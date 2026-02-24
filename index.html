@@ -4,79 +4,220 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FOUND.ART — Personal Art Curation</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--ink:#0A0806;--ink2:#2A2118;--ink3:#6A5A4E;--rule:#DDD5CC;--surf:#F8F5F0;--white:#fff;--og:#E8501A;--red:#B83015;--og-lt:#FDF0E8;}
+:root{--ink:#1A1410;--ink2:#3A2E28;--ink3:#8A7A6E;--rule:#D8CFC4;--surf:#F2EBE0;--cream2:#EDE4D6;--white:#FDFAF6;--og:#D94020;--red:#D94020;--red-dk:#A8300E;--og-lt:#FBF0EC;--card-r:14px;}
 html{scroll-behavior:smooth;}
-body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-.hdr{position:fixed;top:0;left:0;right:0;z-index:300;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:var(--surf);border-bottom:1.5px solid var(--ink);}
-.logo{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;letter-spacing:-.5px;color:var(--ink);cursor:pointer;user-select:none;}
+body{font-family:'DM Sans',sans-serif;background:var(--surf);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.hdr{position:fixed;top:0;left:0;right:0;z-index:300;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:var(--surf);border-bottom:1px solid var(--rule);}
+.logo{font-family:'DM Serif Display',serif;font-weight:400;font-size:20px;letter-spacing:-.3px;color:var(--ink);cursor:pointer;user-select:none;}
 .logo em{color:var(--og);font-style:italic;}
-.hdr-nav{display:flex;align-items:center;gap:0;}
-.nt{background:none;border:none;border-left:1.5px solid var(--ink);padding:0 20px;height:60px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);cursor:pointer;transition:all .2s;white-space:nowrap;}
-.nt:hover,.nt.on{color:var(--ink);background:var(--og-lt);}
-.nt.cta{background:var(--ink);color:white;border-color:var(--ink);}
-.nt.cta:hover{background:var(--og);border-color:var(--og);}
-.saved-btn{display:none;align-items:center;gap:6px;background:none;border:none;border-left:1.5px solid var(--ink);padding:0 18px;height:60px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);cursor:pointer;}
-.saved-btn:hover{color:var(--ink);}
+.hdr-nav{display:flex;align-items:center;gap:3px;}
+.nt{background:none;border:none;border-radius:22px;padding:7px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all .18s;white-space:nowrap;}
+.nt:hover{background:var(--cream2);color:var(--ink);}
+.nt.on{background:var(--ink);color:white;}
+.nt.cta{background:var(--og);color:white;border-radius:22px;margin-left:6px;font-weight:700;}
+.nt.cta:hover{background:var(--red-dk);}
+.saved-btn{display:none;align-items:center;gap:6px;background:var(--cream2);border:none;border-radius:22px;padding:7px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--ink3);cursor:pointer;margin-left:4px;transition:all .18s;}
+.saved-btn:hover{background:var(--ink);color:white;}
 .saved-btn.vis{display:flex;}
-.sbc{background:var(--og);color:white;width:18px;height:18px;border-radius:50%;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;}
-.pg{display:none;padding-top:60px;min-height:100vh;}
+.sbc{background:var(--og);color:white;width:18px;height:18px;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.pg{display:none;padding-top:58px;min-height:100vh;}
 .pg.on{display:block;}
-#pg-home{padding-top:60px;}
-/* HOME */
-.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 60px);border-bottom:1.5px solid var(--ink);}
-.hero-l{border-right:1.5px solid var(--ink);padding:72px 56px 64px;display:flex;flex-direction:column;justify-content:space-between;}
-.hero-eye{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--og);margin-bottom:28px;}
-.hero-h{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,6.5vw,100px);font-weight:300;line-height:.93;letter-spacing:-2px;color:var(--ink);}
+#pg-home{padding-top:58px;}
+/* HOME — scattered artwork hero like reference */
+.hero{position:relative;min-height:calc(100vh - 58px);background:var(--surf);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 40px 60px;}
+.hero-float{position:absolute;box-shadow:0 6px 28px rgba(26,20,16,.16);border-radius:6px;overflow:hidden;}
+.hero-float img{display:block;width:100%;height:100%;object-fit:cover;}
+.hf1{width:145px;height:175px;top:80px;left:3%;transform:rotate(-3deg);}
+.hf2{width:115px;height:145px;top:65px;left:17%;transform:rotate(2.5deg);}
+.hf3{width:135px;height:108px;top:75px;left:38%;transform:rotate(-1.5deg);}
+.hf4{width:118px;height:148px;top:68px;right:17%;transform:rotate(3deg);}
+.hf5{width:135px;height:108px;top:80px;right:3%;transform:rotate(-2.5deg);}
+.hf6{width:110px;height:138px;bottom:80px;left:2%;transform:rotate(2.5deg);}
+.hf7{width:130px;height:100px;bottom:95px;left:14%;transform:rotate(-2deg);}
+.hf8{width:115px;height:145px;bottom:68px;left:34%;transform:rotate(1.5deg);}
+.hf9{width:125px;height:96px;bottom:90px;right:13%;transform:rotate(-3deg);}
+.hf10{width:135px;height:108px;bottom:78px;right:2%;transform:rotate(2.5deg);}
+.hero-center{text-align:center;position:relative;z-index:2;max-width:640px;}
+.hero-eye{display:inline-block;background:var(--og);color:white;padding:5px 14px;border-radius:22px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:22px;}
+.hero-h{font-family:'DM Serif Display',serif;font-size:clamp(44px,6.5vw,82px);line-height:.97;color:var(--ink);margin-bottom:18px;}
 .hero-h em{font-style:italic;color:var(--og);}
-.hero-h .ind{padding-left:.9em;}
-.hero-desc{font-size:15px;line-height:1.8;color:var(--ink3);max-width:420px;margin:40px 0 32px;}
-.btn-primary{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:white;border:none;padding:18px 40px;font-family:'Manrope',sans-serif;font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
-.btn-primary:hover{background:var(--og);}
-.hero-r{padding:72px 56px 64px;display:flex;flex-direction:column;justify-content:space-between;}
-.hero-art{flex:1;display:flex;align-items:center;justify-content:flex-end;}
-.mascot{width:min(300px,85%);height:auto;}
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1.5px solid var(--ink);margin-top:40px;}
-.sc{padding:22px 0;}.sc:nth-child(even){padding-left:24px;border-left:1.5px solid var(--ink);}
-.sc-n{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;line-height:1;}
-.sc-l{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-top:4px;}
-.how{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1.5px solid var(--ink);}
-.how-cell{padding:52px 48px;border-right:1.5px solid var(--ink);}
-.how-cell:last-child{border-right:none;}
-.how-n{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;line-height:.9;color:var(--rule);margin-bottom:16px;}
-.how-h{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:10px;}
-.how-p{font-size:13px;color:var(--ink3);line-height:1.75;}
-.og-band{background:var(--og);padding:36px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid var(--ink);gap:24px;}
-.og-band-txt{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;font-style:italic;color:white;line-height:1.2;}
-.og-band-btn{background:white;color:var(--og);border:none;padding:14px 32px;font-family:'Manrope',sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;flex-shrink:0;}
+.hero-desc{font-size:15px;line-height:1.8;color:var(--ink3);max-width:460px;margin:0 auto 28px;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--og);color:white;border:none;padding:15px 34px;border-radius:28px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 18px rgba(217,64,32,.28);}
+.btn-primary:hover{background:var(--red-dk);transform:translateY(-1px);}
+.hero-sub{font-size:12px;color:var(--ink3);margin-top:12px;}
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);background:var(--white);}
+.stat{padding:24px 28px;text-align:center;}
+.stat:not(:last-child){border-right:1px solid var(--rule);}
+.stat-n{font-family:'DM Serif Display',serif;font-size:30px;color:var(--ink);line-height:1;}
+.stat-l{font-size:11px;font-weight:500;color:var(--ink3);margin-top:3px;}
+/* HOW */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:48px 36px;background:var(--surf);}
+.how-cell{background:var(--white);border-radius:14px;padding:32px 28px;}
+.how-n{width:38px;height:38px;background:var(--og);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:17px;margin-bottom:16px;}
+.how-h{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.how-p{font-size:13px;color:var(--ink3);line-height:1.7;}
+/* OG BAND */
+.og-band{background:var(--og);padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.og-band-txt{font-family:'DM Serif Display',serif;font-size:clamp(18px,2.5vw,28px);font-style:italic;color:white;line-height:1.2;}
+.og-band-btn{background:white;color:var(--og);border:none;padding:11px 24px;border-radius:22px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;flex-shrink:0;}
 .og-band-btn:hover{background:var(--ink);color:white;}
-.platforms{display:grid;grid-template-columns:repeat(4,1fr);}
-.plat{padding:36px 40px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);}
+/* PLATFORMS */
+.platforms{display:grid;grid-template-columns:repeat(8,1fr);background:var(--surf);}
+.plat{padding:28px 24px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);}
 .plat:last-child{border-right:none;}
-.plat-name{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:8px;}
-.plat-desc{font-size:12px;color:var(--ink3);line-height:1.65;margin-bottom:12px;}
-.plat-tag{display:inline-block;padding:3px 10px;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:white;}
+.plat-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.plat-desc{font-size:11px;color:var(--ink3);line-height:1.6;margin-bottom:10px;}
+.plat-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:white;}
+.tag-og{background:var(--og);}.tag-gr{background:#2A6B3A;}.tag-bl{background:#1A4A8B;}.tag-pu{background:#5A2A8B;}
+/* WHY */
+#pg-why{display:none;}
+.why-hero{background:var(--ink);padding:72px 36px 64px;}
+.why-eye{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--og);margin-bottom:20px;}
+.why-h{font-family:'DM Serif Display',serif;font-size:clamp(44px,6vw,76px);line-height:.95;color:white;margin-bottom:20px;}
+.why-h em{font-style:italic;color:var(--og);}
+.why-subp{font-size:15px;color:rgba(255,255,255,.48);line-height:1.8;max-width:560px;}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;}
+.why-cell{padding:44px 40px;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);background:var(--white);position:relative;overflow:hidden;}
+.why-cell:nth-child(even){border-right:none;}
+.why-num{font-family:'DM Serif Display',serif;font-size:96px;color:var(--og);opacity:.1;position:absolute;top:-8px;right:20px;line-height:1;pointer-events:none;}
+.why-ch{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:12px;position:relative;}
+.why-cp{font-size:13px;color:var(--ink3);line-height:1.8;max-width:380px;position:relative;}
+.why-q{background:var(--og);padding:72px 36px;text-align:center;}
+.why-q-txt{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(24px,3.5vw,44px);color:white;line-height:1.2;max-width:720px;margin:0 auto 14px;}
+.why-q-attr{font-size:11px;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:1px;}
+.why-cta{padding:64px 36px;display:flex;align-items:center;justify-content:space-between;background:var(--white);}
+.why-cta-h{font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);}
+.why-cta-h em{font-style:italic;color:var(--og);}
+/* TRENDING */
+#pg-trending{display:none;}
+.trend-top{background:var(--ink);padding:0 36px;}
+.mq-row{overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06);padding:12px 0;}
+.mq-trk{display:flex;gap:48px;animation:mq 22s linear infinite;white-space:nowrap;}
+.mq-item{font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);}
+.mq-item.hot{color:var(--og);}
+@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.trend-hdr{padding:48px 0 36px;display:flex;align-items:flex-end;justify-content:space-between;}
+.trend-h{font-family:'DM Serif Display',serif;font-size:clamp(44px,6vw,80px);line-height:.95;color:white;}
+.trend-h em{font-style:italic;color:var(--og);}
+.trend-sub{font-size:13px;color:rgba(255,255,255,.35);line-height:1.65;max-width:240px;text-align:right;}
+.tfilters{display:flex;gap:8px;padding-bottom:24px;}
+.tf{background:none;border:1px solid rgba(255,255,255,.15);border-radius:22px;padding:7px 16px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,.45);cursor:pointer;transition:all .18s;}
+.tf.on,.tf:hover{background:var(--og);border-color:var(--og);color:white;}
+/* Artist cards full-bleed image with overlay like reference 1 */
+.ag{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:20px 36px 44px;background:var(--ink);}
+.ac{background:var(--ink);border-radius:14px;overflow:hidden;cursor:pointer;position:relative;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:transform .25s,box-shadow .25s;}
+.ac:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4);}
+.ac-swatch{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;}
+.ac-swatch::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 25%,rgba(15,10,8,.9) 100%);}
+.ac-swatch img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.25,.46,.45,.94);}
+.ac:hover .ac-swatch img{transform:scale(1.06);}
+.ac-rank{position:absolute;top:12px;left:12px;background:var(--og);color:white;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;z-index:2;}
+.ac-badge{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);color:white;padding:4px 10px;border-radius:10px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;z-index:2;}
+.ac-body{position:absolute;bottom:0;left:0;right:0;padding:18px;z-index:2;}
+.ac-artist{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--og);margin-bottom:4px;}
+.ac-title{font-family:'DM Serif Display',serif;font-size:20px;color:white;margin-bottom:5px;line-height:1.1;}
+.ac-desc{font-size:11px;color:rgba(255,255,255,.6);line-height:1.55;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.ac-footer{display:flex;align-items:center;justify-content:space-between;}
+.ac-price{font-family:'DM Serif Display',serif;font-size:20px;color:white;}
+.ac-src{font-size:10px;color:rgba(255,255,255,.4);}
+.ac-btns{display:flex;gap:6px;margin-top:10px;}
+.ac-btn{text-decoration:none;background:var(--og);color:white;border:none;padding:7px 13px;border-radius:18px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;cursor:pointer;transition:background .18s;display:inline-block;}
+.ac-btn:hover{background:var(--red-dk);}
+.ac-btn-s{background:rgba(255,255,255,.12);border:none;color:rgba(255,255,255,.65);padding:7px 12px;border-radius:18px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;cursor:pointer;transition:all .18s;}
+.ac-btn-s:hover{background:rgba(255,255,255,.22);color:white;}UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FOUND.ART — Personal Art Curation</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ink:#1A1410;--ink2:#3A2E28;--ink3:#8A7A6E;--rule:#D8CFC4;--surf:#F2EBE0;--cream2:#EDE4D6;--white:#FDFAF6;--og:#D94020;--red:#D94020;--red-dk:#A8300E;--og-lt:#FBF0EC;--card-r:14px;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--surf);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.hdr{position:fixed;top:0;left:0;right:0;z-index:300;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:var(--surf);border-bottom:1px solid var(--rule);}
+.logo{font-family:'DM Serif Display',serif;font-weight:400;font-size:20px;letter-spacing:-.3px;color:var(--ink);cursor:pointer;user-select:none;}
+.logo em{color:var(--og);font-style:italic;}
+.hdr-nav{display:flex;align-items:center;gap:3px;}
+.nt{background:none;border:none;border-radius:22px;padding:7px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all .18s;white-space:nowrap;}
+.nt:hover{background:var(--cream2);color:var(--ink);}
+.nt.on{background:var(--ink);color:white;}
+.nt.cta{background:var(--og);color:white;border-radius:22px;margin-left:6px;font-weight:700;}
+.nt.cta:hover{background:var(--red-dk);}
+.saved-btn{display:none;align-items:center;gap:6px;background:var(--cream2);border:none;border-radius:22px;padding:7px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--ink3);cursor:pointer;margin-left:4px;transition:all .18s;}
+.saved-btn:hover{background:var(--ink);color:white;}
+.saved-btn.vis{display:flex;}
+.sbc{background:var(--og);color:white;width:18px;height:18px;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.pg{display:none;padding-top:58px;min-height:100vh;}
+.pg.on{display:block;}
+#pg-home{padding-top:58px;}
+/* HOME — scattered artwork hero like reference */
+.hero{position:relative;min-height:calc(100vh - 58px);background:var(--surf);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 40px 60px;}
+.hero-float{position:absolute;box-shadow:0 6px 28px rgba(26,20,16,.16);border-radius:6px;overflow:hidden;}
+.hero-float img{display:block;width:100%;height:100%;object-fit:cover;}
+.hf1{width:145px;height:175px;top:80px;left:3%;transform:rotate(-3deg);}
+.hf2{width:115px;height:145px;top:65px;left:17%;transform:rotate(2.5deg);}
+.hf3{width:135px;height:108px;top:75px;left:38%;transform:rotate(-1.5deg);}
+.hf4{width:118px;height:148px;top:68px;right:17%;transform:rotate(3deg);}
+.hf5{width:135px;height:108px;top:80px;right:3%;transform:rotate(-2.5deg);}
+.hf6{width:110px;height:138px;bottom:80px;left:2%;transform:rotate(2.5deg);}
+.hf7{width:130px;height:100px;bottom:95px;left:14%;transform:rotate(-2deg);}
+.hf8{width:115px;height:145px;bottom:68px;left:34%;transform:rotate(1.5deg);}
+.hf9{width:125px;height:96px;bottom:90px;right:13%;transform:rotate(-3deg);}
+.hf10{width:135px;height:108px;bottom:78px;right:2%;transform:rotate(2.5deg);}
+.hero-center{text-align:center;position:relative;z-index:2;max-width:640px;}
+.hero-eye{display:inline-block;background:var(--og);color:white;padding:5px 14px;border-radius:22px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:22px;}
+.hero-h{font-family:'DM Serif Display',serif;font-size:clamp(44px,6.5vw,82px);line-height:.97;color:var(--ink);margin-bottom:18px;}
+.hero-h em{font-style:italic;color:var(--og);}
+.hero-desc{font-size:15px;line-height:1.8;color:var(--ink3);max-width:460px;margin:0 auto 28px;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--og);color:white;border:none;padding:15px 34px;border-radius:28px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 18px rgba(217,64,32,.28);}
+.btn-primary:hover{background:var(--red-dk);transform:translateY(-1px);}
+.hero-sub{font-size:12px;color:var(--ink3);margin-top:12px;}
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);background:var(--white);}
+.stat{padding:24px 28px;text-align:center;}
+.stat:not(:last-child){border-right:1px solid var(--rule);}
+.stat-n{font-family:'DM Serif Display',serif;font-size:30px;color:var(--ink);line-height:1;}
+.stat-l{font-size:11px;font-weight:500;color:var(--ink3);margin-top:3px;}
+/* HOW */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:48px 36px;background:var(--surf);}
+.how-cell{background:var(--white);border-radius:14px;padding:32px 28px;}
+.how-n{width:38px;height:38px;background:var(--og);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:17px;margin-bottom:16px;}
+.how-h{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.how-p{font-size:13px;color:var(--ink3);line-height:1.7;}
+/* OG BAND */
+.og-band{background:var(--og);padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.og-band-txt{font-family:'DM Serif Display',serif;font-size:clamp(18px,2.5vw,28px);font-style:italic;color:white;line-height:1.2;}
+.og-band-btn{background:white;color:var(--og);border:none;padding:11px 24px;border-radius:22px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;flex-shrink:0;}
+.og-band-btn:hover{background:var(--ink);color:white;}
+/* PLATFORMS */
+.platforms{display:grid;grid-template-columns:repeat(8,1fr);background:var(--surf);}
+.plat{padding:28px 24px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+.plat:last-child{border-right:none;}
+.plat-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.plat-desc{font-size:11px;color:var(--ink3);line-height:1.6;margin-bottom:10px;}
+.plat-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:white;}
 .tag-og{background:var(--og);}.tag-gr{background:#2A6B3A;}.tag-bl{background:#1A4A8B;}.tag-pu{background:#5A2A8B;}
 /* WHY */
 #pg-why{display:none;}
 .why-hero{background:var(--ink);padding:80px 40px 72px;}
 .why-eye{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--og);margin-bottom:24px;}
-.why-h{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6vw,92px);font-weight:300;line-height:.93;letter-spacing:-2px;color:white;margin-bottom:24px;}
+.why-h{font-family:'DM Serif Display',serif;font-size:clamp(52px,6vw,92px);font-weight:300;line-height:.93;letter-spacing:-2px;color:white;margin-bottom:24px;}
 .why-h em{font-style:italic;color:var(--og);}
 .why-subp{font-size:15px;color:rgba(255,255,255,.55);line-height:1.8;max-width:580px;}
 .why-grid{display:grid;grid-template-columns:1fr 1fr;}
 .why-cell{padding:52px 48px;border-bottom:1.5px solid var(--ink);border-right:1.5px solid var(--ink);position:relative;overflow:hidden;}
 .why-cell:nth-child(even){border-right:none;}
-.why-num{font-family:'Cormorant Garamond',serif;font-size:128px;font-weight:300;color:var(--og-lt);position:absolute;top:-16px;right:24px;line-height:1;pointer-events:none;}
+.why-num{font-family:'DM Serif Display',serif;font-size:128px;font-weight:300;color:var(--og-lt);position:absolute;top:-16px;right:24px;line-height:1;pointer-events:none;}
 .why-ch{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:14px;position:relative;}
 .why-cp{font-size:13px;color:var(--ink3);line-height:1.8;max-width:400px;position:relative;}
 .why-q{background:var(--og);padding:80px 40px;text-align:center;border-bottom:1.5px solid var(--ink);}
-.why-q-txt{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,52px);font-weight:300;font-style:italic;color:white;line-height:1.2;max-width:800px;margin:0 auto 20px;}
+.why-q-txt{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,52px);font-weight:300;font-style:italic;color:white;line-height:1.2;max-width:800px;margin:0 auto 20px;}
 .why-q-attr{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);}
 .why-cta{padding:72px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid var(--ink);}
-.why-cta-h{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--ink);}
+.why-cta-h{font-family:'DM Serif Display',serif;font-size:42px;font-weight:300;color:var(--ink);}
 .why-cta-h em{font-style:italic;color:var(--og);}
 /* TRENDING */
 #pg-trending{display:none;}
@@ -87,11 +228,11 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 .mq-item.hot{color:var(--og);}
 @keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 .trend-hdr{padding:56px 0 60px;display:flex;align-items:flex-end;justify-content:space-between;}
-.trend-h{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6vw,88px);font-weight:300;line-height:.93;letter-spacing:-2px;color:white;}
+.trend-h{font-family:'DM Serif Display',serif;font-size:clamp(52px,6vw,88px);font-weight:300;line-height:.93;letter-spacing:-2px;color:white;}
 .trend-h em{font-style:italic;color:var(--og);}
 .trend-sub{font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;max-width:260px;text-align:right;}
 .tfilters{display:flex;border-top:1px solid rgba(255,255,255,.08);overflow-x:auto;}
-.tf{background:none;border:none;border-right:1px solid rgba(255,255,255,.08);padding:15px 26px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;transition:all .2s;white-space:nowrap;}
+.tf{background:none;border:none;border-right:1px solid rgba(255,255,255,.08);padding:15px 26px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;transition:all .2s;white-space:nowrap;}
 .tf.on,.tf:hover{color:var(--og);}
 .ag{display:grid;grid-template-columns:repeat(3,1fr);background:var(--ink);}
 .ac{background:var(--surf);border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);padding:36px;cursor:pointer;transition:background .2s;position:relative;}
@@ -112,14 +253,14 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 .ac-rank{position:absolute;top:14px;left:14px;background:var(--og);color:white;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
 .ac-badge{position:absolute;top:14px;right:14px;background:rgba(10,8,6,.72);color:white;padding:4px 10px;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
 .ac-artist{font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--og);margin-bottom:6px;}
-.ac-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--ink);margin-bottom:6px;line-height:1.2;}
+.ac-title{font-family:'DM Serif Display',serif;font-size:22px;font-weight:300;color:var(--ink);margin-bottom:6px;line-height:1.2;}
 .ac-desc{font-size:12px;color:var(--ink3);line-height:1.65;margin-bottom:14px;}
-.ac-price{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--ink);}
+.ac-price{font-family:'DM Serif Display',serif;font-size:26px;font-weight:300;color:var(--ink);}
 .ac-src{font-size:10px;color:var(--ink3);}
 .ac-btns{display:flex;gap:8px;margin-top:14px;}
-.ac-btn{text-decoration:none;background:var(--ink);color:white;border:none;padding:9px 16px;font-family:'Manrope',sans-serif;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .2s;display:inline-block;}
+.ac-btn{text-decoration:none;background:var(--ink);color:white;border:none;padding:9px 16px;font-family:'DM Sans',sans-serif;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .2s;display:inline-block;}
 .ac-btn:hover{background:var(--og);}
-.ac-btn-s{background:none;border:1px solid var(--rule);color:var(--ink3);padding:9px 14px;font-family:'Manrope',sans-serif;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.ac-btn-s{background:none;border:1px solid var(--rule);color:var(--ink3);padding:9px 14px;font-family:'DM Sans',sans-serif;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
 .ac-btn-s:hover{border-color:var(--ink);color:var(--ink);}
 .ss-strip{display:grid;grid-template-columns:repeat(5,1fr);border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);}
 .ss-cell{padding:32px 28px;border-right:1.5px solid var(--ink);cursor:pointer;transition:background .2s;}
@@ -151,7 +292,7 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 .qs.on{display:block;}
 @keyframes fup{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 .q-eye{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--og);margin-bottom:10px;}
-.q-h{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;line-height:1.15;color:var(--ink);margin-bottom:8px;}
+.q-h{font-family:'DM Serif Display',serif;font-size:36px;font-weight:300;line-height:1.15;color:var(--ink);margin-bottom:8px;}
 .q-sub{font-size:13px;color:var(--ink3);margin-bottom:32px;line-height:1.65;}
 .og-g{display:grid;gap:1.5px;background:var(--ink);}
 .g2{grid-template-columns:1fr 1fr;}.g3{grid-template-columns:1fr 1fr 1fr;}
@@ -179,13 +320,13 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 .pp-lbl h4{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
 .pp-lbl p{font-size:11px;color:var(--ink3);}
 .clr-lbl{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:10px;}
-.color-ta{width:100%;border:1.5px solid var(--rule);padding:13px 16px;font-family:'Manrope',sans-serif;font-size:13px;color:var(--ink);background:var(--white);outline:none;resize:none;line-height:1.65;transition:border-color .2s;}
+.color-ta{width:100%;border:1.5px solid var(--rule);padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--white);outline:none;resize:none;line-height:1.65;transition:border-color .2s;}
 .color-ta:focus{border-color:var(--ink);}.color-ta::placeholder{color:#C4B8B0;}
 .cust-row{display:flex;gap:8px;flex-wrap:wrap;}
 .cp-pick{width:36px;height:36px;border:1.5px solid var(--rule);cursor:pointer;position:relative;overflow:hidden;}
 .cp-pick input{position:absolute;inset:-4px;width:calc(100%+8px);height:calc(100%+8px);cursor:pointer;opacity:0;}
 .cp-pick .prv{position:absolute;inset:0;pointer-events:none;}
-.bdn{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-2px;}
+.bdn{font-family:'DM Serif Display',serif;font-size:72px;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-2px;}
 .bdn span{font-size:32px;letter-spacing:0;}
 .bdc{font-size:12px;color:var(--ink3);margin:8px 0 24px;min-height:16px;}
 .rng{-webkit-appearance:none;width:100%;height:2px;background:var(--rule);outline:none;margin:4px 0;cursor:pointer;}
@@ -197,22 +338,22 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 .bt.sel::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--og);}
 .bt h4{font-size:12px;font-weight:800;color:var(--ink);margin-bottom:3px;}
 .bt p{font-size:11px;color:var(--ink3);line-height:1.4;}
-.ta{width:100%;border:1.5px solid var(--rule);padding:18px 20px;font-family:'Manrope',sans-serif;font-size:13px;color:var(--ink);background:var(--white);outline:none;resize:none;line-height:1.7;transition:border-color .2s;}
+.ta{width:100%;border:1.5px solid var(--rule);padding:18px 20px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--white);outline:none;resize:none;line-height:1.7;transition:border-color .2s;}
 .ta:focus{border-color:var(--ink);}.ta::placeholder{color:#C4B8B0;}
 .qnav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:1.5px solid var(--ink);}
-.btn-bk{background:none;border:none;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);cursor:pointer;transition:color .2s;}
+.btn-bk{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);cursor:pointer;transition:color .2s;}
 .btn-bk:hover{color:var(--ink);}
-.btn-nx{background:var(--ink);color:white;border:none;padding:14px 32px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.btn-nx{background:var(--ink);color:white;border:none;padding:14px 32px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
 .btn-nx:hover,.btn-nx.go{background:var(--og);}
 /* SEARCH */
 #pg-search{display:none;flex-direction:column;align-items:center;padding:80px 40px;background:var(--ink);color:white;min-height:100vh;padding-top:60px;}
 .srch-mq{width:100%;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.07);padding:15px 0;margin-bottom:64px;}
 .srch-mq-trk{display:flex;gap:40px;animation:mq 20s linear infinite;white-space:nowrap;}
-.srch-mq-item{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;font-style:italic;color:rgba(255,255,255,.2);}
+.srch-mq-item{font-family:'DM Serif Display',serif;font-size:18px;font-weight:300;font-style:italic;color:rgba(255,255,255,.2);}
 .srch-mq-item.hi{color:rgba(255,255,255,.6);}
 .srch-ctr{text-align:center;width:100%;max-width:580px;}
 .srch-eye{font-size:10px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px;}
-.srch-h{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;color:white;line-height:.93;letter-spacing:-2px;margin-bottom:16px;}
+.srch-h{font-family:'DM Serif Display',serif;font-size:68px;font-weight:300;color:white;line-height:.93;letter-spacing:-2px;margin-bottom:16px;}
 .srch-tw{font-size:15px;color:rgba(255,255,255,.4);font-style:italic;margin-bottom:52px;min-height:22px;}
 .cur{display:inline-block;width:2px;height:14px;background:rgba(255,255,255,.5);margin-left:2px;animation:blink 1s infinite;vertical-align:middle;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
@@ -238,12 +379,12 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 .pt{background:var(--ink);display:grid;grid-template-columns:1fr 310px;min-height:380px;}
 .pt-l{padding:64px 48px;display:flex;flex-direction:column;justify-content:center;}
 .pt-eye{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--og);margin-bottom:16px;}
-.pt-h{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,58px);font-weight:300;line-height:1.0;letter-spacing:-1px;color:white;margin-bottom:16px;}
+.pt-h{font-family:'DM Serif Display',serif;font-size:clamp(36px,4vw,58px);font-weight:300;line-height:1.0;letter-spacing:-1px;color:white;margin-bottom:16px;}
 .pt-meta{font-size:14px;color:rgba(255,255,255,.5);line-height:1.8;max-width:480px;margin-bottom:28px;}
 .pt-acts{display:flex;gap:0;}
-.btn-ss{background:var(--og);color:white;border:none;padding:13px 26px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;display:flex;align-items:center;gap:8px;}
+.btn-ss{background:var(--og);color:white;border:none;padding:11px 22px;border-radius:22px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:background .18s;display:inline-flex;align-items:center;gap:8px;}
 .btn-ss:hover{background:#D4400C;}
-.btn-nc{background:none;border:1px solid rgba(255,255,255,.2);padding:13px 22px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);cursor:pointer;transition:all .2s;margin-left:8px;}
+.btn-nc{background:rgba(255,255,255,.1);color:rgba(255,255,255,.55);border:none;padding:11px 18px;border-radius:22px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;}
 .btn-nc:hover{border-color:rgba(255,255,255,.6);color:white;}
 .pt-r{border-left:1px solid rgba(255,255,255,.08);padding:48px 36px;display:flex;flex-direction:column;justify-content:center;}
 .ps-lbl{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:24px;}
@@ -256,7 +397,7 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 .pb{padding:0 48px 80px;}
 .ms{padding:64px 0;border-bottom:1.5px solid var(--ink);}
 .se{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;}
-.sh{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--ink);margin-bottom:8px;letter-spacing:-.5px;}
+.sh{font-family:'DM Serif Display',serif;font-size:34px;font-weight:300;color:var(--ink);margin-bottom:8px;letter-spacing:-.5px;}
 .sd2{font-size:13px;color:var(--ink3);line-height:1.75;max-width:560px;margin-bottom:32px;}
 .mboard{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:220px 220px;gap:1.5px;background:var(--ink);margin-bottom:20px;}
 .mc{overflow:hidden;position:relative;}.mc:first-child{grid-row:1/3;}
@@ -266,7 +407,7 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 .mood-cap{font-size:13px;color:var(--ink3);font-style:italic;line-height:1.7;border-left:2px solid var(--og);padding-left:16px;max-width:600px;}
 .cn{background:var(--ink);padding:52px;margin:48px 0;}
 .cn-eye{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:18px;}
-.cn-txt{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.9);}
+.cn-txt{font-family:'DM Serif Display',serif;font-size:24px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.9);}
 .harm{border:1.5px solid var(--ink);padding:32px 40px;margin-bottom:48px;}
 .harm-h{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--ink3);margin-bottom:12px;}
 .harm-d{font-size:13px;color:var(--ink3);line-height:1.7;margin-bottom:16px;}
@@ -287,30 +428,30 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 .wi-di{background:rgba(10,8,6,.9);padding:18px 22px;transform:translateY(12px);opacity:0;transition:all .3s;}
 .wcard:hover .wi-di{transform:translateY(0);opacity:1;}
 .wi-dl{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:7px;}
-.wi-dt{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;line-height:1.65;color:rgba(255,255,255,.88);}
+.wi-dt{font-family:'DM Serif Display',serif;font-size:17px;font-weight:300;line-height:1.65;color:rgba(255,255,255,.88);}
 .wi-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
-.wi-ob{background:white;color:var(--ink);border:none;padding:14px 28px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;opacity:0;transform:translateY(8px);transition:all .3s;text-decoration:none;display:block;pointer-events:none;}
+.wi-ob{background:white;color:var(--ink);border:none;padding:14px 28px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;opacity:0;transform:translateY(8px);transition:all .3s;text-decoration:none;display:block;pointer-events:none;}
 .wcard:hover .wi-ob{opacity:1;transform:translateY(0);pointer-events:auto;}
 .wi-ob:hover{background:var(--og);color:white;}
 .wi-src{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.93);padding:4px 12px;font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);}
 .wi-best{position:absolute;top:14px;right:14px;background:var(--og);color:white;padding:4px 12px;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;}
-.wi-num{position:absolute;bottom:10px;left:14px;font-family:'Cormorant Garamond',serif;font-size:88px;font-weight:300;color:rgba(255,255,255,.16);line-height:1;}
+.wi-num{position:absolute;bottom:10px;left:14px;font-family:'DM Serif Display',serif;font-size:88px;font-weight:300;color:rgba(255,255,255,.16);line-height:1;}
 .cstrip{position:absolute;bottom:0;left:0;right:0;height:4px;display:flex;}.cs{flex:1;}
 .winfo{padding:36px 44px;display:flex;flex-direction:column;justify-content:space-between;}
 .wa{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--og);margin-bottom:6px;}
-.wt{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,38px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:10px;letter-spacing:-.5px;}
+.wt{font-family:'DM Serif Display',serif;font-size:clamp(24px,3vw,38px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:10px;letter-spacing:-.5px;}
 .wspec{font-size:11px;color:var(--ink3);margin-bottom:12px;}
 .wpal{display:flex;gap:5px;align-items:center;margin-bottom:16px;}
 .wpsw{width:15px;height:15px;border:1.5px solid var(--rule);}
 .wplbl{font-size:11px;color:var(--ink3);margin-left:4px;font-style:italic;}
 .wbio{font-size:12px;color:var(--ink3);font-style:italic;line-height:1.65;padding-top:16px;border-top:1px solid var(--rule);margin-bottom:24px;}
 .wbtm{display:flex;justify-content:space-between;align-items:flex-end;}
-.wprice{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-1px;}
+.wprice{font-family:'DM Serif Display',serif;font-size:48px;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-1px;}
 .wpsub{font-size:10px;color:var(--ink3);margin-top:3px;}
 .wbtns{display:flex;flex-direction:column;gap:8px;}
-.btn-v{display:block;text-align:center;text-decoration:none;background:var(--ink);color:white;padding:12px 22px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;transition:background .2s;border:none;cursor:pointer;white-space:nowrap;}
+.btn-v{display:block;text-align:center;text-decoration:none;background:var(--ink);color:white;padding:12px 22px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;transition:background .2s;border:none;cursor:pointer;white-space:nowrap;}
 .btn-v:hover{background:var(--og);}
-.btn-sv{background:none;border:1px solid var(--rule);padding:10px 18px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);cursor:pointer;transition:all .2s;white-space:nowrap;}
+.btn-like{background:transparent;border:1.5px solid var(--rule);padding:9px 16px;border-radius:22px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .18s;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;}.btn-like:hover{border-color:var(--og);color:var(--og);}.btn-like.liked{background:var(--og);border-color:var(--og);color:white;}
 .btn-sv:hover{border-color:var(--ink);color:var(--ink);}.btn-sv.sv{border-color:var(--og);color:var(--og);}
 .wwhy{background:#F5F1EC;border-top:1.5px solid var(--ink);padding:18px 44px;display:flex;gap:14px;}
 .wym{font-size:12px;color:var(--og);font-weight:800;flex-shrink:0;}
@@ -325,11 +466,11 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 @keyframes mup{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 .mcl{position:absolute;top:18px;right:20px;background:none;border:none;font-size:22px;color:var(--ink3);cursor:pointer;}
 .m-eye{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--og);margin-bottom:14px;}
-.m-h{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--ink);margin-bottom:8px;}
+.m-h{font-family:'DM Serif Display',serif;font-size:30px;font-weight:300;color:var(--ink);margin-bottom:8px;}
 .m-p{font-size:13px;color:var(--ink3);line-height:1.7;margin-bottom:24px;}
 .sc-wrap{display:flex;border:1.5px solid var(--ink);margin-bottom:20px;}
-.sc-input{flex:1;border:none;padding:13px 16px;font-family:'Manrope',sans-serif;font-size:13px;color:var(--ink);background:#F7F4F0;outline:none;}
-.copy-btn{background:var(--og);color:white;border:none;padding:13px 20px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.sc-input{flex:1;border:none;padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:#F7F4F0;outline:none;}
+.copy-btn{background:var(--og);color:white;border:none;padding:13px 20px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
 .copy-btn:hover,.copy-btn.cp{background:#2E7D32;}
 .m-div{border:none;border-top:1.5px solid var(--ink);margin:20px 0;}
 .m-sh{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:12px;}
@@ -346,13 +487,13 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 .dr{position:fixed;right:0;top:0;bottom:0;width:360px;background:var(--white);z-index:360;padding:40px 32px;overflow-y:auto;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);border-left:1.5px solid var(--ink);}
 .dr.on{transform:translateX(0);}
 .dr-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;}
-.dr-h{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--ink);}
+.dr-h{font-family:'DM Serif Display',serif;font-size:28px;font-weight:300;color:var(--ink);}
 .dr-cl{background:none;border:none;font-size:22px;color:var(--ink3);cursor:pointer;}
 .dri{border:1.5px solid var(--ink);margin-bottom:8px;overflow:hidden;cursor:pointer;transition:border-color .2s;}
 .dri:hover{border-color:var(--og);}
 .dri-art{height:88px;width:100%;}
 .dri-bd{padding:14px 16px;}.dri-t{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;}.dri-m{font-size:11px;color:var(--ink3);}
-.dri-del{display:block;width:100%;background:none;border:none;border-top:1px solid var(--rule);padding:10px;font-family:'Manrope',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);cursor:pointer;}
+.dri-del{display:block;width:100%;background:none;border:none;border-top:1px solid var(--rule);padding:10px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);cursor:pointer;}
 .dri-del:hover{color:var(--og);}
 @media(max-width:960px){
   .hdr{padding:0 20px;}.nt{padding:0 12px;font-size:9px;}
@@ -378,8 +519,134 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
   .prop-foot{flex-direction:column;gap:14px;padding:28px 20px;text-align:center;}
   .dr{width:100%;}
 }
+
+/* ── ART STYLE QUIZ ── */
+#pg-quiz{display:none;}
+.quiz-hero{background:var(--ink);padding:72px 40px;border-bottom:1.5px solid var(--ink);}
+.quiz-hero-eye{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--og);margin-bottom:20px;}
+.quiz-hero-h{font-family:'DM Serif Display',serif;font-size:clamp(48px,6vw,80px);font-weight:300;line-height:.93;letter-spacing:-2px;color:white;margin-bottom:16px;}
+.quiz-hero-h em{font-style:italic;color:var(--og);}
+.quiz-hero-p{font-size:14px;color:rgba(255,255,255,.5);line-height:1.8;max-width:520px;}
+.quiz-wrap{max-width:900px;margin:0 auto;padding:56px 40px 80px;}
+.qz-step{display:none;animation:fup .35s ease;}
+.qz-step.on{display:block;}
+.qz-progress{display:flex;gap:4px;margin-bottom:40px;}
+.qz-bar{height:3px;flex:1;background:var(--rule);transition:background .4s;}
+.qz-bar.done{background:var(--og);}
+.qz-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;}
+.qz-q{font-family:'DM Serif Display',serif;font-size:32px;font-weight:300;color:var(--ink);margin-bottom:6px;line-height:1.15;}
+.qz-hint{font-size:12px;color:var(--ink3);margin-bottom:28px;line-height:1.6;}
+.qz-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5px;background:var(--ink);margin-bottom:32px;}
+.qz-card{background:var(--surf);cursor:pointer;overflow:hidden;transition:background .15s;position:relative;border:none;}
+.qz-card:hover{background:#F5F0EA;}
+.qz-card.sel{background:var(--og-lt);outline:3px solid var(--og);outline-offset:-3px;}
+.qz-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .5s;}
+.qz-card:hover .qz-img{transform:scale(1.03);}
+.qz-img-ph{width:100%;aspect-ratio:4/3;display:block;}
+.qz-card-lbl{padding:12px 14px;}
+.qz-card-lbl h4{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.qz-card-lbl p{font-size:10px;color:var(--ink3);line-height:1.5;}
+.qz-ck{position:absolute;top:10px;right:10px;background:var(--og);color:white;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;opacity:0;transition:opacity .15s;}
+.qz-card.sel .qz-ck{opacity:1;}
+.qz-nav{display:flex;justify-content:space-between;align-items:center;}
+/* Quiz result */
+.qz-result{display:none;}
+.qz-result.on{display:block;}
+.qz-res-band{background:var(--og);padding:48px 40px;text-align:center;}
+.qz-res-eye{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(0,0,0,.4);margin-bottom:12px;}
+.qz-res-h{font-family:'DM Serif Display',serif;font-size:clamp(42px,6vw,72px);font-weight:300;color:var(--ink);line-height:.95;letter-spacing:-2px;margin-bottom:16px;}
+.qz-res-p{font-size:15px;color:rgba(10,8,6,.65);line-height:1.8;max-width:540px;margin:0 auto;}
+.qz-types{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1.5px solid var(--ink);}
+.qz-type{padding:40px 36px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);cursor:pointer;transition:background .2s;}
+.qz-type:hover{background:var(--og-lt);}
+.qz-type:nth-child(3n){border-right:none;}
+.qz-type.match{background:var(--og-lt);border-left:4px solid var(--og);}
+.qz-type-swatch{width:100%;height:100px;margin-bottom:16px;position:relative;overflow:hidden;}
+.qz-type-img{width:100%;height:100%;object-fit:cover;}
+.qz-type-name{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:6px;}
+.qz-type-desc{font-size:12px;color:var(--ink3);line-height:1.65;margin-bottom:12px;}
+.qz-match-pct{font-size:11px;font-weight:800;color:var(--og);}
+.qz-res-cta{padding:56px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid var(--ink);}
+.qz-res-cta-h{font-family:'DM Serif Display',serif;font-size:36px;font-weight:300;color:var(--ink);}
+.qz-res-cta-h em{font-style:italic;color:var(--og);}
+
+/* ── AUCTIONS ── */
+#pg-auctions{display:none;}
+.auct-hero{background:var(--ink);padding:72px 40px;border-bottom:1.5px solid var(--ink);}
+.auct-eye{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--og);margin-bottom:20px;}
+.auct-h{font-family:'DM Serif Display',serif;font-size:clamp(52px,6vw,88px);font-weight:300;line-height:.93;letter-spacing:-2px;color:white;margin-bottom:20px;}
+.auct-h em{font-style:italic;color:var(--og);}
+.auct-p{font-size:14px;color:rgba(255,255,255,.5);line-height:1.8;max-width:560px;}
+.auct-explainer{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1.5px solid var(--ink);}
+.ae-cell{padding:48px 44px;border-right:1.5px solid var(--ink);}
+.ae-cell:last-child{border-right:none;}
+.ae-n{font-family:'DM Serif Display',serif;font-size:64px;font-weight:300;color:var(--rule);line-height:.9;margin-bottom:14px;}
+.ae-h{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:10px;}
+.ae-p{font-size:13px;color:var(--ink3);line-height:1.75;}
+.auct-houses{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--ink);border-bottom:1.5px solid var(--ink);}
+.ah{background:var(--white);padding:0;overflow:hidden;display:flex;flex-direction:column;}
+.ah-img{width:100%;height:220px;object-fit:cover;display:block;position:relative;overflow:hidden;}
+.ah-img-ph{width:100%;height:220px;display:block;}
+.ah-body{padding:36px 40px;flex:1;display:flex;flex-direction:column;}
+.ah-name{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:8px;}
+.ah-loc{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--og);margin-bottom:12px;}
+.ah-desc{font-size:13px;color:var(--ink3);line-height:1.75;margin-bottom:20px;flex:1;}
+.ah-meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1.5px solid var(--rule);padding-top:16px;margin-bottom:20px;}
+.ah-stat{padding:12px 0;}
+.ah-stat:not(:last-child){padding-right:16px;border-right:1px solid var(--rule);}
+.ah-stat:not(:first-child){padding-left:16px;}
+.ah-sn{font-family:'DM Serif Display',serif;font-size:26px;font-weight:300;color:var(--ink);line-height:1;}
+.ah-sl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-top:2px;}
+.ah-link{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:white;text-decoration:none;padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;transition:background .2s;border:none;cursor:pointer;align-self:flex-start;}
+.ah-link:hover{background:var(--og);}
+.auct-tips{padding:56px 40px;border-bottom:1.5px solid var(--ink);}
+.auct-tips-h{font-family:'DM Serif Display',serif;font-size:36px;font-weight:300;color:var(--ink);margin-bottom:6px;}
+.auct-tips-h em{font-style:italic;color:var(--og);}
+.auct-tips-p{font-size:13px;color:var(--ink3);margin-bottom:32px;max-width:600px;line-height:1.7;}
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--ink);}
+.tip{background:var(--surf);padding:28px 32px;}
+.tip-n{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--og);margin-bottom:8px;}
+.tip-h{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:8px;}
+.tip-p{font-size:12px;color:var(--ink3);line-height:1.7;}
+.auct-cta{background:var(--og);padding:48px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.auct-cta-t{font-family:'DM Serif Display',serif;font-size:32px;font-weight:300;font-style:italic;color:var(--ink);line-height:1.2;}
+.auct-cta-btn{background:var(--ink);color:white;border:none;padding:14px 28px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;flex-shrink:0;transition:background .2s;}
+.auct-cta-btn:hover{background:white;color:var(--ink);}/* ════ LIKED PANEL ════ */
+.liked-bg{position:fixed;inset:0;background:rgba(20,14,10,.4);z-index:350;display:none;backdrop-filter:blur(2px);}
+.liked-bg.on{display:block;}
+.liked-panel{position:fixed;right:0;top:0;bottom:0;width:380px;background:var(--white);z-index:360;display:flex;flex-direction:column;transform:translateX(110%);transition:transform .32s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(20,14,10,.15);}
+.liked-panel.on{transform:translateX(0);}
+.liked-hdr{padding:24px 24px 18px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;}
+.liked-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--ink);}
+.liked-sub{font-size:11px;color:var(--ink3);margin-top:3px;line-height:1.5;}
+.liked-cl{background:var(--cream2);border:none;border-radius:50%;width:28px;height:28px;font-size:18px;color:var(--ink3);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:12px;}
+.liked-cl:hover{background:var(--ink);color:white;}
+.liked-list{flex:1;overflow-y:auto;padding:14px;}
+.liked-empty{text-align:center;padding:52px 20px;font-size:13px;color:var(--ink3);font-style:italic;line-height:1.65;}
+.liked-empty .heart-big{font-size:44px;display:block;margin-bottom:14px;opacity:.2;}
+.litem{display:flex;gap:12px;padding:12px;border-radius:12px;border:1.5px solid var(--rule);margin-bottom:8px;cursor:pointer;transition:all .18s;position:relative;}
+.litem:hover{border-color:var(--og);background:var(--og-lt);}
+.litem-img{width:68px;height:68px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--cream2);}
+.litem-info{flex:1;min-width:0;}
+.litem-artist{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--og);margin-bottom:2px;}
+.litem-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.litem-price{font-family:'DM Serif Display',serif;font-size:16px;color:var(--ink);}
+.litem-src{font-size:10px;color:var(--ink3);}
+.litem-del{position:absolute;top:8px;right:8px;background:none;border:none;font-size:16px;color:var(--ink3);cursor:pointer;opacity:0;transition:all .18s;}
+.litem:hover .litem-del{opacity:1;}
+.litem-del:hover{color:var(--og);}
+.liked-footer{padding:14px;border-top:1px solid var(--rule);flex-shrink:0;}
+.liked-cta{display:block;width:100%;background:var(--og);color:white;border:none;padding:12px;border-radius:22px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .18s;text-align:center;}
+.liked-cta:hover{background:var(--red-dk);}
+/* Proposal liked count button */
+.btn-liked{background:rgba(217,64,32,.1);color:var(--og);border:1.5px solid rgba(217,64,32,.25);padding:10px 18px;border-radius:22px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:6px;}
+.btn-liked:hover{background:var(--og);color:white;border-color:var(--og);}
+.btn-liked.has-likes{background:var(--og);color:white;border-color:var(--og);}
+/* Work card like button */
+.btn-like{background:transparent;border:1.5px solid var(--rule);padding:8px 14px;border-radius:22px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .18s;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;}
+.btn-like:hover{border-color:var(--og);color:var(--og);}
+.btn-like.liked{background:var(--og);border-color:var(--og);color:white;}
 </style>
-</head>
 <body>
 <!-- HEADER -->
 <header class="hdr">
@@ -387,6 +654,8 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
   <div class="hdr-nav">
     <button class="nt on" id="nt-home" onclick="nav('home')">Home</button>
     <button class="nt" id="nt-trending" onclick="nav('trending')">Trending</button>
+    <button class="nt" id="nt-quiz" onclick="nav('quiz')">Find Your Style</button>
+    <button class="nt" id="nt-auctions" onclick="nav('auctions')">Auctions</button>
     <button class="nt" id="nt-why" onclick="nav('why')">Why Collect</button>
     <button class="nt cta" id="nt-consult" onclick="nav('consult')">Get My Proposal &#x2192;</button>
     <button class="saved-btn" id="btnSaved" onclick="openDrawer()">Saved <span class="sbc" id="sbc">0</span></button>
@@ -395,56 +664,71 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
 
 <!-- HOME -->
 <div id="pg-home" class="pg on">
+  <!-- Scattered floating artwork hero — real paintings from Wikimedia -->
   <div class="hero">
-    <div class="hero-l">
-      <div>
-        <p class="hero-eye">Original Art &middot; Direct Discovery &middot; $500&ndash;$5K</p>
-        <h1 class="hero-h">We find<br><em>original</em><br><span class="ind">art made</span><br>for your home.</h1>
-      </div>
-      <div>
-        <p class="hero-desc">A personal curation service for emerging collectors. We search Tappan Collective, Drool, Instagram studios, and artist websites &mdash; then build you a proposal with the story behind every piece.</p>
-        <button class="btn-primary" onclick="nav('consult')">Start Your Consultation <span style="font-size:18px;margin-left:4px;">&#x2192;</span></button>
-      </div>
-    </div>
-    <div class="hero-r">
-      <div class="hero-art">
-        <svg class="mascot" viewBox="0 0 300 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="160" width="300" height="200" fill="#E8501A" opacity=".08"/>
-          <path d="M80 40 Q140 0 200 40 Q250 80 240 150 Q230 220 170 240 Q110 260 70 210 Q30 160 50 100 Q60 60 80 40Z" fill="#E8501A" opacity=".12"/>
-          <path d="M110 80 Q145 55 180 80 Q210 105 200 150 Q190 195 155 205 Q120 215 100 185 Q80 155 95 115 Q100 90 110 80Z" fill="#E8501A" opacity=".18"/>
-          <text x="10" y="145" font-family="Cormorant Garamond, serif" font-size="52" font-weight="300" fill="#0A0806" opacity=".05" font-style="italic" letter-spacing="-2">collect</text>
-          <text x="18" y="195" font-family="Cormorant Garamond, serif" font-size="52" font-weight="300" fill="#0A0806" opacity=".05" font-style="italic" letter-spacing="-2">original</text>
-          <line x1="10" y1="240" x2="290" y2="240" stroke="#0A0806" stroke-width="1.5" opacity=".1"/>
-          <line x1="10" y1="255" x2="180" y2="255" stroke="#0A0806" stroke-width="1.5" opacity=".06"/>
-          <rect x="232" y="40" width="52" height="52" fill="none" stroke="#E8501A" stroke-width="1.5" opacity=".45"/>
-          <text x="258" y="73" font-family="Manrope, sans-serif" font-size="20" font-weight="900" fill="#E8501A" text-anchor="middle" opacity=".55">F</text>
-          <circle cx="258" cy="120" r="12" fill="#E8501A" opacity=".2"/>
-          <circle cx="258" cy="120" r="5" fill="#E8501A" opacity=".4"/>
-          <rect x="0" y="344" width="300" height="16" fill="#E8501A" opacity=".15"/>
-        </svg>
-      </div>
-      <div class="hero-stats">
-        <div class="sc"><div class="sc-n">$500&ndash;5K</div><div class="sc-l">Affordable Originals</div></div>
-        <div class="sc"><div class="sc-n">Live AI</div><div class="sc-l">Powered Search</div></div>
-        <div class="sc"><div class="sc-n">1-of-1</div><div class="sc-l">Originals Only</div></div>
-        <div class="sc"><div class="sc-n">Direct</div><div class="sc-l">From the Artist</div></div>
-      </div>
+    <div class="hero-float hf1"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/300px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" alt="Van Gogh Starry Night" loading="lazy"></div>
+    <div class="hero-float hf2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camille_Pissarro_-_Boulevard_Montmartre%2C_Spring_Morning.jpg/240px-Camille_Pissarro_-_Boulevard_Montmartre%2C_Spring_Morning.jpg" alt="Pissarro" loading="lazy"></div>
+    <div class="hero-float hf3"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Monet_Water_Lilies_1906.jpg/300px-Monet_Water_Lilies_1906.jpg" alt="Monet Water Lilies" loading="lazy"></div>
+    <div class="hero-float hf4"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg" alt="Mona Lisa" loading="lazy"></div>
+    <div class="hero-float hf5"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Claude_Monet%2C_The_Magpie%2C_1868-1869.jpg/300px-Claude_Monet%2C_The_Magpie%2C_1868-1869.jpg" alt="Monet The Magpie" loading="lazy"></div>
+    <div class="hero-float hf6"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/200px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg" alt="The Scream" loading="lazy"></div>
+    <div class="hero-float hf7"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Millais_Ophelia.jpg/280px-Millais_Ophelia.jpg" alt="Ophelia" loading="lazy"></div>
+    <div class="hero-float hf8"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GD-FR-Paris-Louvre-Peintures-Vermeer-La_Dentelli%C3%A8re.jpg/200px-GD-FR-Paris-Louvre-Peintures-Vermeer-La_Dentelli%C3%A8re.jpg" alt="Vermeer" loading="lazy"></div>
+    <div class="hero-float hf9"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Monet_Haystacks_Snow_Effect.jpg/280px-Monet_Haystacks_Snow_Effect.jpg" alt="Monet Haystacks" loading="lazy"></div>
+    <div class="hero-float hf10"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg/220px-Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg" alt="American Gothic" loading="lazy"></div>
+    <!-- Centered headline -->
+    <div class="hero-center">
+      <div class="hero-eye">Original Art &middot; Direct Discovery &middot; $500&ndash;$5K</div>
+      <h1 class="hero-h">Find original art<br>made for <em>your home.</em></h1>
+      <p class="hero-desc">A personal AI curation service. Tell us about your space and we search the best platforms — then build you a proposal with the story behind every piece.</p>
+      <button class="btn-primary" onclick="nav('consult')">Start Your Consultation &rarr;</button>
+      <p class="hero-sub">Free &middot; Takes 3 minutes &middot; Real artists, real originals</p>
     </div>
   </div>
+
+  <!-- Stats strip -->
+  <div class="stats">
+    <div class="stat"><div class="stat-n">$500–5K</div><div class="stat-l">Affordable Originals</div></div>
+    <div class="stat"><div class="stat-n">1-of-1</div><div class="stat-l">Every Work</div></div>
+    <div class="stat"><div class="stat-n">Live AI</div><div class="stat-l">Powered Search</div></div>
+    <div class="stat"><div class="stat-n">Direct</div><div class="stat-l">From the Artist</div></div>
+  </div>
+
+  <!-- How it works — card layout like reference 3 -->
   <div class="how">
-    <div class="how-cell"><div class="how-n">01</div><div class="how-h">Tell us about your space</div><p class="how-p">Room, aesthetic, color palette, budget. The more specific you are, the more precise the match.</p></div>
-    <div class="how-cell"><div class="how-n">02</div><div class="how-h">We search where it matters</div><p class="how-p">Tappan Collective, Drool, independent Instagram artists, personal studio sites. Places where real discovery happens.</p></div>
-    <div class="how-cell"><div class="how-n">03</div><div class="how-h">You get a curator&rsquo;s proposal</div><p class="how-p">Not a grid of thumbnails &mdash; a considered proposal. Each artist explained. The specific piece that fits best.</p></div>
+    <div class="how-cell">
+      <div class="how-n">1</div>
+      <div class="how-h">Tell us about your space</div>
+      <p class="how-p">Room, aesthetic, color palette, budget. The more specific you are, the more precise the match.</p>
+    </div>
+    <div class="how-cell">
+      <div class="how-n">2</div>
+      <div class="how-h">We search where it matters</div>
+      <p class="how-p">Tappan Collective, Hake House, Uprise Art, Artsper, artist Instagram pages. Real discovery from real sources.</p>
+    </div>
+    <div class="how-cell">
+      <div class="how-n">3</div>
+      <div class="how-h">You get a curator&rsquo;s proposal</div>
+      <p class="how-p">Not a grid of thumbnails &mdash; a considered proposal. Each artist explained. The specific piece that fits best.</p>
+    </div>
   </div>
+
+  <!-- Red quote band -->
   <div class="og-band">
     <span class="og-band-txt">&ldquo;Collecting art isn&rsquo;t for galleries and billionaires. It never was.&rdquo;</span>
-    <button class="og-band-btn" onclick="nav('why')">Why Collect Original Art &#x2192;</button>
+    <button class="og-band-btn" onclick="nav('why')">Why Collect Art &rarr;</button>
   </div>
-  <div class="platforms">
-    <div class="plat"><div class="plat-name">Tappan Collective</div><p class="plat-desc">Curated emerging artists. Editorial, beautiful, diverse. Some of the best discovery outside the gallery system.</p><span class="plat-tag tag-og">Featured Source</span></div>
-    <div class="plat"><div class="plat-name">Drool</div><p class="plat-desc">Print and original editions from a hand-picked roster of contemporary artists. Quality over quantity.</p><span class="plat-tag tag-gr">Editions + Originals</span></div>
-    <div class="plat"><div class="plat-name">Instagram &amp; Studios</div><p class="plat-desc">The best artists often sell direct. Instagram is where real collecting relationships start. We know who to watch.</p><span class="plat-tag tag-bl">Direct Discovery</span></div>
-    <div class="plat"><div class="plat-name">Artist Websites</div><p class="plat-desc">When you buy direct from an artist&rsquo;s own site, more money reaches them. We prioritise this path.</p><span class="plat-tag tag-pu">Highest Artist Cut</span></div>
+
+  <!-- Platforms -->
+  <div class="platforms" style="grid-template-columns:repeat(8,1fr);">
+    <div class="plat"><div class="plat-name">Tappan Collective</div><p class="plat-desc">Curated emerging artists, editorial quality.</p><span class="plat-tag tag-og">Featured</span></div>
+    <div class="plat"><div class="plat-name">Hake House</div><p class="plat-desc">Boutique originals and limited editions.</p><span class="plat-tag tag-gr">Originals</span></div>
+    <div class="plat"><div class="plat-name">Uprise Art</div><p class="plat-desc">Direct from emerging artists, fair pricing.</p><span class="plat-tag tag-bl">Direct</span></div>
+    <div class="plat"><div class="plat-name">Artsy</div><p class="plat-desc">Broad marketplace, good for research.</p><span class="plat-tag tag-pu">Marketplace</span></div>
+    <div class="plat"><div class="plat-name">Singular Art</div><p class="plat-desc">One-of-a-kind only, every piece unique.</p><span class="plat-tag tag-og">1-of-1</span></div>
+    <div class="plat"><div class="plat-name">Artsper</div><p class="plat-desc">International emerging artists, fair prices.</p><span class="plat-tag tag-gr">International</span></div>
+    <div class="plat"><div class="plat-name">Artfully Walls</div><p class="plat-desc">Home-friendly originals and limited prints.</p><span class="plat-tag tag-bl">Home-Friendly</span></div>
+    <div class="plat"><div class="plat-name">Instagram &amp; Artist Sites</div><p class="plat-desc">Direct — more money reaches artists.</p><span class="plat-tag tag-pu">Highest Cut</span></div>
   </div>
 </div>
 
@@ -456,12 +740,12 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
     <p class="why-subp">It&rsquo;s not about investment returns or impressing anyone. It&rsquo;s about surrounding yourself with things made by other humans, for no practical reason at all &mdash; just feeling and expression.</p>
   </div>
   <div class="why-grid">
-    <div class="why-cell"><div class="why-num">01</div><h3 class="why-ch">It directly sustains an artist&rsquo;s life</h3><p class="why-cp">When you buy an original directly from an artist, you&rsquo;re paying their rent, their materials, their next year of making. Galleries take 50%. Platforms take 30&ndash;40%. Buying direct means close to 100% reaches the person who made it.</p></div>
-    <div class="why-cell"><div class="why-num">02</div><h3 class="why-ch">A 1-of-1 is genuinely irreplaceable</h3><p class="why-cp">No one else in the world owns this specific object. The canvas with those marks, in that light, made on that particular day. You&rsquo;re not buying access to an image. You&rsquo;re acquiring the thing itself.</p></div>
-    <div class="why-cell"><div class="why-num">03</div><h3 class="why-ch">It tells the world who you are</h3><p class="why-cp">Art on your wall is autobiography. What you find beautiful, what unsettles you, what you want to wake up to. A home full of original art is a home that has something to say &mdash; about you, not a decorator&rsquo;s sense of safety.</p></div>
-    <div class="why-cell"><div class="why-num">04</div><h3 class="why-ch">Now is genuinely the right moment</h3><p class="why-cp">The artists priced at $500&ndash;$2,000 today are the ones with gallery shows in five years. The windows at these prices close. The best time to start is before the rest of the room knows the name.</p></div>
-    <div class="why-cell"><div class="why-num">05</div><h3 class="why-ch">Living with art changes you</h3><p class="why-cp">Not metaphorically &mdash; literally. A painting you see every morning for a year does something to how you look at the world. You start noticing light differently. Art teaches attention.</p></div>
-    <div class="why-cell"><div class="why-num">06</div><h3 class="why-ch">The financial side is real, not mythical</h3><p class="why-cp">Not every piece appreciates dramatically. But original works by artists whose careers are building have a track record. Buying at the right moment in a career isn&rsquo;t speculating &mdash; it&rsquo;s collecting with your eyes open.</p></div>
+    <div class="why-cell"><div class="why-num">01</div><h3 class="why-ch">Your money goes straight to the artist</h3><p class="why-cp">When you buy from a gallery, the artist gets about half. Big platforms? Same deal. But buy direct from an artist&rsquo;s website or Instagram, and almost all of it reaches them. That means your purchase literally pays someone&rsquo;s rent and lets them keep making work. It&rsquo;s one of the most direct ways to support something you believe in.</p></div>
+    <div class="why-cell"><div class="why-num">02</div><h3 class="why-ch">You get something nobody else has</h3><p class="why-cp">An original painting or drawing is a one-of-a-kind object &mdash; not a print, not a copy. The actual thing someone made with their hands. You can own something that exists exactly once in the world. No one else can have it. That&rsquo;s not a marketing pitch, it&rsquo;s just genuinely true.</p></div>
+    <div class="why-cell"><div class="why-num">03</div><h3 class="why-ch">Your home starts to feel like <em>yours</em></h3><p class="why-cp">Ever walked into someone&rsquo;s home and immediately got a sense of who they are? That&rsquo;s art doing that. The pieces you choose say something about what moves you and what you think is beautiful. It&rsquo;s one of the easiest ways to make a space feel genuinely personal rather than just furnished.</p></div>
+    <div class="why-cell"><div class="why-num">04</div><h3 class="why-ch">You&rsquo;re getting in early &mdash; and that matters</h3><p class="why-cp">Many artists selling for $500&ndash;$1,500 today will be significantly pricier in a few years as their careers grow. You&rsquo;re not speculating &mdash; you&rsquo;re buying work you love while it&rsquo;s still accessible. People who started collecting early always say the same thing: &ldquo;I wish I&rsquo;d bought more when I had the chance.&rdquo;</p></div>
+    <div class="why-cell"><div class="why-num">05</div><h3 class="why-ch">You start seeing the world differently</h3><p class="why-cp">This sounds a bit much, but it&rsquo;s genuinely true: living with art you love changes how you notice things. Light, colour, composition start jumping out everywhere. You stop scrolling past beautiful things. It&rsquo;s a bit like learning a new language &mdash; once you start paying attention, the world gets more interesting.</p></div>
+    <div class="why-cell"><div class="why-num">06</div><h3 class="why-ch">It can actually hold &amp; grow in value</h3><p class="why-cp">We&rsquo;re not promising you&rsquo;ll flip paintings for profit &mdash; that&rsquo;s not the point. But works by artists with growing careers do tend to hold their value and often increase over time. The upside vs stocks or real estate? You get to live with your investment and enjoy looking at it every single day.</p></div>
   </div>
   <div class="why-q"><p class="why-q-txt">&ldquo;The purpose of art is washing the dust of daily life off our souls.&rdquo;</p><p class="why-q-attr">&mdash; Pablo Picasso</p></div>
   <div class="why-cta"><h2 class="why-cta-h">Ready to find your <em>first piece?</em></h2><button class="btn-primary" onclick="nav('consult')">Start Your Consultation &#x2192;</button></div>
@@ -646,6 +930,7 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
           Save &amp; Share
         </button>
+        <button class="btn-liked" id="btnLiked" onclick="openLiked()">&#x2665; Liked Works <span id="likedCount" style="background:rgba(255,255,255,.25);padding:1px 7px;border-radius:8px;font-size:11px;margin-left:2px;">0</span></button>
         <button class="btn-nc" onclick="nav('home')">New Consultation</button>
       </div>
     </div>
@@ -675,7 +960,7 @@ body{font-family:'Manrope',sans-serif;background:var(--surf);color:var(--ink);-w
       <div class="wl" id="wlist"></div>
     </div>
   </div>
-  <div class="prop-foot"><button style="border:1.5px solid var(--rule);padding:12px 22px;font-family:Manrope,sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:none;cursor:pointer;color:var(--ink3);" onclick="nav('home')">&#x2190; New Consultation</button><span class="pf-l">FOUND.ART &mdash; Original art for emerging collectors</span></div>
+  <div class="prop-foot"><button style="border:1.5px solid var(--rule);padding:12px 22px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:none;cursor:pointer;color:var(--ink3);" onclick="nav('home')">&#x2190; New Consultation</button><span class="pf-l">FOUND.ART &mdash; Original art for emerging collectors</span></div>
 </div>
 
 <!-- MODAL -->
@@ -718,18 +1003,46 @@ function nav(id){
   window.scrollTo(0,0);
   if(id==='trending')buildTrending();
   if(id==='consult')showQ(1);
+  if(id==='quiz')initQuiz();
 }
 
 const artists=[
-  {rank:1,cat:'abstract',name:'Flora Yukhnovich',title:'Warm to the Touch',desc:"Deliriously lush neo-rococo abstraction. Soft pinks, golds, and creams that feel like Fragonard dissolved in honey. One of the most sought-after painters of her generation.",price:'$1,200\u2013$2,400',src:'Tappan Collective',url:'https://www.tappancollective.com',art:'a1',badge:'\uD83D\uDD25 Hot'},
-  {rank:2,cat:'figurative',name:'Christina Quarles',title:'Study Series',desc:"Fragmented figuration in acidic, electric palettes. Bodies in motion, identity in flux. Works on paper remain accessible at this stage of her career.",price:'$800\u2013$1,800',src:'Artist Website',url:'https://www.christinaquarles.com',art:'a2',badge:'\u2191 Rising'},
-  {rank:3,cat:'stilllife',name:'Issy Wood',title:'Untitled Interior',desc:"Uncanny domestic scenes \u2014 velvet textures, strange light, objects with unnerving presence. Quiet but impossible to ignore.",price:'$900\u2013$2,000',src:'Drool',url:'https://drool.com',art:'a3',badge:'New'},
-  {rank:4,cat:'abstract',name:'Michael Armitage',title:'Figure Study',desc:"East African landscapes and figures rendered with charged, political energy. Painted on lubugo bark cloth. The material is inseparable from the meaning.",price:'$1,400\u2013$3,200',src:'Instagram',url:'https://www.instagram.com/michael.armitage',art:'a4',badge:'\u2191 Rising'},
-  {rank:5,cat:'abstract',name:'Jade Fadojutimi',title:'Color Field No. 3',desc:"Enormous, turbulent canvases that feel like pure feeling made visible. Works on paper are your entry point into one of the decade\u2019s defining careers.",price:'$700\u2013$1,600',src:'Tappan Collective',url:'https://www.tappancollective.com',art:'a5',badge:'\uD83D\uDD25 Hot'},
-  {rank:6,cat:'photography',name:'Dana Lixenberg',title:'Community Study',desc:"Documentary photography with a visual poetry that transcends journalism. Long-form projects, beautifully printed. Limited editions still available.",price:'$600\u2013$1,400',src:'Artist Website',url:'https://www.danelixenberg.com',art:'a6',badge:'New'},
-  {rank:7,cat:'stilllife',name:'Laura Jones',title:'Domestic Still I',desc:"Hyperrealist still lifes of domestic objects rendered with obsessive attention. Familiar but strange. The light alone is worth the asking price.",price:'$900\u2013$2,200',src:'Drool',url:'https://drool.com',art:'a7',badge:'\u2191 Rising'},
-  {rank:8,cat:'abstract',name:'Cecily Brown',title:'Works on Paper',desc:"The gateway into one of the most significant careers of the last 30 years. Gestural, warm, and very much alive. Paper works are the accessible entry.",price:'$1,800\u2013$4,000',src:'Artist Website',url:'https://www.cecilybrown.com',art:'a8',badge:'Investment'},
-  {rank:9,cat:'figurative',name:'Otis Kwame Kye Quaicoe',title:'Portrait Study',desc:"Intimate, psychological oil portraits. Dark grounds with figures who emerge from shadow. Deeply affecting and technically extraordinary.",price:'$1,200\u2013$2,800',src:'Tappan Collective',url:'https://www.tappancollective.com',art:'a9',badge:'\uD83D\uDD25 Hot'},
+  {rank:1,name:'Flora Yukhnovich',title:'Voluptuous Panic',desc:'Luscious, candy-coloured abstractions built from Rococo brushwork. Rising fast.',price:'$3,200–6,000',src:'Victoria Miro',cat:'abstract',badge:'🔥 Trending',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Pablo_Picasso%2C_1921%2C_Nous_autres_musiciens_%28Three_Musicians%29%2C_oil_on_canvas%2C_204.5_x_188.3_cm%2C_Philadelphia_Museum_of_Art.jpg/480px-Pablo_Picasso%2C_1921%2C_Nous_autres_musiciens_%28Three_Musicians%29%2C_oil_on_canvas%2C_204.5_x_188.3_cm%2C_Philadelphia_Museum_of_Art.jpg',
+   url:'https://www.victoriamiro.com/artists/88-flora-yukhnovich/'},
+  {rank:2,name:'Christina Quarles',title:'Come Into My Arms',desc:'Fragmented figures in acid-bright spaces questioning body and identity.',price:'$8,000–25,000',src:'Hauser & Wirth',cat:'figurative',badge:'⬆ Rising',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/320px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg',
+   url:'https://www.hauserwirth.com/artists/28468-christina-quarles/'},
+  {rank:3,name:'Issy Wood',title:'Untitled (Coat)',desc:'Intimate oil paintings of inanimate objects with an uncanny psychological charge.',price:'$4,000–12,000',src:'Cabinet Gallery',cat:'stilllife',badge:'⬆ Rising',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GD-FR-Paris-Louvre-Peintures-Vermeer-La_Dentelli%C3%A8re.jpg/280px-GD-FR-Paris-Louvre-Peintures-Vermeer-La_Dentelli%C3%A8re.jpg',
+   url:'https://www.cabinet.uk.com/artists/issy-wood'},
+  {rank:4,name:'Jadé Fadojutimi',title:'The Rites of Passage',desc:'Dense gestural abstraction — paint applied in shimmering, electric layers.',price:'$15,000–40,000',src:'Gagosian',cat:'abstract',badge:'🔥 Trending',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/480px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg',
+   url:'https://gagosian.com/artists/jade-fadojutimi/'},
+  {rank:5,name:'Cecily Brown',title:'The Fugitive Kind',desc:'Lush gestural painting combining figuration and abstraction. Collector favourite.',price:'$50,000+',src:'Maccarone',cat:'figurative',badge:'⬆ Established',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Monet_Water_Lilies_1906.jpg/480px-Monet_Water_Lilies_1906.jpg',
+   url:'https://www.cecilybrownstudio.com'},
+  {rank:6,name:'Eric Aho',title:'Winter Ice Out',desc:'Quiet, monumental landscapes with an elemental force. New England light.',price:'$2,800–8,000',src:'Tappan Collective',cat:'landscape',badge:'⬆ Rising',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Claude_Monet%2C_The_Magpie%2C_1868-1869.jpg/480px-Claude_Monet%2C_The_Magpie%2C_1868-1869.jpg',
+   url:'https://www.tappancollective.com/artists/eric-aho'},
+  {rank:7,name:'Zanele Muholi',title:'Somnyama Ngonyama',desc:'Powerful self-portrait photography exploring Black identity and beauty.',price:'$5,000–18,000',src:'Stevenson Gallery',cat:'photography',badge:'🔥 Trending',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/320px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg',
+   url:'https://stevenson.info/artist/zanele-muholi/'},
+  {rank:8,name:'Laura Jones',title:'Mimosa',desc:'Botanical oil paintings with a jewel-like intensity. Works selling fast.',price:'$1,200–3,500',src:'Uprise Art',cat:'stilllife',badge:'⬆ Affordable',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camille_Pissarro_-_Boulevard_Montmartre%2C_Spring_Morning.jpg/480px-Camille_Pissarro_-_Boulevard_Montmartre%2C_Spring_Morning.jpg',
+   url:'https://upriseartshop.com/collections/artists/laura-jones'},
+  {rank:9,name:'Michael Armitage',title:'The Promised Land',desc:'Layered narrative painting on lubugo bark cloth. Storytelling and materiality combined.',price:'$20,000+',src:'White Cube',cat:'figurative',badge:'⬆ Rising',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Millais_Ophelia.jpg/480px-Millais_Ophelia.jpg',
+   url:'https://whitecube.com/artists/michael-armitage'},
+  {rank:10,name:'Anne-Sophie Tschiegg',title:'Les Herbes',desc:'Delicate works on paper featuring botanical studies with minimal, quiet lines.',price:'$800–2,200',src:'Tappan Collective',cat:'stilllife',badge:'⬆ Affordable',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Monet_Haystacks_Snow_Effect.jpg/480px-Monet_Haystacks_Snow_Effect.jpg',
+   url:'https://www.tappancollective.com/artists/anne-sophie-tschiegg'},
+  {rank:11,name:'Otis Kwame Kye Quaicoe',title:'Gold Coast',desc:'Richly coloured figurative paintings celebrating Black joy and portraiture.',price:'$6,000–20,000',src:'Roberts Projects',cat:'figurative',badge:'🔥 Trending',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg/320px-Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg',
+   url:'https://www.robertsprojectsla.com/artists/otis-kwame-kye-quaicoe'},
+  {rank:12,name:'Dana Lixenberg',title:'Imperial Courts',desc:'Long-form documentary photography that becomes a living archive of community.',price:'$1,500–4,500',src:'Artsper',cat:'photography',badge:'⬆ Rising',
+   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg',
+   url:'https://www.artsper.com/us/contemporary-artists/netherlands/16839/dana-lixenberg'}
 ];
 
 function buildTrending(filter){
@@ -738,16 +1051,25 @@ function buildTrending(filter){
   const list=filter==='all'?artists:artists.filter(a=>a.cat===filter);
   grid.innerHTML=list.map(a=>`
     <div class="ac" data-cat="${a.cat}">
-      <div class="ac-swatch"><div class="ac-art ${a.art}"></div><div class="ac-rank">${a.rank}</div><div class="ac-badge">${a.badge}</div></div>
-      <p class="ac-artist">${a.name}</p>
-      <p class="ac-title">${a.title}</p>
-      <p class="ac-desc">${a.desc}</p>
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;">
-        <div><div class="ac-price">${a.price}</div><div class="ac-src">${a.src}</div></div>
-      </div>
-      <div class="ac-btns">
-        <a class="ac-btn" href="${a.url}" target="_blank">View Works &rarr;</a>
-        <button class="ac-btn-s" onclick="nav('consult')">Get My Proposal</button>
+      <div class="ac-swatch">
+        <img src="${a.img}" alt="${a.name} — ${a.title}" loading="lazy">
+        <div class="ac-rank">${a.rank}</div>
+        <div class="ac-badge">${a.badge}</div>
+        <div class="ac-body">
+          <p class="ac-artist">${a.name}</p>
+          <p class="ac-title">${a.title}</p>
+          <p class="ac-desc">${a.desc}</p>
+          <div class="ac-footer">
+            <div>
+              <div class="ac-price">${a.price}</div>
+              <div class="ac-src">via ${a.src}</div>
+            </div>
+          </div>
+          <div class="ac-btns">
+            <a class="ac-btn" href="${a.url}" target="_blank">View Works &rarr;</a>
+            <button class="ac-btn-s" onclick="nav('consult')">Get Proposal</button>
+          </div>
+        </div>
       </div>
     </div>`).join('');
 }
@@ -854,15 +1176,15 @@ async function submit(){
 
 async function callAI(){
   const hexStr=S.colorHexes.length?S.colorHexes.join(', '):'not specified';
-  const sys=`You are FOUND.ART, an expert art curator specializing in finding affordable original art ($500-$5,000) for emerging collectors. You have deep knowledge of Tappan Collective, Drool, independent artist Instagram pages, and artist personal websites. You STRONGLY PREFER these sources over Saatchi Art. Direct artist relationships are your priority.
+  const sys=`You are FOUND.ART, an expert art curator for emerging collectors. You specialize in finding affordable original art ($500-$5,000) from platforms like Tappan Collective, Hake House, Uprise Art, Artsy, Singular Art, Artsper, Artfully Walls, artist websites, and Instagram. AVOID Saatchi Art — use the above sources instead.
 
 CRITICAL RULES:
-1. Only recommend REAL artists who genuinely exist.
-2. PRIORITIZE: Tappan Collective, Drool, artist personal websites, Instagram. Use Saatchi only as a last resort.
-3. For each recommendation: first explain why THIS ARTIST specifically, then identify the best specific work for this client.
-4. sourceUrl: Use specific artist pages where possible. Tappan = https://www.tappancollective.com/[name]. Instagram = https://www.instagram.com/[real-handle].
-5. artDescription: Write a vivid 3-4 sentence description of what this work LOOKS like. Be painterly and specific.
-6. Return ONLY valid JSON, no markdown fences.`;
+1. Only recommend REAL artists who genuinely exist and have verifiable careers.
+2. PRIORITIZE: Tappan Collective, Hake House, Uprise Art, Artsper, artist personal websites and Instagram. These give artists the best deal.
+3. For imageUrl: provide a real Wikimedia Commons image URL (https://upload.wikimedia.org/wikipedia/commons/thumb/...) of an actual painting/artwork that represents the STYLE/MOOD of this artist's work — use public domain art images, real paintings — use a real painting/artwork photo, not a person or abstract texture. Search for something that matches: abstract if they're an abstract painter, portrait-style if figurative, landscape if landscape, still life if that's their thing.
+4. artDescription: 3-4 vivid sentences describing what a typical work LOOKS like. Colors, marks, scale, feeling. Make the reader picture it.
+5. Return ONLY valid JSON, no markdown fences.
+6. sourceUrl should be specific: Tappan = https://www.tappancollective.com/artists/[slug], Instagram = https://www.instagram.com/[real-handle].`;
 
   const usr=`Create an art proposal. For each work, lead with WHY this artist specifically, then the best piece for this brief.
 
@@ -897,6 +1219,7 @@ Return this JSON:
       "price": 1200,
       "source": "Tappan Collective",
       "sourceUrl": "https://www.tappancollective.com/artist-slug",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
       "colorHexes": ["#hex1","#hex2","#hex3"],
       "colorNotes": "dominant colors in this work",
       "artDescription": "4 vivid sentences: colors, marks, composition, scale, feeling. Make the reader SEE it.",
@@ -992,13 +1315,16 @@ function render(p){
     const palSw=wHex.slice(0,4).map(h=>`<div class="wpsw" style="background:${h};border-color:${h};"></div>`).join('');
     const artBg=wHex.length>=2?`linear-gradient(145deg,${wHex[0]} 0%,${wHex[1]} 42%,${wHex[2]||wHex[0]} 82%)`:'linear-gradient(145deg,#D4A882,#8B5A3C)';
     const overlay='radial-gradient(ellipse 60% 70% at 35% 35%,rgba(255,255,255,.13) 0%,transparent 55%),radial-gradient(ellipse 40% 50% at 72% 68%,rgba(0,0,0,.18) 0%,transparent 48%)';
+    const hasImg=w.imageUrl&&w.imageUrl.includes('unsplash');
     const card=document.createElement('div');
     card.className='wcard'+(flip?' fl':'');
     card.innerHTML=`
       <div class="wcard-main">
         <div class="wi">
-          <div class="wi-art" style="background:${artBg};">
-            <div style="position:absolute;inset:0;background:${overlay};"></div>
+          <div class="wi-art" style="${hasImg?'':('background:'+artBg+';')}position:relative;">
+            ${hasImg?`<img src="${w.imageUrl}" alt="${w.artist} — ${w.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;min-height:420px;">`:
+            `<div style="position:absolute;inset:0;background:${artBg};min-height:420px;"></div>`}
+            <div style="position:absolute;inset:0;background:${hasImg?'linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.25) 100%)':overlay};"></div>
             <div class="wi-desc">
               <div class="wi-di">
                 <p class="wi-dl">About This Work</p>
@@ -1031,7 +1357,7 @@ function render(p){
               </div>
               <div class="wbtns">
                 <a class="btn-v" href="${w.sourceUrl||'https://www.tappancollective.com'}" target="_blank">View on ${srcShort} &rarr;</a>
-                <button class="btn-sv" onclick="toggleSv(this,event)">&#x2661; Save</button>
+                <button class="btn-like" onclick="toggleLike(this,w,event)">&#x2661; Save</button>
               </div>
             </div>
           </div>
@@ -1092,16 +1418,454 @@ function fallback(){
     curatorNote:`Your brief pointed us toward works between the expressive and the contemplative. ${S.colorFamily?'The '+S.colorFamily.toLowerCase()+' tones in your room call for art with warmth and depth.':''} We looked at Tappan Collective, Drool, and several artist Instagram accounts before landing on these. Each one is available now.`,
     colorHarmony:{desc:`The selected works extend your room's ${S.colorFamily||'palette'} naturally \u2014 warm, grounded tones that feel like they grew from the space.`,artSwatches:['#D4A882','#B87A5A','#8B5A3C','#C8912A','#6B4226']},
     works:[
-      {artist:'Janaina Tschape',artistWhy:"Tschap\u00e9's organic abstraction is uniquely suited to rooms with warm, natural palettes. Her work breathes without demanding.",title:'Forest Study No. 4',medium:'Oil on canvas',dimensions:'24 \u00d7 30 in',year:'2022',price:Math.min(S.budget,1400),source:'Tappan Collective',sourceUrl:'https://www.tappancollective.com',colorHexes:['#7A9460','#D4BFA8','#F5EFE6'],colorNotes:'warm greens, earth tones, cream',artDescription:"A large gestural canvas built from sweeping arcs of warm sage and deep forest green over a luminous cream ground. The paint is layered \u2014 some passages thick and impasto, others thin and translucent. Light seems to filter through the marks as though through foliage. The composition has no hard edges: everything bleeds into everything else, creating a feeling of organic depth.",why:`Tschap\u00e9's organic abstraction sits beautifully against a ${S.colorFamily||'warm'} palette. The muted greens and earth tones extend your room's warmth without competing.`,artistBio:'Brazilian-German artist with international exhibition history. Her work explores the intersection of nature, the body, and abstraction.',matchScore:94},
-      {artist:'Issy Wood',artistWhy:"Wood's uncanny domesticity brings both wit and depth. Her work creates conversation and holds up over years of looking.",title:'Velvet Study (Evening)',medium:'Oil on linen',dimensions:'16 \u00d7 20 in',year:'2023',price:Math.min(S.budget,1800),source:'Drool',sourceUrl:'https://drool.com',colorHexes:['#3A2A18','#8B5A38','#D4C4A0'],colorNotes:'deep umber, warm mahogany, pale gold',artDescription:"A small, jewel-like oil on linen depicting a section of velvet upholstery in deep teal. The fabric occupies the entire canvas \u2014 there is no background, no context, just the material. A single highlight catches the pile of the velvet and runs diagonally across the composition. The effect is both intimate and strangely monumental.",why:"Wood's intimately scaled oils suit a bedroom or study perfectly. The uncanny quality rewards long attention \u2014 this is a work that gives more over time, not less.",artistBio:'British painter known for her unsettling, meticulously rendered depictions of domestic objects and interiors.',matchScore:90},
-      {artist:'Otis Kwame Kye Quaicoe',artistWhy:"Quaicoe's portraits have a psychological depth that demands sustained attention. His technical command is extraordinary for his career stage.",title:'Portrait in Ochre',medium:'Oil on canvas',dimensions:'20 \u00d7 24 in',year:'2022',price:Math.min(S.budget,1600),source:'Tappan Collective',sourceUrl:'https://www.tappancollective.com',colorHexes:['#C8912A','#6B4226','#2A1A0A'],colorNotes:'warm ochre, deep umber, near-black ground',artDescription:"An intimate oil portrait on a dark, near-black ground. The figure emerges from shadow \u2014 face and shoulders catching warm ochre and golden light while the rest dissolves. The paint surface is direct and sure: no overworking, no hesitation. The eyes hold the viewer with a quiet, unblinking intelligence.",why:`Quaicoe's warm ochre palette will sing against your ${S.colorFamily||'room colors'}. The dark ground means the work holds its own on any wall.`,artistBio:'Ghanaian-American painter based in Portland whose oil portraits are attracting serious gallery and collector attention.',matchScore:88},
-      {artist:'Flora Yukhnovich',artistWhy:"Yukhnovich distils the excess of the Rococo into something that feels entirely contemporary. Her warmth is specific, not generic.",title:'Pink Study on Paper',medium:'Gouache on paper',dimensions:'14 \u00d7 18 in',year:'2021',price:Math.min(S.budget,2100),source:'Artist Website',sourceUrl:'https://www.florayukhnovich.com',colorHexes:['#E8C8B0','#D4A8C0','#F5EFE6'],colorNotes:'soft pinks, peachy creams, warm whites',artDescription:"A loose, luminous gouache on paper in blush pinks, buttery creams, and pale gold. The marks are rapid and confident \u2014 broad washes interrupted by smaller, more gestural passages. The overall effect is of light dissolving form: the suggestion of drapery or perhaps clouds, but the real subject is colour and warmth.",why:`Works on paper by artists of Yukhnovich's momentum are exceptional value. The warm pinks and creams map directly to your ${S.colorFamily||'palette'}.`,artistBio:'British painter whose neo-rococo abstraction has attracted significant gallery and institutional attention.',matchScore:86}
+      {artist:'Janaina Tschäpe',artistWhy:"Tschäpe's organic abstraction suits warm, natural-palette rooms perfectly. Her work breathes without demanding attention.",title:'Forest Study No. 4',medium:'Oil on canvas',dimensions:'24 × 30 in',year:'2022',price:Math.min(S.budget,1400),source:'Tappan Collective',sourceUrl:'https://www.tappancollective.com',imageUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg',colorHexes:['#7A9460','#D4BFA8','#F5EFE6'],colorNotes:'warm greens, earth tones, cream',artDescription:"A large gestural canvas built from sweeping arcs of warm sage and deep forest green over a luminous cream ground. The paint is layered — some passages thick and impasto, others thin and translucent. Light seems to filter through the marks as though through foliage. The composition has no hard edges: everything bleeds into everything else, creating a feeling of organic depth.",why:`Tschäpe's organic abstraction sits beautifully against a ${S.colorFamily||'warm'} palette. The muted greens and earth tones extend your room's warmth without competing.`,artistBio:'Brazilian-German artist with international exhibition history. Her work explores the intersection of nature, the body, and abstraction.',matchScore:94},
+      {artist:'Issy Wood',artistWhy:"Wood's uncanny domesticity brings both wit and depth. Her work holds up over years of looking and always creates conversation.",title:'Velvet Study (Evening)',medium:'Oil on linen',dimensions:'16 × 20 in',year:'2023',price:Math.min(S.budget,1800),source:'Uprise Art',sourceUrl:'https://upriseartny.com',imageUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Millais_Ophelia.jpg/600px-Millais_Ophelia.jpg',colorHexes:['#3A2A18','#8B5A38','#D4C4A0'],colorNotes:'deep umber, warm mahogany, pale gold',artDescription:"A small, jewel-like oil on linen depicting a section of velvet upholstery in deep teal. The fabric occupies the entire canvas — there is no background, just the material. A single highlight catches the pile of the velvet and runs diagonally across the composition. The effect is both intimate and strangely monumental.",why:"Wood's intimately scaled oils suit a bedroom or study perfectly. The uncanny quality rewards long attention — this is work that gives more over time.",artistBio:'British painter known for her unsettling, meticulously rendered depictions of domestic objects and interiors.',matchScore:90},
+      {artist:'Otis Kwame Kye Quaicoe',artistWhy:"Quaicoe's portraits have psychological depth that demands attention. His technical command is extraordinary for his career stage.",title:'Portrait in Ochre',medium:'Oil on canvas',dimensions:'20 × 24 in',year:'2022',price:Math.min(S.budget,1600),source:'Tappan Collective',sourceUrl:'https://www.tappancollective.com',imageUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Pablo_Picasso%2C_1921%2C_Nous_autres_musiciens_%28Three_Musicians%29%2C_oil_on_canvas%2C_204.5_x_188.3_cm%2C_Philadelphia_Museum_of_Art.jpg/600px-Pablo_Picasso%2C_1921%2C_Nous_autres_musiciens_%28Three_Musicians%29%2C_oil_on_canvas%2C_204.5_x_188.3_cm%2C_Philadelphia_Museum_of_Art.jpg',colorHexes:['#C8912A','#6B4226','#2A1A0A'],colorNotes:'warm ochre, deep umber, near-black ground',artDescription:"An intimate oil portrait on a dark, near-black ground. The figure emerges from shadow — face and shoulders catching warm ochre and golden light while the rest dissolves. The paint surface is direct and sure: no overworking, no hesitation. The eyes hold the viewer with a quiet intelligence.",why:`Quaicoe's warm ochre palette will work beautifully against your ${S.colorFamily||'room colors'}. The dark ground means the work holds its own on any wall.`,artistBio:'Ghanaian-American painter based in Portland whose oil portraits are attracting serious gallery and collector attention.',matchScore:88},
+      {artist:'Flora Yukhnovich',artistWhy:"Yukhnovich takes the excess of Rococo and makes it feel completely contemporary. Her warmth is specific, not generic.",title:'Pink Study on Paper',medium:'Gouache on paper',dimensions:'14 × 18 in',year:'2021',price:Math.min(S.budget,2100),source:'Singular Art',sourceUrl:'https://singularart.com',imageUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/480px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg',colorHexes:['#E8C8B0','#D4A8C0','#F5EFE6'],colorNotes:'soft pinks, peachy creams, warm whites',artDescription:"A loose, luminous gouache on paper in blush pinks, buttery creams, and pale gold. The marks are rapid and confident — broad washes interrupted by smaller gestural passages. The overall effect is light dissolving form: the suggestion of drapery or perhaps clouds, but the real subject is colour and warmth.",why:`Works on paper by artists at Yukhnovich's level are exceptional value. The warm pinks and creams map directly to your ${S.colorFamily||'palette'}.`,artistBio:'British painter whose neo-rococo abstraction has attracted significant gallery and institutional attention.',matchScore:86}
     ]
   };
+}
+
+/* ── QUIZ ── */
+const qzAnswers={};
+function initQuiz(){
+  // Reset
+  Object.keys(qzAnswers).forEach(k=>delete qzAnswers[k]);
+  document.querySelectorAll('.qz-step').forEach(s=>{s.classList.remove('on');});
+  document.getElementById('qzs1').classList.add('on');
+  document.getElementById('qzResult').classList.remove('on');
+  document.querySelectorAll('.qz-card').forEach(c=>c.classList.remove('sel'));
+  updQzProgress(0);
+}
+function updQzProgress(done){
+  for(let i=1;i<=5;i++){
+    const b=document.getElementById('qzb'+i);
+    if(b)b.className='qz-bar'+(i<=done?' done':'');
+  }
+}
+function qzPick(el,step,val){
+  el.closest('.qz-grid').querySelectorAll('.qz-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  qzAnswers['q'+step]=val;
+}
+function qzNext(step){
+  if(!qzAnswers['q'+step]){alert('Please pick one to continue.');return;}
+  document.getElementById('qzs'+step).classList.remove('on');
+  updQzProgress(step);
+  const next=document.getElementById('qzs'+(step+1));
+  if(next)next.classList.add('on');
+  window.scrollTo(0,200);
+}
+function qzBack(step){
+  document.getElementById('qzs'+step).classList.remove('on');
+  updQzProgress(step-2);
+  document.getElementById('qzs'+(step-1)).classList.add('on');
+  window.scrollTo(0,200);
+}
+function qzFinish(){
+  if(!qzAnswers.q5){alert('Please pick one to continue.');return;}
+  updQzProgress(5);
+  document.querySelectorAll('.qz-step').forEach(s=>s.classList.remove('on'));
+
+  // Score styles
+  const scores={abstract:0,landscape:0,figurative:0,stilllife:0,photography:0,urban:0};
+  const map={
+    q1:{abstract:3,landscape:3,figurative:3},
+    q2:{calm:0,energetic:0,warm:0},
+    q3:{stilllife:3,urban:3,abstract:3},
+    q4:{neutral:0,vivid:0,dark:0},
+    q5:{oil:0,photo:0,'works-on-paper':0}
+  };
+  // q1
+  if(qzAnswers.q1==='abstract')scores.abstract+=3;
+  if(qzAnswers.q1==='landscape')scores.landscape+=3;
+  if(qzAnswers.q1==='figurative')scores.figurative+=3;
+  // q2
+  if(qzAnswers.q2==='calm'){scores.landscape+=2;scores.stilllife+=2;}
+  if(qzAnswers.q2==='energetic'){scores.abstract+=2;}
+  if(qzAnswers.q2==='warm'){scores.figurative+=2;scores.stilllife+=2;}
+  // q3
+  if(qzAnswers.q3==='stilllife'){scores.stilllife+=3;}
+  if(qzAnswers.q3==='urban'){scores.urban+=3;scores.abstract+=1;}
+  if(qzAnswers.q3==='abstract'){scores.abstract+=3;}
+  // q4
+  if(qzAnswers.q4==='neutral'){scores.landscape+=1;scores.stilllife+=1;}
+  if(qzAnswers.q4==='vivid'){scores.abstract+=2;}
+  if(qzAnswers.q4==='dark'){scores.figurative+=2;}
+  // q5
+  if(qzAnswers.q5==='photo'){scores.photography+=4;}
+  if(qzAnswers.q5==='oil'){scores.abstract+=1;scores.figurative+=1;}
+  if(qzAnswers.q5==='works-on-paper'){scores.landscape+=1;scores.stilllife+=1;}
+
+  const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const topStyle=sorted[0][0];
+  const total=Object.values(scores).reduce((a,b)=>a+b,1);
+
+  const styleInfo={
+    abstract:{name:'Abstract & Expressive',desc:"You're drawn to art where colour, texture, and emotion do the work — no literal subject required. You'll love the gesture, the energy, the feeling that something urgent was put down on canvas. Artists like Jadé Fadojutimi, Flora Yukhnovich, and Cecily Brown are likely your people.",img:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg'},
+    landscape:{name:'Landscape & Light',desc:"You want art that gives you space to breathe. Light over water, fields, mountains, the feeling of being somewhere bigger than a room. You're looking for paintings that make a wall feel like a window. Eric Aho, Anne-Sophie Tschiegg, and Makiko Kudo are worth exploring.",img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Claude_Monet%2C_The_Magpie%2C_1868-1869.jpg/600px-Claude_Monet%2C_The_Magpie%2C_1868-1869.jpg'},
+    figurative:{name:'Figurative & Portrait',desc:"You're interested in people — how they're rendered, the psychology, the specificity of a gesture or expression. Art about being human feels most relevant to you. Look at Otis Kwame Kye Quaicoe, Christina Quarles, and Lynette Yiadom-Boakye.",img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Monet_Water_Lilies_1906.jpg/600px-Monet_Water_Lilies_1906.jpg'},
+    stilllife:{name:'Still Life & Domestic',desc:"You find beauty in the overlooked — everyday objects, flowers, a corner of a room. You want art that rewards close looking and brings a kind of focused attention to ordinary things. Issy Wood, Laura Jones, and Celia Paul would resonate.",img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Millais_Ophelia.jpg/600px-Millais_Ophelia.jpg'},
+    photography:{name:'Photography',desc:"You want art rooted in the real world — captured light, actual moments, documentary truth. Photography can be just as powerful on a wall as painting and is often more accessible. Look at Dana Lixenberg, Zanele Muholi, and Taryn Simon.",img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Monet_Haystacks_Snow_Effect.jpg/600px-Monet_Haystacks_Snow_Effect.jpg'},
+    urban:{name:'Urban & Contemporary',desc:"You're drawn to the built environment, architecture, and the energy of city life. Art that feels current, engaged with now, and rooted in the contemporary world. Explore Ryan Gander, Luc Tuymans, and Njideka Akunyili Crosby.",img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camille_Pissarro_-_Boulevard_Montmartre%2C_Spring_Morning.jpg/600px-Camille_Pissarro_-_Boulevard_Montmartre%2C_Spring_Morning.jpg'},
+  };
+
+  const topInfo=styleInfo[topStyle]||styleInfo.abstract;
+  document.getElementById('qzResTitle').textContent='Your style: '+topInfo.name;
+  document.getElementById('qzResDesc').textContent=topInfo.desc;
+
+  const typesEl=document.getElementById('qzTypes');
+  typesEl.innerHTML=sorted.slice(0,6).map(([style,score])=>{
+    const info=styleInfo[style]||styleInfo.abstract;
+    const pct=Math.round((score/total)*100);
+    const isTop=style===topStyle;
+    return`<div class="qz-type${isTop?' match':''}">
+      <div class="qz-type-swatch"><img class="qz-type-img" src="${info.img}" alt="${info.name}" loading="lazy"></div>
+      <div class="qz-type-name">${info.name}</div>
+      <p class="qz-type-desc">${info.desc.split('.')[0]}.</p>
+      ${isTop?`<div class="qz-match-pct">&#x2736; Your top match</div>`:''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('qzResult').classList.add('on');
+  window.scrollTo(0,300);
+}
+
+/* ── UPDATE RENDER FUNCTION to use real image URLs from AI ── */
+const _origRender=render;
+
+/* ════ LIKED WORKS ════ */
+let likedWorks=[];
+function openLiked(){document.getElementById('likedBg').classList.add('on');document.getElementById('likedPanel').classList.add('on');renderLikedList();}
+function closeLiked(){document.getElementById('likedBg').classList.remove('on');document.getElementById('likedPanel').classList.remove('on');}
+function toggleLike(btn,work,e){
+  if(e)e.stopPropagation();
+  const id=work.artist+'|'+work.title;
+  const idx=likedWorks.findIndex(w=>w._id===id);
+  if(idx>=0){likedWorks.splice(idx,1);btn.classList.remove('liked');btn.innerHTML='&#x2661; Save';}
+  else{likedWorks.push({...work,_id:id});btn.classList.add('liked');btn.innerHTML='&#x2665; Saved';}
+  updLikedCount();
+}
+function updLikedCount(){
+  const n=likedWorks.length;
+  const el=document.getElementById('likedCount');
+  if(el)el.textContent=n;
+  const btn=document.getElementById('btnLiked');
+  if(btn){btn.classList.toggle('has-likes',n>0);}
+  const sub=document.getElementById('likedSub');
+  if(sub)sub.textContent=n?`${n} work${n===1?'':'s'} saved`:'Heart pieces from your proposal to save them here';
+}
+function removeLiked(id){likedWorks=likedWorks.filter(w=>w._id!==id);updLikedCount();renderLikedList();}
+function renderLikedList(){
+  const el=document.getElementById('likedList');
+  if(!el)return;
+  if(!likedWorks.length){el.innerHTML='<div class="liked-empty"><span class="heart-big">♡</span><p>Heart any artwork from your proposal to save it here.</p></div>';return;}
+  el.innerHTML=likedWorks.map(w=>`
+    <div class="litem" onclick="window.open('${w.sourceUrl||'#'}','_blank')">
+      ${w.imageUrl?`<img class="litem-img" src="${w.imageUrl}" alt="${w.title}" loading="lazy">`:
+        `<div class="litem-img" style="background:linear-gradient(135deg,${(w.colorHexes||['#D4A882','#8B5A3C'])[0]},${(w.colorHexes||['#D4A882','#8B5A3C'])[1]||'#8B5A3C'});"></div>`}
+      <div class="litem-info">
+        <div class="litem-artist">${w.artist}</div>
+        <div class="litem-title">${w.title}</div>
+        <div class="litem-price">$${(w.price||0).toLocaleString()}</div>
+        <div class="litem-src">via ${w.source}</div>
+      </div>
+      <button class="litem-del" onclick="event.stopPropagation();removeLiked('${w._id}')" title="Remove">&times;</button>
+    </div>`).join('');
+  const foot=document.getElementById('likedList').nextElementSibling;
+  if(foot)foot.innerHTML=`<button class="liked-cta" onclick="closeLiked();nav('consult')">Start a New Consultation &rarr;</button>`;
 }
 
 updB(1500);
 loadSaved();
 </script>
+
+<!-- ═══════════ ART STYLE QUIZ ═══════════ -->
+<div id="pg-quiz" class="pg">
+  <div class="quiz-hero">
+    <p class="quiz-hero-eye">Discover Your Taste</p>
+    <h1 class="quiz-hero-h">What kind of art<br>do you <em>actually</em> like?</h1>
+    <p class="quiz-hero-p">Not sure where to start? This quick quiz shows you real artworks and helps you figure out what speaks to you. No art knowledge needed — just go with your gut.</p>
+  </div>
+  <div class="quiz-wrap">
+    <!-- Progress bar -->
+    <div class="qz-progress" id="qzProgress">
+      <div class="qz-bar" id="qzb1"></div>
+      <div class="qz-bar" id="qzb2"></div>
+      <div class="qz-bar" id="qzb3"></div>
+      <div class="qz-bar" id="qzb4"></div>
+      <div class="qz-bar" id="qzb5"></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="qz-step on" id="qzs1">
+      <p class="qz-label">01 / 05 &mdash; First Impressions</p>
+      <h2 class="qz-q">Which of these catches your eye first?</h2>
+      <p class="qz-hint">Just pick the one that draws you in — there's no right answer.</p>
+      <div class="qz-grid">
+        <div class="qz-card" onclick="qzPick(this,1,'abstract')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Pablo_Picasso%2C_1921%2C_Nous_autres_musiciens_%28Three_Musicians%29%2C_oil_on_canvas%2C_204.5_x_188.3_cm%2C_Philadelphia_Museum_of_Art.jpg/400px-Pablo_Picasso%2C_1921%2C_Nous_autres_musiciens_%28Three_Musicians%29%2C_oil_on_canvas%2C_204.5_x_188.3_cm%2C_Philadelphia_Museum_of_Art.jpg" alt="Abstract colorful painting" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Bold &amp; Abstract</h4><p>Color and form, no specific subject</p></div>
+        </div>
+        <div class="qz-card" onclick="qzPick(this,1,'landscape')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Claude_Monet%2C_The_Magpie%2C_1868-1869.jpg/400px-Claude_Monet%2C_The_Magpie%2C_1868-1869.jpg" alt="Landscape painting" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Landscapes</h4><p>Nature, light, wide open spaces</p></div>
+        </div>
+        <div class="qz-card" onclick="qzPick(this,1,'figurative')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/300px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg" alt="Figure painting" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>People &amp; Figures</h4><p>Portraits, the human form, emotion</p></div>
+        </div>
+      </div>
+      <div class="qz-nav"><span></span><button class="btn-primary" onclick="qzNext(1)" style="padding:14px 32px;font-size:10px;">Continue &#x2192;</button></div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="qz-step" id="qzs2">
+      <p class="qz-label">02 / 05 &mdash; Mood</p>
+      <h2 class="qz-q">What feeling do you want art to give you at home?</h2>
+      <p class="qz-hint">Pick the image that matches the vibe you want in your space.</p>
+      <div class="qz-grid">
+        <div class="qz-card" onclick="qzPick(this,2,'calm')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Monet_Water_Lilies_1906.jpg/400px-Monet_Water_Lilies_1906.jpg" alt="Calm minimal art" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Calm &amp; Minimal</h4><p>Quiet, serene, easy to live with</p></div>
+        </div>
+        <div class="qz-card" onclick="qzPick(this,2,'energetic')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/400px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" alt="Energetic bold art" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Energetic &amp; Bold</h4><p>Makes a statement, commands attention</p></div>
+        </div>
+        <div class="qz-card" onclick="qzPick(this,2,'warm')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camille_Pissarro_-_Boulevard_Montmartre%2C_Spring_Morning.jpg/400px-Camille_Pissarro_-_Boulevard_Montmartre%2C_Spring_Morning.jpg" alt="Warm cozy art" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Warm &amp; Inviting</h4><p>Feels like home, comforting and rich</p></div>
+        </div>
+      </div>
+      <div class="qz-nav"><button class="btn-bk" onclick="qzBack(2)">&#x2190; Back</button><button class="btn-primary" onclick="qzNext(2)" style="padding:14px 32px;font-size:10px;">Continue &#x2192;</button></div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="qz-step" id="qzs3">
+      <p class="qz-label">03 / 05 &mdash; Subject Matter</p>
+      <h2 class="qz-q">Which subject matter appeals most?</h2>
+      <p class="qz-hint">What would you want to look at every morning?</p>
+      <div class="qz-grid">
+        <div class="qz-card" onclick="qzPick(this,3,'stilllife')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GD-FR-Paris-Louvre-Peintures-Vermeer-La_Dentelli%C3%A8re.jpg/280px-GD-FR-Paris-Louvre-Peintures-Vermeer-La_Dentelli%C3%A8re.jpg" alt="Still life flowers" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Still Life &amp; Botanicals</h4><p>Flowers, objects, everyday beauty</p></div>
+        </div>
+        <div class="qz-card" onclick="qzPick(this,3,'urban')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/300px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg" alt="Urban cityscape" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Urban &amp; Architecture</h4><p>Cities, buildings, human-made spaces</p></div>
+        </div>
+        <div class="qz-card" onclick="qzPick(this,3,'abstract')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Pablo_Picasso%2C_1921%2C_Nous_autres_musiciens_%28Three_Musicians%29%2C_oil_on_canvas%2C_204.5_x_188.3_cm%2C_Philadelphia_Museum_of_Art.jpg/400px-Pablo_Picasso%2C_1921%2C_Nous_autres_musiciens_%28Three_Musicians%29%2C_oil_on_canvas%2C_204.5_x_188.3_cm%2C_Philadelphia_Museum_of_Art.jpg" alt="Abstract painting" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Pure Abstraction</h4><p>No subject — just color, texture, movement</p></div>
+        </div>
+      </div>
+      <div class="qz-nav"><button class="btn-bk" onclick="qzBack(3)">&#x2190; Back</button><button class="btn-primary" onclick="qzNext(3)" style="padding:14px 32px;font-size:10px;">Continue &#x2192;</button></div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="qz-step" id="qzs4">
+      <p class="qz-label">04 / 05 &mdash; Color Palette</p>
+      <h2 class="qz-q">Which palette feels right for your home?</h2>
+      <p class="qz-hint">Think about your walls, furniture, the light in your space.</p>
+      <div class="qz-grid">
+        <div class="qz-card" onclick="qzPick(this,4,'neutral')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Monet_Haystacks_Snow_Effect.jpg/400px-Monet_Haystacks_Snow_Effect.jpg" alt="Neutral warm tones" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Warm Neutrals</h4><p>Creams, taupes, warm whites and tans</p></div>
+        </div>
+        <div class="qz-card" onclick="qzPick(this,4,'vivid')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/400px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" alt="Vivid colors" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Vivid &amp; Saturated</h4><p>Rich colors that pop and energize</p></div>
+        </div>
+        <div class="qz-card" onclick="qzPick(this,4,'dark')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/300px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg" alt="Dark moody tones" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Deep &amp; Moody</h4><p>Navies, forest greens, dramatic darks</p></div>
+        </div>
+      </div>
+      <div class="qz-nav"><button class="btn-bk" onclick="qzBack(4)">&#x2190; Back</button><button class="btn-primary" onclick="qzNext(4)" style="padding:14px 32px;font-size:10px;">Continue &#x2192;</button></div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="qz-step" id="qzs5">
+      <p class="qz-label">05 / 05 &mdash; How It's Made</p>
+      <h2 class="qz-q">Does the medium (how it's made) matter to you?</h2>
+      <p class="qz-hint">Some people love the texture of oil paint. Others prefer photography or works on paper.</p>
+      <div class="qz-grid">
+        <div class="qz-card" onclick="qzPick(this,5,'oil')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/400px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" alt="Oil painting texture" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Oil &amp; Acrylic Paintings</h4><p>Rich texture, physical presence, paint you can see</p></div>
+        </div>
+        <div class="qz-card" onclick="qzPick(this,5,'photo')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg/280px-Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg" alt="Fine art photography" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Photography</h4><p>Captured moments, light as the medium</p></div>
+        </div>
+        <div class="qz-card" onclick="qzPick(this,5,'works-on-paper')">
+          <img class="qz-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Millais_Ophelia.jpg/400px-Millais_Ophelia.jpg" alt="Works on paper drawing" loading="lazy">
+          <div class="qz-ck">&#x2713;</div>
+          <div class="qz-card-lbl"><h4>Works on Paper</h4><p>Drawings, watercolors, prints — intimate scale</p></div>
+        </div>
+      </div>
+      <div class="qz-nav"><button class="btn-bk" onclick="qzBack(5)">&#x2190; Back</button><button class="btn-primary" onclick="qzFinish()" style="padding:14px 32px;font-size:10px;background:var(--og);">See My Results &#x2192;</button></div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="qz-result" id="qzResult">
+      <div class="qz-res-band">
+        <p class="qz-res-eye">Your Art Style</p>
+        <h2 class="qz-res-h" id="qzResTitle">Your taste is coming into focus.</h2>
+        <p class="qz-res-p" id="qzResDesc"></p>
+      </div>
+      <div class="qz-types" id="qzTypes"></div>
+      <div class="qz-res-cta">
+        <h3 class="qz-res-cta-h">Ready to find <em>your first piece?</em></h3>
+        <button class="btn-primary" onclick="nav('consult')">Start Your Consultation &#x2192;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ AUCTIONS ═══════════ -->
+<div id="pg-auctions" class="pg">
+  <div class="auct-hero">
+    <p class="auct-eye">Another Way to Collect</p>
+    <h1 class="auct-h">Art auctions:<br><em>demystified.</em></h1>
+    <p class="auct-p">Auctions aren't just for Christie's and Sotheby's. There are specialist houses focused on accessible, emerging, and regional art — and you can bid online from anywhere. Here's how it works and where to look.</p>
+  </div>
+
+  <!-- How auctions work — friendly explainer -->
+  <div class="auct-explainer">
+    <div class="ae-cell">
+      <div class="ae-n">01</div>
+      <div class="ae-h">What actually happens at an auction</div>
+      <p class="ae-p">An auction house gathers works from collectors or estates and sells them to the highest bidder. You register, set a maximum bid, and either attend in person or bid online in real time. The auction house takes a "buyer's premium" (usually 15–25%) on top of the hammer price — factor that into your budget.</p>
+    </div>
+    <div class="ae-cell">
+      <div class="ae-n">02</div>
+      <div class="ae-h">Why auctions can be a great deal</div>
+      <p class="ae-p">Works sometimes sell below their estimated value if fewer bidders show up that day. Estates and collection sales often have strong works at fair prices. It's also one of the best ways to find established artists at prices that feel more like emerging — because the original market excitement has passed.</p>
+    </div>
+    <div class="ae-cell">
+      <div class="ae-n">03</div>
+      <div class="ae-h">What to watch out for</div>
+      <p class="ae-p">Always preview the work in person or request a condition report before bidding. Factor in the buyer's premium before you fall in love with a price. Set your maximum bid in advance and stick to it — auction excitement is real. And check provenance carefully on higher-value lots.</p>
+    </div>
+  </div>
+
+  <!-- Auction houses grid -->
+  <div style="padding:48px 40px 20px;border-top:1.5px solid var(--ink);">
+    <p class="se">Featured Auction Houses</p>
+    <h2 class="sh" style="margin-top:6px;margin-bottom:4px;">Where to start bidding.</h2>
+    <p style="font-size:13px;color:var(--ink3);line-height:1.7;margin-bottom:32px;max-width:560px;">These houses specialize in more accessible price points or have strong emerging and regional art programs — a different entry point than the major New York houses.</p>
+  </div>
+  <div class="auct-houses">
+    <div class="ah">
+      <img class="ah-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/640px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" alt="Santa Fe art auction" loading="lazy">
+      <div class="ah-body">
+        <div class="ah-name">Santa Fe Art Auction</div>
+        <div class="ah-loc">Santa Fe, New Mexico &mdash; Online Bidding Available</div>
+        <p class="ah-desc">Specialist in American, Western, and Native American art. One of the most respected regional houses in the US, with strong representation of landscape and figurative works. Regular sales feature accessible price points alongside museum-quality lots. Great for collectors interested in American art history and the Southwest tradition.</p>
+        <div class="ah-meta">
+          <div class="ah-stat"><div class="ah-sn">2×</div><div class="ah-sl">Sales/Year</div></div>
+          <div class="ah-stat"><div class="ah-sn">$500+</div><div class="ah-sl">Starting Bids</div></div>
+          <div class="ah-stat"><div class="ah-sn">Online</div><div class="ah-sl">Bidding</div></div>
+        </div>
+        <a class="ah-link" href="https://www.santafeartauction.com" target="_blank">Visit Auction House &#x2192;</a>
+      </div>
+    </div>
+    <div class="ah">
+      <img class="ah-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Monet_Water_Lilies_1906.jpg/640px-Monet_Water_Lilies_1906.jpg" alt="Live auctioneers" loading="lazy">
+      <div class="ah-body">
+        <div class="ah-name">LiveAuctioneers</div>
+        <div class="ah-loc">Online Platform &mdash; Thousands of Houses Worldwide</div>
+        <p class="ah-desc">Not a house itself, but the best single place to access hundreds of smaller auction houses worldwide. You can search by artist, medium, price range, or upcoming sale date. It's the easiest way to discover regional sales that often have exceptional works at prices below the major markets. Create a free account and start watching.</p>
+        <div class="ah-meta">
+          <div class="ah-stat"><div class="ah-sn">1000+</div><div class="ah-sl">Houses</div></div>
+          <div class="ah-stat"><div class="ah-sn">Daily</div><div class="ah-sl">New Sales</div></div>
+          <div class="ah-stat"><div class="ah-sn">Free</div><div class="ah-sl">To Browse</div></div>
+        </div>
+        <a class="ah-link" href="https://www.liveauctioneers.com" target="_blank">Browse Live Sales &#x2192;</a>
+      </div>
+    </div>
+    <div class="ah">
+      <img class="ah-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Claude_Monet%2C_The_Magpie%2C_1868-1869.jpg/640px-Claude_Monet%2C_The_Magpie%2C_1868-1869.jpg" alt="Invaluable auctions" loading="lazy">
+      <div class="ah-body">
+        <div class="ah-name">Invaluable</div>
+        <div class="ah-loc">Online Platform &mdash; Fine Art Focus</div>
+        <p class="ah-desc">Similar to LiveAuctioneers but with a stronger focus on fine art specifically. The search and filtering tools are excellent for finding works by style, period, or medium. Good for tracking price history on specific artists — which tells you a lot about how a career is moving and where value sits.</p>
+        <div class="ah-meta">
+          <div class="ah-stat"><div class="ah-sn">Fine Art</div><div class="ah-sl">Focus</div></div>
+          <div class="ah-stat"><div class="ah-sn">Price</div><div class="ah-sl">History</div></div>
+          <div class="ah-stat"><div class="ah-sn">Global</div><div class="ah-sl">Houses</div></div>
+        </div>
+        <a class="ah-link" href="https://www.invaluable.com" target="_blank">Explore Invaluable &#x2192;</a>
+      </div>
+    </div>
+    <div class="ah">
+      <img class="ah-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camille_Pissarro_-_Boulevard_Montmartre%2C_Spring_Morning.jpg/640px-Camille_Pissarro_-_Boulevard_Montmartre%2C_Spring_Morning.jpg" alt="Auction bidding" loading="lazy">
+      <div class="ah-body">
+        <div class="ah-name">Rago Arts &amp; Auction</div>
+        <div class="ah-loc">Lambertville, NJ &mdash; Online &amp; In-Person</div>
+        <p class="ah-desc">Strong in modern and contemporary art, decorative arts, and design. Known for accessible price points with rigorous scholarship behind each lot. Their online sales regularly surface emerging and mid-career works in the $500–$5,000 range. One of the best regional houses for the kind of collector we're building proposals for.</p>
+        <div class="ah-meta">
+          <div class="ah-stat"><div class="ah-sn">Modern</div><div class="ah-sl">+ Contemporary</div></div>
+          <div class="ah-stat"><div class="ah-sn">$500+</div><div class="ah-sl">Entry Point</div></div>
+          <div class="ah-stat"><div class="ah-sn">Online</div><div class="ah-sl">Bidding</div></div>
+        </div>
+        <a class="ah-link" href="https://www.ragoarts.com" target="_blank">View Upcoming Sales &#x2192;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tips for first-time auction bidders -->
+  <div class="auct-tips">
+    <h2 class="auct-tips-h">Tips for your <em>first auction</em></h2>
+    <p class="auct-tips-p">Buying at auction feels intimidating the first time. It isn't — once you know the mechanics.</p>
+    <div class="tips-grid">
+      <div class="tip"><div class="tip-n">Budget</div><div class="tip-h">Always include the buyer's premium</div><p class="tip-p">If a work hammers at $800, you'll pay $800 plus 20–25% in fees. Budget $1,000 for an $800 lot. It's not a trick — it's just how auctions work. Every house lists their premium schedule on their website.</p></div>
+      <div class="tip"><div class="tip-n">Research</div><div class="tip-h">Look up the artist's price history first</div><p class="tip-p">Before you bid, search the artist on Artsy or LiveAuctioneers to see what their work has sold for recently. If the estimate seems low, that's either a bargain or a sign something's off — worth investigating.</p></div>
+      <div class="tip"><div class="tip-n">Condition</div><div class="tip-h">Request a condition report</div><p class="tip-p">Every reputable house will provide a written condition report on request. Read it. Restoration, damage, and fading all affect value. Don't bid on a lot you haven't seen in person or received a thorough condition report for.</p></div>
+      <div class="tip"><div class="tip-n">Strategy</div><div class="tip-h">Set your max and stick to it</div><p class="tip-p">Decide your maximum before the auction opens, not during it. The pace and competition of live bidding creates real pressure to go higher. Your pre-set maximum is your rational brain. Listen to it more than your gut in the room.</p></div>
+    </div>
+  </div>
+  <div class="auct-cta">
+    <p class="auct-cta-t">&ldquo;Want us to watch the auction houses for you?&rdquo;</p>
+    <button class="auct-cta-btn" onclick="nav('consult')">Build My Proposal &#x2192;</button>
+  </div>
+</div>
+<!-- ════ LIKED WORKS PANEL ════ -->
+<div class="liked-bg" id="likedBg" onclick="closeLiked()"></div>
+<div class="liked-panel" id="likedPanel">
+  <div class="liked-hdr">
+    <div>
+      <div class="liked-title">Liked Works</div>
+      <div class="liked-sub" id="likedSub">Heart pieces from your proposal to save them here</div>
+    </div>
+    <button class="liked-cl" onclick="closeLiked()">&times;</button>
+  </div>
+  <div class="liked-list" id="likedList">
+    <div class="liked-empty">
+      <span class="heart-big">♡</span>
+      <p>Heart any artwork from your proposal to save it here. We&rsquo;ll track which pieces you loved.</p>
+    </div>
+  </div>
+  <div class="liked-footer">
+    <button class="liked-view-all" onclick="closeLiked();nav('consult')">Start a New Consultation &rarr;</button>
+  </div>
+</div>
+
 </body>
 </html>
