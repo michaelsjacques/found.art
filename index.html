@@ -756,7 +756,7 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
 
 /* ─── CONSULT / PROPOSAL CSS (keeps old class names, new look) ───── */
 /* Consultation wrapper */
-.cx{display:grid;grid-template-columns:1fr 360px;min-height:calc(100vh - 52px);}
+.cx{display:grid;grid-template-columns:360px 1fr;min-height:calc(100vh - 52px);}
 .sb{padding:40px 28px;background:var(--cream2);border-left:1px solid var(--rule);position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto;}
 .sb-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--grey);margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--rule);}
 .sl{display:flex;flex-direction:column;gap:0;}
@@ -837,6 +837,26 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
 /* Drawer (share) */
 .dr-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;display:none;}
 .dr-bg.on{display:flex;align-items:center;justify-content:center;}
+/* Modal overlay */
+#mBg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:450;display:none;align-items:center;justify-content:center;backdrop-filter:blur(3px);}
+#mBg.on{display:flex;}
+.modal{background:white;padding:40px;max-width:460px;width:calc(100% - 40px);position:relative;}
+.mcl{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--grey);}
+.mcl:hover{color:var(--black);}
+.m-eye{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:8px;}
+.m-h{font-family:'Cormorant',Georgia,serif;font-size:26px;font-weight:300;font-style:italic;margin-bottom:4px;}
+.m-p{font-size:13px;font-weight:300;color:var(--grey);margin-bottom:20px;}
+.m-code{background:var(--cream2);border:1px solid var(--rule);padding:12px 14px;font-size:12px;word-break:break-all;margin-bottom:10px;}
+.m-btn{width:100%;background:var(--black);color:white;border:none;padding:13px;font-family:inherit;font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-bottom:8px;}
+.m-btn:hover{background:var(--grey);}
+.m-link{font-size:11px;text-align:center;color:var(--grey);cursor:pointer;display:block;background:none;border:none;font-family:inherit;width:100%;padding:4px;}
+.m-link:hover{color:var(--black);}
+/* Drawer overlay */
+#drBg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:440;display:none;}
+#drBg.on{display:block;}
+#drawer{position:fixed;right:0;top:0;bottom:0;width:380px;background:white;z-index:441;display:flex;flex-direction:column;transform:translateX(110%);transition:transform .3s cubic-bezier(.4,0,.2,1);}
+#drawer.on{transform:translateX(0);}
+.dr-hdr{padding:24px 24px 20px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
 .dr{background:white;padding:40px;max-width:440px;width:calc(100% - 40px);position:relative;}
 .dr-cl{position:absolute;top:14px;right:14px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--grey);}
 .dr-h{font-family:'Cormorant',Georgia,serif;font-size:26px;font-weight:300;font-style:italic;margin-bottom:4px;}
@@ -920,10 +940,10 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
   <div class="hero">
     <div class="hero-img">
       <img id="heroImg"
-        src="https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/1686,/0/default.jpg"
+        src="https://images.metmuseum.org/CRDImages/ep/original/DT1747.jpg"
         alt="A Sunday on La Grande Jatte — Georges Seurat, 1886. Art Institute of Chicago."
         onload="this.classList.add('loaded')"
-        onerror="this.parentElement.style.background='#1a1a1a'">
+        onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous">
     </div>
     <div class="hero-content">
       <h1 class="hero-h">Original art,<br><em>found for you.</em></h1>
@@ -961,9 +981,9 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
   <!-- Split — Nighthawks image + how it works -->
   <div class="split">
     <div class="split-img">
-      <img src="https://www.artic.edu/iiif/2/b0cf5a7c-a2ea-3e0b-e5d4-a7a3f73f3b13/full/843,/0/default.jpg"
+      <img src="https://images.metmuseum.org/CRDImages/ep/original/DT4.jpg"
         alt="Nighthawks — Edward Hopper, 1942"
-        onerror="this.parentElement.style.background='#2a2a2a'">
+        onerror="this.parentElement.style.background='#2a2a2a'" referrerpolicy="no-referrer" crossorigin="anonymous">
     </div>
     <div class="split-body">
       <p class="t-eye split-eye">How it works</p>
@@ -976,23 +996,23 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
   <!-- 3-image grid -->
   <div class="img-grid">
     <div class="ig-main">
-      <img src="https://www.artic.edu/iiif/2/a6b1cdb3-accf-a52f-78b7-227085101ff8/full/843,/0/default.jpg"
+      <img src="https://images.metmuseum.org/CRDImages/ep/original/DT65.jpg"
         alt="Paris Street; Rainy Day — Gustave Caillebotte, 1877"
-        onerror="this.parentElement.style.background='#2a2a2a'">
+        onerror="this.parentElement.style.background='#2a2a2a'" referrerpolicy="no-referrer" crossorigin="anonymous">
       <div class="ig-caption">
         <p class="t-eye">Featured</p>
         <p class="ig-caption-h">The art that lives with you</p>
       </div>
     </div>
     <div class="ig-side">
-      <img src="https://www.artic.edu/iiif/2/831a05e6-9ecf-c4a6-b7ba-523fb8b4a5b5/full/400,/0/default.jpg"
+      <img src="https://images.metmuseum.org/CRDImages/ep/original/DT1946.jpg"
         alt="The Old Guitarist — Pablo Picasso, 1903"
-        onerror="this.parentElement.style.background='#1a1a1a'">
+        onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous">
     </div>
     <div class="ig-side" style="border-top:1px solid rgba(255,255,255,.05);">
-      <img src="https://www.artic.edu/iiif/2/e966799b-97ee-193b-0e52-e735e3ece53a/full/400,/0/default.jpg"
+      <img src="https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"
         alt="Time Transfixed — René Magritte, 1938"
-        onerror="this.parentElement.style.background='#1a1a1a'">
+        onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous">
     </div>
   </div>
 
@@ -1030,9 +1050,9 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
   <!-- CTA band -->
   <div class="cta-band">
     <div class="cta-band-img">
-      <img src="https://www.artic.edu/iiif/2/02ef1e53-10e7-5d67-7a1d-ed72d5baf4e3/full/843,/0/default.jpg"
+      <img src="https://images.metmuseum.org/CRDImages/ep/original/DP251139.jpg"
         alt="American Gothic — Grant Wood, 1930"
-        onerror="this.parentElement.style.background='#1a1a1a'">
+        onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous">
     </div>
     <div class="cta-band-body">
       <h2 class="cta-band-h">Ready to find<br><em>your piece?</em></h2>
@@ -1064,9 +1084,9 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
 <div id="pg-why" class="pg">
 
   <div class="why-hero">
-    <img src="https://www.artic.edu/iiif/2/a6b1cdb3-accf-a52f-78b7-227085101ff8/full/1686,/0/default.jpg"
+    <img src="https://images.metmuseum.org/CRDImages/ep/original/DP245840.jpg"
       alt="Paris Street; Rainy Day"
-      onerror="this.parentElement.style.background='#1a1a1a'">
+      onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous">
     <div class="why-hero-txt">
       <h1 class="why-hero-h">Why collect<br><em>original art?</em></h1>
     </div>
@@ -1126,9 +1146,9 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
 
   <div class="cta-band">
     <div class="cta-band-img">
-      <img src="https://www.artic.edu/iiif/2/e966799b-97ee-193b-0e52-e735e3ece53a/full/843,/0/default.jpg"
+      <img src="https://images.metmuseum.org/CRDImages/ep/original/DT3.jpg"
         alt="Time Transfixed — Magritte"
-        onerror="this.parentElement.style.background='#1a1a1a'">
+        onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous">
     </div>
     <div class="cta-band-body">
       <h2 class="cta-band-h">Ready to start<br><em>collecting?</em></h2>
@@ -1161,9 +1181,9 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
 
   <div class="cta-band">
     <div class="cta-band-img">
-      <img src="https://www.artic.edu/iiif/2/02ef1e53-10e7-5d67-7a1d-ed72d5baf4e3/full/843,/0/default.jpg"
+      <img src="https://images.metmuseum.org/CRDImages/ep/original/DP251351.jpg"
         alt="American Gothic"
-        onerror="this.parentElement.style.background='#1a1a1a'">
+        onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous">
     </div>
     <div class="cta-band-body">
       <h2 class="cta-band-h">Want us to find<br><em>your artist?</em></h2>
@@ -1400,40 +1420,40 @@ function nav(id){
 
 const artists=[
   {rank:1,name:'Flora Yukhnovich',title:'Voluptuous Panic',desc:'Luscious candy-coloured abstractions built from Rococo brushwork. Rising fast on the secondary market.',price:'$3,200–6,000',src:'Victoria Miro',cat:'abstract',badge:'Trending',
-   img:'https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DP127984.jpg',
    url:'https://www.victoriamiro.com/artists/88-flora-yukhnovich/'},
   {rank:2,name:'Christina Quarles',title:'Come Into My Arms',desc:'Fragmented figures in acid-bright spaces questioning body and identity.',price:'$8,000–25,000',src:'Hauser & Wirth',cat:'figurative',badge:'Rising',
-   img:'https://www.artic.edu/iiif/2/831a05e6-9ecf-c4a6-b7ba-523fb8b4a5b5/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DP251588.jpg',
    url:'https://www.hauserwirth.com/artists/28468-christina-quarles/'},
   {rank:3,name:'Issy Wood',title:'Untitled (Coat)',desc:'Intimate oil paintings of everyday objects with an uncanny psychological charge.',price:'$4,000–12,000',src:'Cabinet Gallery',cat:'stilllife',badge:'Rising',
-   img:'https://www.artic.edu/iiif/2/e966799b-97ee-193b-0e52-e735e3ece53a/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DP251139.jpg',
    url:'https://www.cabinet.uk.com/artists/issy-wood'},
   {rank:4,name:'Jadé Fadojutimi',title:'The Rites of Passage',desc:'Dense gestural abstraction — paint applied in shimmering electric layers.',price:'$15,000–40,000',src:'Gagosian',cat:'abstract',badge:'Trending',
-   img:'https://www.artic.edu/iiif/2/b0cf5a7c-a2ea-3e0b-e5d4-a7a3f73f3b13/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DT1747.jpg',
    url:'https://gagosian.com/artists/jade-fadojutimi/'},
   {rank:5,name:'Cecily Brown',title:'The Fugitive Kind',desc:'Lush gestural painting combining figuration and abstraction.',price:'$50,000+',src:'Maccarone',cat:'figurative',badge:'Established',
-   img:'https://www.artic.edu/iiif/2/a6b1cdb3-accf-a52f-78b7-227085101ff8/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DT4.jpg',
    url:'https://www.cecilybrownstudio.com'},
   {rank:6,name:'Eric Aho',title:'Winter Ice Out',desc:'Quiet monumental landscapes with an elemental force. New England light.',price:'$2,800–8,000',src:'Tappan Collective',cat:'landscape',badge:'Rising',
-   img:'https://www.artic.edu/iiif/2/02ef1e53-10e7-5d67-7a1d-ed72d5baf4e3/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DT65.jpg',
    url:'https://www.tappancollective.com/artists/eric-aho'},
   {rank:7,name:'Zanele Muholi',title:'Somnyama Ngonyama',desc:'Powerful self-portrait photography celebrating Black identity and beauty.',price:'$5,000–18,000',src:'Stevenson Gallery',cat:'photography',badge:'Trending',
-   img:'https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DT1946.jpg',
    url:'https://stevenson.info/artist/zanele-muholi/'},
   {rank:8,name:'Laura Jones',title:'Mimosa',desc:'Botanical oil paintings with a jewel-like intensity. Works selling fast.',price:'$1,200–3,500',src:'Uprise Art',cat:'stilllife',badge:'Affordable',
-   img:'https://www.artic.edu/iiif/2/831a05e6-9ecf-c4a6-b7ba-523fb8b4a5b5/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg',
    url:'https://upriseartshop.com/collections/artists/laura-jones'},
   {rank:9,name:'Michael Armitage',title:'The Promised Land',desc:'Layered narrative painting on lubugo bark cloth.',price:'$20,000+',src:'White Cube',cat:'figurative',badge:'Rising',
-   img:'https://www.artic.edu/iiif/2/e966799b-97ee-193b-0e52-e735e3ece53a/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DP251139.jpg',
    url:'https://whitecube.com/artists/michael-armitage'},
   {rank:10,name:'Anne-Sophie Tschiegg',title:'Les Herbes',desc:'Delicate works on paper featuring botanical studies with quiet lines.',price:'$800–2,200',src:'Tappan Collective',cat:'stilllife',badge:'Affordable',
-   img:'https://www.artic.edu/iiif/2/b0cf5a7c-a2ea-3e0b-e5d4-a7a3f73f3b13/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DP245840.jpg',
    url:'https://www.tappancollective.com/artists/anne-sophie-tschiegg'},
   {rank:11,name:'Otis Kwame Kye Quaicoe',title:'Gold Coast',desc:'Richly coloured figurative paintings celebrating Black joy.',price:'$6,000–20,000',src:'Roberts Projects',cat:'figurative',badge:'Trending',
-   img:'https://www.artic.edu/iiif/2/a6b1cdb3-accf-a52f-78b7-227085101ff8/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DT3.jpg',
    url:'https://www.robertsprojectsla.com/artists/otis-kwame-kye-quaicoe'},
   {rank:12,name:'Dana Lixenberg',title:'Imperial Courts',desc:'Long-form documentary photography that becomes a living archive.',price:'$1,500–4,500',src:'Artsper',cat:'photography',badge:'Rising',
-   img:'https://www.artic.edu/iiif/2/02ef1e53-10e7-5d67-7a1d-ed72d5baf4e3/full/843,/0/default.jpg',
+   img:'https://images.metmuseum.org/CRDImages/ep/original/DP251351.jpg',
    url:'https://www.artsper.com/us/contemporary-artists/netherlands/16839/dana-lixenberg'}
 ];
 
@@ -1444,7 +1464,7 @@ function buildTrending(filter){
   grid.innerHTML=list.map(a=>`
     <div class="ac" data-cat="${a.cat}">
       <div class="ac-swatch">
-        <img src="${a.img}" alt="${a.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+        <img src="${a.img}" alt="${a.name}" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" onerror="this.parentElement.parentElement.style.background='#2a2420'">
         <div class="ac-rank">${a.rank}</div>
         <div class="ac-badge">${a.badge}</div>
         <div class="ac-body">
@@ -1714,7 +1734,7 @@ function render(p){
       <div class="wcard-main">
         <div class="wi">
           <div class="wi-art" style="${hasImg?'':('background:'+artBg+';')}position:relative;">
-            ${hasImg?`<img src="${w.imageUrl}" alt="${w.artist} — ${w.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;min-height:420px;">`:
+            ${hasImg?`<img src="${w.imageUrl}" alt="${w.artist} — ${w.title}" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" style="width:100%;height:100%;object-fit:cover;display:block;min-height:420px;" onerror="this.parentElement.style.background='#1a1a18';this.remove()">`:
             `<div style="position:absolute;inset:0;background:${artBg};min-height:420px;"></div>`}
             <div style="position:absolute;inset:0;background:${hasImg?'linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.25) 100%)':overlay};"></div>
             <div class="wi-desc">
@@ -1954,7 +1974,7 @@ function renderLikedList(){
   if(!likedWorks.length){el.innerHTML='<div class="liked-empty"><span class="heart-big">♡</span><p>Heart any artwork from your proposal to save it here.</p></div>';return;}
   el.innerHTML=likedWorks.map(w=>`
     <div class="litem" onclick="window.open('${w.sourceUrl||'#'}','_blank')">
-      ${w.imageUrl?`<img class="litem-img" src="${w.imageUrl}" alt="${w.title}" loading="lazy">`:
+      ${w.imageUrl?`<img class="litem-img" src="${w.imageUrl}" alt="${w.title}" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous">`:
         `<div class="litem-img" style="background:linear-gradient(135deg,${(w.colorHexes||['#D4A882','#8B5A3C'])[0]},${(w.colorHexes||['#D4A882','#8B5A3C'])[1]||'#8B5A3C'});"></div>`}
       <div class="litem-info">
         <div class="litem-artist">${w.artist}</div>
@@ -1998,17 +2018,17 @@ loadSaved();
       <p class="qz-hint">Just pick the one that draws you in — there's no right answer.</p>
       <div class="qz-grid">
         <div class="qz-card" onclick="qzPick(this,1,'abstract')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/831a05e6-9ecf-c4a6-b7ba-523fb8b4a5b5/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DP127984.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Bold &amp; Abstract</h4><p>Color and form, no specific subject</p></div>
         </div>
         <div class="qz-card" onclick="qzPick(this,1,'landscape')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/b0cf5a7c-a2ea-3e0b-e5d4-a7a3f73f3b13/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DP251588.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Landscapes</h4><p>Nature, light, wide open spaces</p></div>
         </div>
         <div class="qz-card" onclick="qzPick(this,1,'figurative')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DP251139.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>People &amp; Figures</h4><p>Portraits, the human form, emotion</p></div>
         </div>
@@ -2023,17 +2043,17 @@ loadSaved();
       <p class="qz-hint">Pick the image that matches the vibe you want in your space.</p>
       <div class="qz-grid">
         <div class="qz-card" onclick="qzPick(this,2,'calm')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/a6b1cdb3-accf-a52f-78b7-227085101ff8/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DT1747.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Calm &amp; Minimal</h4><p>Quiet, serene, easy to live with</p></div>
         </div>
         <div class="qz-card" onclick="qzPick(this,2,'energetic')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/02ef1e53-10e7-5d67-7a1d-ed72d5baf4e3/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DT4.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Energetic &amp; Bold</h4><p>Makes a statement, commands attention</p></div>
         </div>
         <div class="qz-card" onclick="qzPick(this,2,'warm')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/e966799b-97ee-193b-0e52-e735e3ece53a/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DT65.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Warm &amp; Inviting</h4><p>Feels like home, comforting and rich</p></div>
         </div>
@@ -2048,17 +2068,17 @@ loadSaved();
       <p class="qz-hint">What would you want to look at every morning?</p>
       <div class="qz-grid">
         <div class="qz-card" onclick="qzPick(this,3,'stilllife')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/831a05e6-9ecf-c4a6-b7ba-523fb8b4a5b5/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DT1946.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Still Life &amp; Botanicals</h4><p>Flowers, objects, everyday beauty</p></div>
         </div>
         <div class="qz-card" onclick="qzPick(this,3,'urban')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/b0cf5a7c-a2ea-3e0b-e5d4-a7a3f73f3b13/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Urban &amp; Architecture</h4><p>Cities, buildings, human-made spaces</p></div>
         </div>
         <div class="qz-card" onclick="qzPick(this,3,'abstract')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DP251139.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Pure Abstraction</h4><p>No subject — just color, texture, movement</p></div>
         </div>
@@ -2073,17 +2093,17 @@ loadSaved();
       <p class="qz-hint">Think about your walls, furniture, the light in your space.</p>
       <div class="qz-grid">
         <div class="qz-card" onclick="qzPick(this,4,'neutral')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/a6b1cdb3-accf-a52f-78b7-227085101ff8/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DP245840.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Warm Neutrals</h4><p>Creams, taupes, warm whites and tans</p></div>
         </div>
         <div class="qz-card" onclick="qzPick(this,4,'vivid')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/02ef1e53-10e7-5d67-7a1d-ed72d5baf4e3/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DT3.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Vivid &amp; Saturated</h4><p>Rich colors that pop and energize</p></div>
         </div>
         <div class="qz-card" onclick="qzPick(this,4,'dark')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/e966799b-97ee-193b-0e52-e735e3ece53a/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DP251351.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Deep &amp; Moody</h4><p>Navies, forest greens, dramatic darks</p></div>
         </div>
@@ -2098,17 +2118,17 @@ loadSaved();
       <p class="qz-hint">Some people love the texture of oil paint. Others prefer photography or works on paper.</p>
       <div class="qz-grid">
         <div class="qz-card" onclick="qzPick(this,5,'oil')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/831a05e6-9ecf-c4a6-b7ba-523fb8b4a5b5/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DP127984.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Oil &amp; Acrylic Paintings</h4><p>Rich texture, physical presence, paint you can see</p></div>
         </div>
         <div class="qz-card" onclick="qzPick(this,5,'photo')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/b0cf5a7c-a2ea-3e0b-e5d4-a7a3f73f3b13/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DP251588.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Photography</h4><p>Captured moments, light as the medium</p></div>
         </div>
         <div class="qz-card" onclick="qzPick(this,5,'works-on-paper')">
-          <img class="qz-img" src="https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/600,/0/default.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0">
+          <img class="qz-img" src="https://images.metmuseum.org/CRDImages/ep/original/DP251139.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" onerror="this.style.opacity=0" referrerpolicy="no-referrer" crossorigin="anonymous">
           <div class="qz-ck">&#x2713;</div>
           <div class="qz-card-lbl"><h4>Works on Paper</h4><p>Drawings, watercolors, prints — intimate scale</p></div>
         </div>
@@ -2150,7 +2170,7 @@ loadSaved();
     <div class="ae-cell">
       <div class="ae-n">02</div>
       <div class="ae-h">Why auctions can be a great deal</div>
-      <p class="ae-p">Works sometimes sell below their estimated value if fewer bidders show up that day. Estates and collection sales often have strong works at fa<div class="ah-img"><img src="https://www.artic.edu/iiif/2/e966799b-97ee-193b-0e52-e735e3ece53a/full/600,/0/default.jpg" alt="" loading="lazy" onerror="this.parentElement.style.background='#1a1a1a'"></div> the original market excitement has passed.</p>
+      <p class="ae-p">Works sometimes sell below their estimated value if fewer bidders show up that day. Estates and collection sales often have strong works at fa<div class="ah-img"><img src="https://images.metmuseum.org/CRDImages/ep/original/DT1747.jpg" alt="" loading="lazy" onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous"></div> the original market excitement has passed.</p>
     </div>
     <div class="ae-cell">
       <div class="ae-n">03</div>
@@ -2166,7 +2186,7 @@ loadSaved();
     <p style="font-size:13px;color:var(--ink3);line-height:1.7;margin-bottom:32px;max-width:560px;">These houses specialize in more accessible price points or have strong emerging and regional art programs — a different entry point than the major New York houses.</p>
   </div>
   <div class="auct-houses">
-    <div class="a<div class="ah-img"><img src="https://www.artic.edu/iiif/2/831a05e6-9ecf-c4a6-b7ba-523fb8b4a5b5/full/600,/0/default.jpg" alt="" loading="lazy" onerror="this.parentElement.style.background='#1a1a1a'"></div>);"></div>
+    <div class="a<div class="ah-img"><img src="https://images.metmuseum.org/CRDImages/ep/original/DT4.jpg" alt="" loading="lazy" onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous"></div>);"></div>
       <div class="ah-body">
         <div class="ah-name">Santa Fe Art Auction</div>
         <div class="ah-loc">Santa Fe, New Mexico &mdash; Online Bidding Available</div>
@@ -2178,7 +2198,7 @@ loadSaved();
         </div>
         <a class="ah-link" href="https://www.santafeartauction.com" target="_blank">Visit Auction House &#x2192;</a>
       </div>
-    </div><div class="ah-img"><img src="https://www.artic.edu/iiif/2/b0cf5a7c-a2ea-3e0b-e5d4-a7a3f73f3b13/full/600,/0/default.jpg" alt="" loading="lazy" onerror="this.parentElement.style.background='#1a1a1a'"></div>8 60%,#4a6888 100%);"></div>
+    </div><div class="ah-img"><img src="https://images.metmuseum.org/CRDImages/ep/original/DT65.jpg" alt="" loading="lazy" onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous"></div>
       <div class="ah-body">
         <div class="ah-name">LiveAuctioneers</div>
         <div class="ah-loc">Online Platform &mdash; Thousands of Houses Worldwide</div>
@@ -2188,7 +2208,7 @@ loadSaved();
           <div class="ah-stat"><div class="ah-sn">Daily</div><div class="ah-sl">New Sales</div></div>
           <div class="ah-stat"><div class="ah-sn">Free</div><div class="ah-sl">To Browse</div></div>
         </div>
-        <a class="ah-link" href="https://www.liveauctioneers.com" target="_bla<div class="ah-img"><img src="https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/600,/0/default.jpg" alt="" loading="lazy" onerror="this.parentElement.style.background='#1a1a1a'"></div>round:linear-gradient(135deg,#1a1a18 0%,#3a3a38 40%,#606060 70%,#888884 100%);"></div>
+        <a class="ah-link" href="https://www.liveauctioneers.com" target="_bla<div class="ah-img"><img src="https://images.metmuseum.org/CRDImages/ep/original/DT1946.jpg" alt="" loading="lazy" onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous"></div>
       <div class="ah-body">
         <div class="ah-name">Invaluable</div>
         <div class="ah-loc">Online Platform &mdash; Fine Art Focus</div>
@@ -2202,7 +2222,7 @@ loadSaved();
       </div>
     </div>
     <div class="ah">
-      <div class="ah-img"><img src="https://www.artic.edu/iiif/2/02ef1e53-10e7-5d67-7a1d-ed72d5baf4e3/full/843,/0/default.jpg" alt="" loading="lazy" onerror="this.parentElement.style.background='#1a1a1a'"></div>
+      <div class="ah-img"><img src="https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg" alt="" loading="lazy" onerror="this.parentElement.style.background='#1a1a1a'" referrerpolicy="no-referrer" crossorigin="anonymous"></div>
       <div class="ah-body">
         <div class="ah-name">Rago Arts &amp; Auction</div>
         <div class="ah-loc">Lambertville, NJ &mdash; Online &amp; In-Person</div>
