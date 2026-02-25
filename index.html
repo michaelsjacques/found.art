@@ -1369,6 +1369,12 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
       <p class="sd2">Each piece found for specific reasons. Hover each artwork to read the description &mdash; click to view the real source.</p>
       <div class="wl" id="wlist"></div>
     </div>
+    <div class="ws" id="exploreSection" style="display:none;">
+      <p class="se">Also Worth Exploring</p>
+      <h2 class="sh">Artists to watch.</h2>
+      <p class="sd2">These artists don't have a specific work available right now — but their practice is worth knowing. Check their sites directly for current availability.</p>
+      <div id="artistList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-top:32px;"></div>
+    </div>
   </div>
   <div class="prop-foot"><button style="border:1.5px solid var(--rule);padding:12px 22px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:none;cursor:pointer;color:var(--ink3);" onclick="nav('home')">&#x2190; New Consultation</button><span class="pf-l">FOUND.ART &mdash; Original art for emerging collectors</span></div>
 </div>
@@ -1694,65 +1700,77 @@ async function submit(){
 async function callAI(){
   const hexStr = S.colorHexes.length ? S.colorHexes.join(', ') : 'not specified';
 
-  // SYSTEM — tells Claude who it is and strict output rules
-  const sys = `You are FOUND.ART, a sharp, opinionated art curator. Your job is to find real, specific, currently-available artworks for collectors, then return a structured JSON proposal.
+  const sys = `You are FOUND.ART — an expert art curator whose only job is to find the RIGHT art for each client, regardless of where it comes from.
 
-WHAT YOU MUST DO:
-1. Use the web_search tool MULTIPLE TIMES to find real available works across different platforms.
-2. For EVERY work you plan to include, you MUST search to verify: (a) the product page URL is real, (b) you can find the actual product image URL from that page's HTML/CDN.
-3. Spread results across at least 3 different platforms — do NOT pick all works from one source.
-4. NEVER invent or guess image URLs. If you cannot find the real CDN image URL for a work, skip that work and find another.
-5. All prices must be under the client's stated budget.
+YOUR NORTH STAR: The best match for the client's room, colors, sensibility, and budget. Platform doesn't matter. Price range within budget doesn't matter as a constraint — just quality of fit.
 
-PLATFORM SEARCH PATTERNS:
-- Tappan Collective: search "site:tappancollective.com/products [style/subject]" — images at cdn/shop/files/
-- Uprise Art: search "site:shop.upriseart.com/products [subject]" — images at cdn.shopify.com
-- Artfinder: search "site:artfinder.com/product [style] painting" — images at images.artfinder.com
-- Artsper: search "site:artsper.com [subject] painting affordable" — images at d1ee3oaj84wqaf.cloudfront.net
-- Hake House: search "site:hakehouse.com [subject]" — images at their cdn
-- Artfully Walls: search "site:artfullywalls.com/products [style]"
+YOUR OUTPUT has two parts:
 
-SEARCH STRATEGY — do these steps in order:
-Step 1: Search for works matching the brief across 3–4 platforms
-Step 2: For each candidate, fetch or search its product page to get the exact image URL
-Step 3: Only include works where you have both: a real product page URL AND a real image CDN URL
-Step 4: Return the JSON
+PART 1 — SPECIFIC WORKS (3–5 works)
+These are specific purchasable artworks you have verified exist via web search.
+Rules:
+- Search broadly across ANY platform — Tappan Collective, Uprise Art, Artfinder, Artsper, Artfully Walls, Hake House, 1stDibs, gallery websites, artist shops, wherever the right work lives.
+- For each candidate: search for it, confirm the product page URL is real and not a 404, extract the actual image CDN URL from the page (not a guess).
+- If you find a perfect work but can't locate the product image URL, set imageUrl to "" — do NOT guess or fabricate image URLs.
+- sourceUrl MUST go to the specific work's page (e.g. /products/work-name, /artwork/123), never a homepage or collection page.
+- Price must be under budget.
 
-RESPONSE FORMAT — return ONLY valid JSON, nothing else, no markdown fences:
+PART 2 — ARTISTS TO EXPLORE (2–3 artists)
+These are artists whose practice is right for this client, but you may not have found a specific available work.
+- Use for: artists on Instagram, artists with websites but complex inventory, artists the client should simply know about
+- Include their Instagram URL OR website URL — real URLs only, no invented handles
+- No image URL needed here
+- No specific work title needed — just the artist and why they matter for this brief
+
+SEARCH APPROACH:
+- First, think about what style/subject/palette would work best for this brief
+- Search multiple platforms for that type of work
+- Don't artificially balance platforms — if 3 perfect works are on Tappan and nothing great is elsewhere, use those 3
+- Also search Instagram and artist websites for the "explore" section
+
+RESPONSE — return ONLY valid JSON, no markdown, no preamble:
 {
-  "proposalTitle": "Short evocative title for this specific brief",
-  "proposalMeta": "2 sentences explaining the curation approach",
-  "moodTitle": "3–5 word mood phrase",
-  "moodDesc": "2 sentences on visual atmosphere and palette direction",
+  "proposalTitle": "Short evocative title",
+  "proposalMeta": "2 sentences on curation approach",
+  "moodTitle": "3–5 word mood",
+  "moodDesc": "2 sentences on visual atmosphere",
   "moodColors": ["#hex1","#hex2","#hex3","#hex4"],
   "moodCaption": "One evocative sentence",
-  "curatorNote": "3–4 sentences directly to this client about their specific room and why these works",
+  "curatorNote": "3–4 sentences directly to this client",
   "colorHarmony": {"desc": "2 sentences on color relationship", "artSwatches": ["#h1","#h2","#h3","#h4","#h5"]},
   "works": [
     {
       "artist": "Full Name",
-      "artistWhy": "1–2 sentences: why THIS artist for THIS client specifically",
-      "title": "Exact title as listed on the product page",
+      "artistWhy": "1–2 sentences: why this artist for this client",
+      "title": "Exact title as on product page",
       "medium": "e.g. Oil on linen",
       "dimensions": "e.g. 24 × 36 in",
-      "year": "e.g. 2024",
+      "year": "2024",
       "price": 1400,
-      "source": "Platform name e.g. Uprise Art",
-      "sourceUrl": "https://exact-product-page-url.com/products/work-slug",
-      "imageUrl": "https://exact-cdn-image-url.jpg",
+      "source": "Platform name",
+      "sourceUrl": "https://specific-product-page-url.com/products/slug",
+      "imageUrl": "https://cdn-image-url.jpg (or empty string if not found)",
       "colorHexes": ["#hex1","#hex2","#hex3"],
-      "colorNotes": "brief dominant color description",
-      "artDescription": "4 vivid sentences: what you actually see — colors, marks, composition, scale, feeling",
-      "artistBio": "1–2 sentences on who this artist is and why they matter now",
+      "colorNotes": "dominant color description",
+      "artDescription": "4 vivid sentences describing what you actually see",
+      "artistBio": "1–2 sentences on this artist",
+      "why": "2–3 sentences: why this specific work for this specific client",
       "matchScore": 88
     }
+  ],
+  "artists": [
+    {
+      "name": "Full Name",
+      "handle": "@instagramhandle or website.com",
+      "handleUrl": "https://instagram.com/handle or https://artistwebsite.com",
+      "why": "2–3 sentences: why this artist's practice is right for this client",
+      "style": "e.g. Gestural abstraction, muted palette",
+      "priceRange": "e.g. $800–$3,000 via studio"
+    }
   ]
-}
+}`;
 
-Include 4–5 works. Vary price range within budget. Mix platforms.`;
-
-  // USER MESSAGE — the specific brief
-  const usr = `Find me specific available artworks for this brief. Search across multiple platforms, verify each product page exists, find the real image URL from each page, then return JSON.
+  const usr = `Create a proposal for this brief. Lead with the best match — don't artificially diversify platforms. Search, verify, then return JSON.
 
 ROOM: ${S.room}
 INTERIOR STYLE: ${S.style}
@@ -1763,7 +1781,7 @@ ART SENSIBILITY: ${S.arttype.join(', ')||'open'}
 BUDGET: up to $${S.budget}
 EXTRA NOTES: ${S.extra||'none'}
 
-IMPORTANT: Search at least 3 different platforms. For each work, confirm the product URL and image URL are real before including it. Return ONLY the JSON, no other text.`;
+Search for works that genuinely fit this brief. Verify each product URL is real before including. Return ONLY JSON.`;
 
   try{
     const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -1771,7 +1789,7 @@ IMPORTANT: Search at least 3 different platforms. For each work, confirm the pro
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
         model:'claude-sonnet-4-20250514',
-        max_tokens:5000,
+        max_tokens:6000,
         tools:[{type:'web_search_20250305',name:'web_search'}],
         system: sys,
         messages:[{role:'user', content: usr}]
@@ -1780,7 +1798,6 @@ IMPORTANT: Search at least 3 different platforms. For each work, confirm the pro
     const data = await res.json();
     let txt = '';
     if(data.content) txt = data.content.filter(b=>b.type==='text').map(b=>b.text).join('');
-    // Strip markdown fences if present
     txt = txt.replace(/```json\s*/g,'').replace(/```\s*/g,'');
     const m = txt.match(/\{[\s\S]*\}/);
     if(!m) throw new Error('no json');
@@ -1792,6 +1809,7 @@ IMPORTANT: Search at least 3 different platforms. For each work, confirm the pro
     setTimeout(()=>render(fallback()), 8500);
   }
 }
+
 
 const moodBgs={
   atmosphere:'radial-gradient(ellipse 70% 85% at 32% 45%,#C83820 0%,#7A1A08 50%,#1A0604 100%)',
@@ -1874,7 +1892,7 @@ function render(p){
         <div class="wi">
           <div class="wi-art" style="${hasImg?'':('background:'+artBg+';')}position:relative;">
             ${hasImg?`<img src="${proxyImg(w.imageUrl)}" alt="${w.artist} — ${w.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;min-height:420px;" onerror="this.parentElement.style.background='#1a1a18';this.remove()">`:
-            `<div style="position:absolute;inset:0;background:${artBg};min-height:420px;"></div>`}
+            `<div style="position:absolute;inset:0;background:${artBg};min-height:420px;display:flex;align-items:flex-end;justify-content:flex-start;padding:20px;"><span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6);">Visit to view artwork</span></div>`}
             <div style="position:absolute;inset:0;background:${hasImg?'linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.25) 100%)':overlay};"></div>
             <div class="wi-desc">
               <div class="wi-di">
@@ -1883,7 +1901,7 @@ function render(p){
               </div>
             </div>
             <div class="wi-ov">
-              <a class="wi-ob" href="${w.sourceUrl||'https://www.tappancollective.com'}" target="_blank">View on ${w.source||'Artist Site'} &rarr;</a>
+              ${w.sourceUrl?`<a class="wi-ob" href="${w.sourceUrl}" target="_blank">View on ${w.source||'Artist Site'} &rarr;</a>`:''}
             </div>
           </div>
           <div class="wi-src">${srcShort}</div>
@@ -1907,7 +1925,7 @@ function render(p){
                 <p class="wpsub">Original work</p>
               </div>
               <div class="wbtns">
-                <a class="btn-v" href="${w.sourceUrl||'https://www.tappancollective.com'}" target="_blank">View on ${srcShort} &rarr;</a>
+                ${w.sourceUrl?`<a class="btn-v" href="${w.sourceUrl}" target="_blank">View on ${srcShort} &rarr;</a>`:`<span class="btn-v" style="opacity:.4;cursor:default;">No direct link</span>`}
                 <button class="btn-like" onclick="toggleLike(this,w,event)">&#x2661; Save</button>
               </div>
             </div>
@@ -1918,6 +1936,32 @@ function render(p){
     wl.appendChild(card);
   });
 }
+
+  // Render "Artists to Explore" section
+  const exploreSection = document.getElementById('exploreSection');
+  const artistList = document.getElementById('artistList');
+  if(p.artists && p.artists.length > 0 && artistList){
+    exploreSection.style.display = 'block';
+    artistList.innerHTML = '';
+    p.artists.forEach(a => {
+      const card = document.createElement('div');
+      card.style.cssText = 'border:1px solid var(--rule);padding:28px 24px;background:white;';
+      const domain = a.handleUrl ? (() => { try { return new URL(a.handleUrl).hostname.replace('www.',''); } catch(e){ return a.handle||''; } })() : (a.handle||'');
+      const isInsta = a.handleUrl && a.handleUrl.includes('instagram');
+      card.innerHTML = `
+        <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:8px;">${a.style||'Artist'}</p>
+        <h3 style="font-family:'Cormorant',Georgia,serif;font-size:22px;font-weight:300;font-style:italic;margin-bottom:10px;">${a.name}</h3>
+        <p style="font-size:12px;font-weight:300;color:var(--ink2);line-height:1.7;margin-bottom:16px;">${a.why||''}</p>
+        ${a.priceRange ? `<p style="font-size:11px;color:var(--grey);margin-bottom:16px;">Typical range: ${a.priceRange}</p>` : ''}
+        <a href="${a.handleUrl||'#'}" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);text-decoration:none;border-bottom:1px solid var(--black);padding-bottom:2px;">
+          ${isInsta ? '&#x2767; Instagram' : '&#x2767; Website'} &rarr;
+        </a>`;
+      artistList.appendChild(card);
+    });
+  } else if(exploreSection){
+    exploreSection.style.display = 'none';
+  }
 
 function toggleSv(btn,e){e&&e.stopPropagation();btn.classList.toggle('sv');btn.textContent=btn.classList.contains('sv')?'\u2665 Saved':'\u2661 Save';}
 
