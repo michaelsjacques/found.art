@@ -922,6 +922,344 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
 /* ── Consultation question steps ── */
 .qs{display:none;}
 .qs.on{display:block;}
+
+/* ══════════════════════════════════════════
+   CONSULTATION — complete clean styles
+══════════════════════════════════════════ */
+
+/* Layout */
+.cx{display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 52px);}
+@media(max-width:800px){.cx{grid-template-columns:1fr;}}
+
+/* Sidebar */
+.sb{
+  padding:36px 24px;
+  background:var(--cream2);
+  border-right:1px solid var(--rule);
+  position:sticky;top:52px;
+  height:calc(100vh - 52px);
+  overflow-y:auto;
+}
+.sb-lbl{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--grey);margin-bottom:20px;padding-bottom:14px;
+  border-bottom:1px solid var(--rule);
+}
+.sl{display:flex;flex-direction:column;gap:0;}
+.si{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 0;border-bottom:1px solid var(--rule);
+  opacity:.45;transition:opacity .2s;cursor:default;
+}
+.si.on{opacity:1;}
+.si.dn{opacity:.7;}
+.si.dn .sd{background:var(--black);color:white;}
+.sd{
+  width:22px;height:22px;border-radius:50%;
+  border:1.5px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:600;flex-shrink:0;margin-top:2px;
+  transition:all .2s;
+}
+.si.on .sd{border-color:var(--black);background:var(--black);color:white;}
+.si-h{font-size:12px;font-weight:600;color:var(--ink);line-height:1.3;}
+.si-p{font-size:11px;color:var(--grey);line-height:1.4;margin-top:1px;}
+.sb-note{font-size:10px;color:var(--grey);line-height:1.6;margin-top:20px;font-style:italic;}
+
+/* Main question area */
+.qm{padding:52px 52px 80px;overflow-y:auto;}
+@media(max-width:800px){.qm{padding:32px 20px 60px;}}
+
+/* Question header */
+.q-eye{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--grey);margin-bottom:14px;
+}
+.q-h{
+  font-family:'Cormorant',Georgia,serif;
+  font-size:clamp(28px,4vw,48px);
+  font-weight:700;line-height:1.1;
+  color:var(--ink);margin-bottom:10px;
+}
+.q-sub{
+  font-size:14px;font-weight:300;color:var(--ink3);
+  line-height:1.7;margin-bottom:32px;max-width:560px;
+}
+
+/* Option grid */
+.og-g{display:grid;gap:10px;margin-bottom:32px;}
+.og-g.g2{grid-template-columns:1fr 1fr;}
+.og-g.g3{grid-template-columns:1fr 1fr;}
+@media(max-width:600px){.og-g.g2,.og-g.g3{grid-template-columns:1fr;}}
+
+/* Option card */
+.opt{
+  border:1.5px solid var(--rule);
+  cursor:pointer;transition:border-color .15s, background .15s;
+  background:white;overflow:hidden;
+}
+.opt:hover{border-color:var(--ink3);}
+.opt.sel{border-color:var(--black);background:var(--black);}
+
+/* Color swatch area inside option */
+.opt .av{
+  width:100%;height:80px;
+  display:block;position:relative;
+  overflow:hidden;
+}
+.opt .chkb{
+  position:absolute;top:10px;right:12px;
+  font-size:13px;color:white;
+  opacity:0;transition:opacity .15s;
+  line-height:1;text-shadow:0 1px 3px rgba(0,0,0,.4);
+}
+.opt.sel .chkb{opacity:1;}
+
+/* Option text */
+.opt-bd{padding:12px 14px 14px;}
+.opt-bd h4{
+  font-size:13px;font-weight:600;
+  color:var(--ink);margin-bottom:3px;line-height:1.3;
+  transition:color .15s;
+}
+.opt-bd p{
+  font-size:11px;font-weight:300;
+  color:var(--ink3);line-height:1.5;
+  transition:color .15s;
+}
+.opt.sel .opt-bd h4{color:white;}
+.opt.sel .opt-bd p{color:rgba(255,255,255,.6);}
+
+/* Color palette picker (Q3) */
+.cp-g,.cp-row{
+  display:flex;flex-wrap:wrap;gap:10px;
+  margin-bottom:28px;
+}
+.cp-card{
+  flex:0 0 calc(25% - 8px);min-width:120px;
+  border:1.5px solid var(--rule);
+  cursor:pointer;transition:border-color .15s;
+  overflow:hidden;background:white;
+}
+@media(max-width:700px){.cp-card{flex:0 0 calc(50% - 5px);}}
+.cp-card:hover{border-color:var(--ink3);}
+.cp-card.sel{border-color:var(--black);outline:2px solid var(--black);outline-offset:-1px;}
+.cp-sw-r{
+  display:flex;height:52px;
+}
+.cp-sw-r .cp-sw{
+  flex:1;height:100%;
+}
+.cp-nm{
+  font-size:11px;font-weight:500;
+  color:var(--ink);padding:8px 10px;
+}
+
+/* Color hex input row */
+.hex-row{
+  display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;margin-bottom:8px;
+}
+.hex-swatch{
+  width:36px;height:36px;border-radius:50%;
+  border:2px solid var(--rule);cursor:pointer;
+  flex-shrink:0;transition:transform .15s;
+}
+.hex-swatch:hover{transform:scale(1.1);}
+
+/* Art type chips (Q4) */
+.at-g{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
+.at-chip{
+  padding:10px 18px;
+  border:1.5px solid var(--rule);
+  font-size:12px;font-weight:500;letter-spacing:.5px;
+  cursor:pointer;transition:all .15s;background:white;
+  color:var(--ink);
+}
+.at-chip:hover{border-color:var(--black);}
+.at-chip.sel{background:var(--black);color:white;border-color:var(--black);}
+
+/* Budget slider (Q5) */
+.bud-disp{
+  font-family:'Cormorant',Georgia,serif;
+  font-size:clamp(36px,5vw,56px);font-weight:300;font-style:italic;
+  color:var(--ink);margin-bottom:8px;
+}
+.bud-note{font-size:12px;color:var(--grey);margin-bottom:24px;}
+input[type=range]{
+  width:100%;max-width:500px;
+  -webkit-appearance:none;height:2px;background:var(--rule);
+  outline:none;margin-bottom:32px;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;
+  border-radius:50%;background:var(--black);cursor:pointer;
+}
+
+/* Nav buttons */
+.qnav{
+  display:flex;align-items:center;gap:12px;
+  margin-top:32px;padding-top:24px;
+  border-top:1px solid var(--rule);
+}
+.btn-nx{
+  background:var(--black);color:white;border:none;
+  padding:14px 32px;font-size:10px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+  transition:background .2s;
+}
+.btn-nx:hover{background:#333;}
+.btn-bk{
+  background:none;color:var(--grey);
+  border:1px solid var(--rule);
+  padding:14px 20px;font-size:10px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+  transition:all .2s;
+}
+.btn-bk:hover{border-color:var(--black);color:var(--black);}
+
+/* Textarea */
+.q-ta{
+  width:100%;max-width:560px;
+  padding:16px;
+  border:1.5px solid var(--rule);
+  font-family:'DM Sans',sans-serif;font-size:13px;
+  color:var(--ink);background:white;resize:vertical;
+  min-height:100px;outline:none;transition:border-color .15s;
+  box-sizing:border-box;
+}
+.q-ta:focus{border-color:var(--black);}
+.q-ta::placeholder{color:var(--grey);font-style:italic;}
+
+/* Submit button */
+.btn-submit{
+  background:var(--black);color:white;border:none;
+  padding:18px 48px;font-size:11px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;cursor:pointer;
+  transition:background .2s;display:block;
+  margin-top:8px;
+}
+.btn-submit:hover{background:#333;}
+
+/* Q5 budget */
+.bdc{font-size:12px;color:var(--grey);margin-bottom:20px;line-height:1.5;}
+.rng{width:100%;max-width:500px;-webkit-appearance:none;appearance:none;height:2px;background:var(--rule);outline:none;margin-bottom:8px;cursor:pointer;}
+.rng::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--black);cursor:pointer;}
+.rng::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--black);border:none;cursor:pointer;}
+.rng-row{display:flex;justify-content:space-between;max-width:500px;font-size:11px;color:var(--grey);margin-bottom:32px;}
+
+/* Q6 textarea */
+.ta{width:100%;max-width:560px;padding:16px;border:1.5px solid var(--rule);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:white;resize:vertical;min-height:120px;outline:none;transition:border-color .15s;box-sizing:border-box;line-height:1.7;}
+.ta:focus{border-color:var(--black);}
+.ta::placeholder{color:var(--grey);font-style:italic;}
+
+/* Fix .cp-g to display as wrap row */
+.cp-g{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
+.cp-card{flex:0 0 calc(25% - 8px);min-width:130px;border:1.5px solid var(--rule);cursor:pointer;transition:border-color .15s;overflow:hidden;background:white;}
+@media(max-width:700px){.cp-card{flex:0 0 calc(50% - 5px);}}
+.cp-card:hover{border-color:var(--ink3);}
+.cp-card.sel{border-color:var(--black);outline:2px solid var(--black);outline-offset:-1px;}
+.cp-sw-r{display:flex;height:48px;}
+.cp-sw-r .cp-sw{flex:1;height:100%;border:none;width:auto;}
+.cp-nm{font-size:11px;font-weight:500;color:var(--ink);padding:7px 10px;}
+.cp-card.sel .cp-nm{color:var(--black);}
+
+/* Color hex picker row */
+.hex-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 20px;}
+.hex-swatch{width:34px;height:34px;border-radius:50%;border:2px solid var(--rule);cursor:pointer;flex-shrink:0;transition:transform .15s,border-color .15s;}
+.hex-swatch:hover{transform:scale(1.12);border-color:var(--black);}
+
+/* Section labels within Q3 */
+.cp-sect-lbl{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--grey);margin-bottom:10px;margin-top:24px;}
+
+/* ══ Q3 palette preview & color picker ══ */
+.pp-prev{
+  display:flex;height:56px;border:1px solid var(--rule);
+  overflow:hidden;margin-bottom:12px;
+}
+.pp-seg{flex:1;height:100%;transition:background .3s;}
+.pp-lbl{margin-bottom:20px;}
+.pp-lbl h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.pp-lbl p{font-size:12px;color:var(--grey);}
+.prv{position:absolute;inset:0;pointer-events:none;border-radius:2px;}
+.cp-pick{
+  width:44px;height:44px;position:relative;
+  border:1.5px solid var(--rule);border-radius:4px;
+  overflow:hidden;cursor:pointer;flex-shrink:0;
+  transition:border-color .15s;
+}
+.cp-pick:hover{border-color:var(--black);}
+.cp-pick input[type=color]{
+  position:absolute;inset:-4px;width:calc(100% + 8px);height:calc(100% + 8px);
+  border:none;padding:0;cursor:pointer;opacity:0;
+}
+
+/* ══ Override any old conflicting opt rules ══ */
+.opt .av{
+  width:100%;height:80px;
+  display:block;
+  background:#f0ede8;
+}
+.opt .chkb{
+  position:absolute;top:8px;right:10px;
+  font-size:14px;color:white;
+  opacity:0;transition:opacity .15s;
+  pointer-events:none;
+  text-shadow:0 1px 4px rgba(0,0,0,.5);
+}
+.opt.sel .chkb{opacity:1;}
+.opt-bd h4,.opt-bd p{margin:0;}
+
+/* ══ Make g2/g3 work properly ══ */
+.og-g.g2{grid-template-columns:1fr 1fr;}
+.og-g.g3{grid-template-columns:1fr 1fr 1fr;}
+@media(max-width:640px){
+  .og-g.g2,.og-g.g3{grid-template-columns:1fr;}
+}
+
+/* ══ Q3 two-column layout for palette + picker ══ */
+.q3-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+  margin-bottom:0;
+}
+@media(max-width:700px){.q3-cols{grid-template-columns:1fr;}}
+
+/* ══ Q3 palette preview fixes ══ */
+.cp-prev{
+  width:100% !important;height:56px !important;
+  border:1px solid var(--rule) !important;
+  display:flex !important;
+  overflow:hidden;margin-bottom:12px;
+}
+#ppBar{
+  display:flex !important;
+  width:100% !important;
+  height:100% !important;
+  background:none !important;
+}
+.pp-seg{flex:1;height:100%;}
+.pp-lbl{margin-bottom:16px;}
+.pp-lbl h4{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.pp-lbl p{font-size:11px;color:var(--grey);line-height:1.5;}
+.col-2{display:flex;flex-direction:column;gap:16px;}
+.color-ta{
+  width:100%;padding:14px;
+  border:1.5px solid var(--rule);
+  font-family:'DM Sans',sans-serif;font-size:13px;
+  color:var(--ink);background:white;
+  resize:vertical;min-height:90px;
+  outline:none;line-height:1.7;
+  box-sizing:border-box;
+}
+.color-ta:focus{border-color:var(--black);}
+.color-ta::placeholder{color:var(--grey);font-style:italic;}
+.clr-lbl{
+  font-size:9px;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--grey);
+  margin-bottom:10px;display:block;
+}
 </style>
 </head>
 <body>
@@ -1216,12 +1554,12 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
       <div class="qs on" id="q1">
         <p class="q-eye">01 / 06 &mdash; The Room</p><h2 class="q-h">Which room are we shopping for?</h2><p class="q-sub">This shapes scale, subject matter, and the emotional register of everything we find.</p>
         <div class="og-g g3">
-          <div class="opt" onclick="pick(this,'room','living room')"><div class="opt-v"><div class="av" style="background:linear-gradient(160deg,#F5EFE6,#E8D4BC,#D4B898)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Living Room</h4><p>Centrepiece &mdash; needs presence</p></div></div>
-          <div class="opt" onclick="pick(this,'room','bedroom')"><div class="opt-v"><div class="av" style="background:linear-gradient(135deg,#E8E0D8,#D4C8C0,#C0ACA4)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Bedroom</h4><p>Intimate, personal, calming</p></div></div>
-          <div class="opt" onclick="pick(this,'room','dining room')"><div class="opt-v"><div class="av" style="background:linear-gradient(180deg,#2A1810,#4A2C18,#6A4028)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Dining Room</h4><p>Conversation-starting energy</p></div></div>
-          <div class="opt" onclick="pick(this,'room','home office')"><div class="opt-v"><div class="av" style="background:linear-gradient(135deg,#E8EAE4,#D0D4CC,#B8BEB6)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Home Office</h4><p>Grounding, focused, inspiring</p></div></div>
-          <div class="opt" onclick="pick(this,'room','entryway')"><div class="opt-v"><div class="av" style="background:linear-gradient(180deg,#1A1410,#3A2818,#5A3C20)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Entryway / Hall</h4><p>A bold first impression</p></div></div>
-          <div class="opt" onclick="pick(this,'room','other space')"><div class="opt-v"><div class="av" style="background:radial-gradient(circle at 40% 60%,#D4C4B0,#C0AA90,#A89070)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Other Space</h4><p>We&rsquo;ll work with what you have</p></div></div>
+          <div class="opt" onclick="pick(this,'room','living room')"><div class="av" style="background:linear-gradient(160deg,#F5EFE6,#E8D4BC,#D4B898);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Living Room</h4><p>Centrepiece &mdash; needs presence</p></div></div>
+          <div class="opt" onclick="pick(this,'room','bedroom')"><div class="av" style="background:linear-gradient(135deg,#E8E0D8,#D4C8C0,#C0ACA4);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Bedroom</h4><p>Intimate, personal, calming</p></div></div>
+          <div class="opt" onclick="pick(this,'room','dining room')"><div class="av" style="background:linear-gradient(180deg,#2A1810,#4A2C18,#6A4028);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Dining Room</h4><p>Conversation-starting energy</p></div></div>
+          <div class="opt" onclick="pick(this,'room','home office')"><div class="av" style="background:linear-gradient(135deg,#E8EAE4,#D0D4CC,#B8BEB6);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Home Office</h4><p>Grounding, focused, inspiring</p></div></div>
+          <div class="opt" onclick="pick(this,'room','entryway')"><div class="av" style="background:linear-gradient(180deg,#1A1410,#3A2818,#5A3C20);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Entryway / Hall</h4><p>A bold first impression</p></div></div>
+          <div class="opt" onclick="pick(this,'room','other space')"><div class="av" style="background:radial-gradient(circle at 40% 60%,#D4C4B0,#C0AA90,#A89070);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Other Space</h4><p>We&rsquo;ll work with what you have</p></div></div>
         </div>
         <div class="qnav"><span></span><button class="btn-nx" onclick="goQ(1,2)">Continue &#x2192;</button></div>
       </div>
@@ -1229,12 +1567,12 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
       <div class="qs" id="q2">
         <p class="q-eye">02 / 06 &mdash; Interior Style</p><h2 class="q-h">What&rsquo;s the aesthetic of your home?</h2><p class="q-sub">Choose the closest &mdash; or the one you&rsquo;re working toward.</p>
         <div class="og-g g2">
-          <div class="opt" onclick="pick(this,'style','Japandi / Wabi-Sabi')"><div class="opt-v"><div class="av" style="background:linear-gradient(135deg,#F0EAE0,#E0D4C4,#D0C0A8,#C0AA90)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Japandi / Wabi-Sabi</h4><p>Natural materials, quiet imperfection</p></div></div>
-          <div class="opt" onclick="pick(this,'style','Warm and Organic')"><div class="opt-v"><div class="av" style="background:linear-gradient(160deg,#E8C890,#D4A060,#B87840)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Warm &amp; Organic</h4><p>Earthy palette, textured fabrics, warmth</p></div></div>
-          <div class="opt" onclick="pick(this,'style','Contemporary Minimal')"><div class="opt-v"><div class="av" style="background:linear-gradient(135deg,#F8F8F6,#F0F0EE,#E8E8E4)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Contemporary Minimal</h4><p>White walls, clean lines, art as sole drama</p></div></div>
-          <div class="opt" onclick="pick(this,'style','Maximalist / Eclectic')"><div class="opt-v"><div class="av" style="background:linear-gradient(135deg,#8B1A1A,#C04020,#E86830)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Maximalist / Eclectic</h4><p>Gallery walls, bold colour, layered</p></div></div>
-          <div class="opt" onclick="pick(this,'style','Mid-Century Modern')"><div class="opt-v"><div class="av" style="background:linear-gradient(160deg,#8A5830,#C08040,#D4A860)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Mid-Century Modern</h4><p>Warm walnut, geometric, retro confidence</p></div></div>
-          <div class="opt" onclick="pick(this,'style','Industrial / Urban Loft')"><div class="opt-v"><div class="av" style="background:linear-gradient(135deg,#3A3836,#585654,#7A7874)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Industrial / Urban Loft</h4><p>Exposed concrete, metal, raw character</p></div></div>
+          <div class="opt" onclick="pick(this,'style','Japandi / Wabi-Sabi')"><div class="av" style="background:linear-gradient(135deg,#F0EAE0,#E0D4C4,#D0C0A8,#C0AA90);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Japandi / Wabi-Sabi</h4><p>Natural materials, quiet imperfection</p></div></div>
+          <div class="opt" onclick="pick(this,'style','Warm and Organic')"><div class="av" style="background:linear-gradient(160deg,#E8C890,#D4A060,#B87840);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Warm &amp; Organic</h4><p>Earthy palette, textured fabrics, warmth</p></div></div>
+          <div class="opt" onclick="pick(this,'style','Contemporary Minimal')"><div class="av" style="background:linear-gradient(135deg,#F8F8F6,#F0F0EE,#E8E8E4);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Contemporary Minimal</h4><p>White walls, clean lines, art as sole drama</p></div></div>
+          <div class="opt" onclick="pick(this,'style','Maximalist / Eclectic')"><div class="av" style="background:linear-gradient(135deg,#8B1A1A,#C04020,#E86830);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Maximalist / Eclectic</h4><p>Gallery walls, bold colour, layered</p></div></div>
+          <div class="opt" onclick="pick(this,'style','Mid-Century Modern')"><div class="av" style="background:linear-gradient(160deg,#8A5830,#C08040,#D4A860);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Mid-Century Modern</h4><p>Warm walnut, geometric, retro confidence</p></div></div>
+          <div class="opt" onclick="pick(this,'style','Industrial / Urban Loft')"><div class="av" style="background:linear-gradient(135deg,#3A3836,#585654,#7A7874);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Industrial / Urban Loft</h4><p>Exposed concrete, metal, raw character</p></div></div>
         </div>
         <div class="qnav"><button class="btn-bk" onclick="goQ(2,1)">&#x2190; Back</button><button class="btn-nx" onclick="goQ(2,3)">Continue &#x2192;</button></div>
       </div>
@@ -1274,12 +1612,12 @@ input[type=text]:focus,input[type=email]:focus{border-color:var(--black);}
       <div class="qs" id="q4">
         <p class="q-eye">04 / 06 &mdash; Art Sensibility</p><h2 class="q-h">What kind of art speaks to you?</h2><p class="q-sub">Select all that resonate. The more honest, the sharper the search.</p>
         <div class="og-g g2">
-          <div class="opt" onclick="tog(this,'arttype','abstract')"><div class="opt-v"><div class="av" style="background:conic-gradient(from 45deg at 40% 50%,#C0390B,#8B1A0A,#2A0805,#6B1A0A,#C0390B)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Abstract</h4><p>Emotion over representation. Colour, form, energy.</p></div></div>
-          <div class="opt" onclick="tog(this,'arttype','landscape and nature')"><div class="opt-v"><div class="av" style="background:linear-gradient(180deg,#7AAAC0 0%,#9AC0A8 35%,#D4C880 55%,#8A9858 75%,#3A5030 100%)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Landscape &amp; Nature</h4><p>Light, terrain, the natural world rendered freshly.</p></div></div>
-          <div class="opt" onclick="tog(this,'arttype','figurative')"><div class="opt-v"><div class="av" style="background:linear-gradient(135deg,#D4B090,#C09070,#A87050)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Figurative</h4><p>The human form, faces, presence and intimacy.</p></div></div>
-          <div class="opt" onclick="tog(this,'arttype','botanical and still life')"><div class="opt-v"><div class="av" style="background:linear-gradient(160deg,#E8F0D8,#C8DCA8,#A0C070,#78A040)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Botanical &amp; Still Life</h4><p>Quiet beauty. Objects, plants, the domestic gaze.</p></div></div>
-          <div class="opt" onclick="tog(this,'arttype','photography')"><div class="opt-v"><div class="av" style="background:linear-gradient(135deg,#1A1A18,#3A3A38,#5A5A58,#7A7A78)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Photography</h4><p>Captured moments. Light as medium.</p></div></div>
-          <div class="opt" onclick="tog(this,'arttype','textural and mixed media')"><div class="opt-v"><div class="av" style="background:repeating-linear-gradient(45deg,#C8A880 0px,#C8A880 5px,#B89060 5px,#B89060 10px)"></div><div class="chkb">&#x2713;</div></div><div class="opt-bd"><h4>Textural &amp; Mixed Media</h4><p>Works you want to touch. Material as meaning.</p></div></div>
+          <div class="opt" onclick="tog(this,'arttype','abstract')"><div class="av" style="background:conic-gradient(from 45deg at 40% 50%,#C0390B,#8B1A0A,#2A0805,#6B1A0A,#C0390B);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Abstract</h4><p>Emotion over representation. Colour, form, energy.</p></div></div>
+          <div class="opt" onclick="tog(this,'arttype','landscape and nature')"><div class="av" style="background:linear-gradient(180deg,#7AAAC0 0%,#9AC0A8 35%,#D4C880 55%,#8A9858 75%,#3A5030 100%);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Landscape &amp; Nature</h4><p>Light, terrain, the natural world rendered freshly.</p></div></div>
+          <div class="opt" onclick="tog(this,'arttype','figurative')"><div class="av" style="background:linear-gradient(135deg,#D4B090,#C09070,#A87050);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Figurative</h4><p>The human form, faces, presence and intimacy.</p></div></div>
+          <div class="opt" onclick="tog(this,'arttype','botanical and still life')"><div class="av" style="background:linear-gradient(160deg,#E8F0D8,#C8DCA8,#A0C070,#78A040);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Botanical &amp; Still Life</h4><p>Quiet beauty. Objects, plants, the domestic gaze.</p></div></div>
+          <div class="opt" onclick="tog(this,'arttype','photography')"><div class="av" style="background:linear-gradient(135deg,#1A1A18,#3A3A38,#5A5A58,#7A7A78);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Photography</h4><p>Captured moments. Light as medium.</p></div></div>
+          <div class="opt" onclick="tog(this,'arttype','textural and mixed media')"><div class="av" style="background:repeating-linear-gradient(45deg,#C8A880 0px,#C8A880 5px,#B89060 5px,#B89060 10px);position:relative;"><span class="chkb">&#x2713;</span></div><div class="opt-bd"><h4>Textural &amp; Mixed Media</h4><p>Works you want to touch. Material as meaning.</p></div></div>
         </div>
         <div class="qnav"><button class="btn-bk" onclick="goQ(4,3)">&#x2190; Back</button><button class="btn-nx" onclick="goQ(4,5)">Continue &#x2192;</button></div>
       </div>
