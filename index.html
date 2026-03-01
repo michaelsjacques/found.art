@@ -1260,6 +1260,612 @@ input[type=range]::-webkit-slider-thumb{
   text-transform:uppercase;color:var(--grey);
   margin-bottom:10px;display:block;
 }
+
+/* ══════════════════════════════════════
+   EDUCATION HOME PAGE
+══════════════════════════════════════ */
+
+/* Hero */
+.edu-hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--black);
+  padding:80px 40px 60px;
+  position:relative;
+}
+.edu-hero-inner{max-width:780px;}
+.edu-eyebrow{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,255,255,.35);margin-bottom:24px;display:block;
+}
+.edu-hero h1.edu-hero-h, .edu-hero-h{
+  font-family:'Cormorant',Georgia,serif;
+  font-size:clamp(40px,6vw,84px);
+  font-weight:300;line-height:1.0;
+  color:white;margin-bottom:24px;
+}
+.edu-hero-h em{
+  font-style:italic;
+  color:rgba(255,255,255,.55);
+}
+.edu-hero-sub{
+  font-size:16px;font-weight:300;
+  color:rgba(255,255,255,.55);
+  line-height:1.8;margin-bottom:40px;
+  max-width:560px;
+}
+.edu-hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.edu-btn-primary{
+  background:white;color:var(--black);
+  border:none;padding:16px 32px;
+  font-size:11px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;cursor:pointer;
+  transition:opacity .2s;
+}
+.edu-btn-primary:hover{opacity:.85;}
+.edu-btn-ghost{
+  background:none;color:rgba(255,255,255,.55);
+  border:1px solid rgba(255,255,255,.2);
+  padding:16px 28px;font-size:11px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+  transition:all .2s;
+}
+.edu-btn-ghost:hover{border-color:rgba(255,255,255,.5);color:white;}
+.edu-hero-scroll-hint{
+  position:absolute;bottom:32px;left:40px;
+  font-size:20px;color:rgba(255,255,255,.2);
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* Section common */
+.edu-section{}
+.edu-section-inner{max-width:1100px;margin:0 auto;}
+.edu-section-h{
+  font-family:'Cormorant',Georgia,serif;
+  font-size:clamp(32px,5vw,60px);
+  font-weight:300;line-height:1.05;
+  margin-bottom:14px;
+}
+.edu-section-h em{font-style:italic;}
+.edu-section-sub{
+  font-size:14px;font-weight:300;line-height:1.75;
+  margin-bottom:40px;max-width:500px;
+  color:var(--ink3);
+}
+
+/* Myth cards */
+.myth-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:2px;
+}
+@media(max-width:1000px){.myth-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:640px){.myth-grid{grid-template-columns:1fr 1fr;}}
+.myth-card{
+  background:rgba(255,255,255,.05);
+  padding:32px 24px;
+  cursor:pointer;
+  perspective:1000px;
+  transition:background .2s;
+  position:relative;
+  min-height:220px;
+}
+.myth-card:hover{background:rgba(255,255,255,.08);}
+.myth-front,.myth-back{
+  position:absolute;inset:0;padding:32px 24px;
+  backface-visibility:hidden;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.myth-back{
+  transform:rotateY(180deg);
+  background:rgba(255,255,255,.1);
+  backface-visibility:hidden;
+}
+.myth-card.flipped .myth-front{transform:rotateY(-180deg);}
+.myth-card.flipped .myth-back{transform:rotateY(0);}
+.myth-n{
+  font-size:10px;letter-spacing:2px;
+  color:rgba(255,255,255,.25);margin-bottom:16px;
+}
+.myth-claim{
+  font-family:'Cormorant',Georgia,serif;
+  font-size:clamp(16px,1.8vw,22px);
+  font-weight:400;font-style:italic;
+  color:white;line-height:1.3;flex:1;
+  display:flex;align-items:center;
+}
+.myth-flip-hint{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.25);margin-top:auto;
+}
+.myth-truth{
+  font-size:13px;font-weight:300;
+  color:rgba(255,255,255,.85);
+  line-height:1.7;
+  display:flex;align-items:center;
+  height:100%;
+}
+
+/* Steps accordion */
+.steps-list{max-width:760px;}
+.step-item{
+  border-bottom:1px solid var(--rule);
+  cursor:pointer;
+}
+.step-header{
+  display:flex;align-items:center;gap:20px;
+  padding:24px 0;
+}
+.step-num{
+  font-size:10px;letter-spacing:2px;
+  color:var(--grey);flex-shrink:0;width:28px;
+}
+.step-title{
+  font-size:16px;font-weight:500;
+  color:var(--ink);flex:1;line-height:1.3;
+}
+.step-arrow{
+  font-size:18px;color:var(--grey);
+  transition:transform .3s;flex-shrink:0;
+}
+.step-item.open .step-arrow{transform:rotate(180deg);}
+.step-body{
+  display:none;
+  padding:0 0 28px 48px;
+}
+.step-item.open .step-body{display:block;}
+.step-body p{
+  font-size:14px;font-weight:300;
+  color:var(--ink3);line-height:1.8;
+  margin-bottom:14px;
+}
+.step-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;}
+.step-links a{
+  font-size:11px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--black);
+  text-decoration:none;border-bottom:1.5px solid var(--black);
+  padding-bottom:1px;
+}
+.step-cta{
+  background:var(--black);color:white;border:none;
+  padding:14px 28px;font-size:10px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+  margin-top:8px;transition:background .2s;
+}
+.step-cta:hover{background:#333;}
+
+/* Budget table */
+.budget-table{margin-top:16px;border-top:1px solid var(--rule);}
+.bt-row{
+  display:flex;gap:24px;padding:14px 0;
+  border-bottom:1px solid var(--rule);
+}
+.bt-price{
+  font-size:13px;font-weight:600;color:var(--ink);
+  flex-shrink:0;width:140px;
+}
+.bt-what{
+  font-size:13px;font-weight:300;color:var(--ink3);
+  line-height:1.6;
+}
+
+/* Source grid */
+.source-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;margin-top:20px;
+}
+@media(max-width:760px){.source-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.source-grid{grid-template-columns:1fr;}}
+.source-card{
+  background:white;padding:20px;
+  border:1px solid var(--rule);
+}
+.source-icon{font-size:24px;margin-bottom:10px;display:block;}
+.source-card h4{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.source-card p{font-size:12px;font-weight:300;color:var(--ink3);line-height:1.65;}
+
+/* Category tabs */
+.cat-tabs{
+  display:flex;overflow-x:auto;
+  border-bottom:1px solid var(--rule);
+  padding:0 40px;
+  margin-top:40px;
+  scrollbar-width:none;
+}
+.cat-tabs::-webkit-scrollbar{display:none;}
+.cat-tab{
+  background:none;border:none;
+  padding:14px 20px;cursor:pointer;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--grey);
+  white-space:nowrap;
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;
+  transition:all .2s;
+}
+.cat-tab:hover{color:var(--ink);}
+.cat-tab.on{color:var(--black);border-bottom-color:var(--black);}
+.cat-panels{padding:0 40px 80px;}
+.cat-panel{display:none;}
+.cat-panel.on{display:flex;gap:40px;padding-top:40px;align-items:flex-start;}
+@media(max-width:700px){.cat-panel.on{flex-direction:column;}}
+.cat-swatch{
+  flex:0 0 220px;height:300px;
+  border-radius:1px;
+}
+@media(max-width:700px){.cat-swatch{width:100%;height:160px;flex:none;}}
+.cat-body{flex:1;}
+.cat-body h3{
+  font-family:'Cormorant',Georgia,serif;
+  font-size:36px;font-weight:300;font-style:italic;
+  margin-bottom:16px;color:var(--ink);
+}
+.cat-desc{
+  font-size:14px;font-weight:300;color:var(--ink3);
+  line-height:1.8;margin-bottom:28px;
+}
+.cat-facts{border-top:1px solid var(--rule);}
+.cat-fact{
+  display:flex;gap:20px;padding:12px 0;
+  border-bottom:1px solid var(--rule);
+}
+.cf-label{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--grey);flex-shrink:0;width:160px;
+  padding-top:2px;
+}
+.cf-val{font-size:13px;color:var(--ink);line-height:1.5;}
+
+/* Platform grid */
+.platform-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;
+}
+@media(max-width:900px){.platform-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.platform-grid{grid-template-columns:1fr;}}
+.pf-card{
+  background:white;padding:28px 24px;
+  border:1px solid var(--rule);
+  transition:border-color .2s;
+}
+.pf-card:hover{border-color:var(--ink3);}
+.pf-logo{font-size:28px;margin-bottom:12px;display:block;}
+.pf-card h4{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.pf-card p{font-size:12px;font-weight:300;color:var(--ink3);line-height:1.7;margin-bottom:12px;}
+.pf-tag{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--grey);padding-top:12px;
+  border-top:1px solid var(--rule);
+}
+
+/* CTA section */
+.edu-cta{
+  background:var(--black);
+  padding:100px 40px;
+  text-align:center;
+}
+.edu-cta-inner{max-width:640px;margin:0 auto;}
+.edu-cta-h{
+  font-family:'Cormorant',Georgia,serif;
+  font-size:clamp(40px,6vw,72px);
+  font-weight:300;line-height:1.05;
+  color:white;margin-bottom:20px;
+}
+.edu-cta-h em{font-style:italic;color:rgba(255,255,255,.5);}
+.edu-cta-sub{
+  font-size:15px;font-weight:300;
+  color:rgba(255,255,255,.5);
+  line-height:1.75;margin-bottom:36px;
+}
+.edu-cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* ═══════════════════════════════════════════
+   ARTIST OF THE DAY PAGE
+═══════════════════════════════════════════ */
+
+.aod-wrap{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  min-height:calc(100vh - 52px);
+}
+
+/* Left nav sidebar */
+.aod-nav{
+  background:var(--black);
+  padding:48px 0 48px;
+  display:flex;
+  flex-direction:column;
+  position:sticky;
+  top:52px;
+  height:calc(100vh - 52px);
+  overflow-y:auto;
+}
+.aod-nav-label{
+  font-size:9px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+  padding:0 24px 16px;
+}
+.aod-day-btn{
+  padding:16px 24px;
+  cursor:pointer;
+  border-left:2px solid transparent;
+  transition:all .2s;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.aod-day-btn:hover{
+  background:rgba(255,255,255,.05);
+}
+.aod-day-btn.active{
+  border-left-color:white;
+  background:rgba(255,255,255,.08);
+}
+.aod-day-btn.future{
+  opacity:.25;
+  cursor:default;
+}
+.aod-day-btn.today .aod-day-name::after{
+  content:' · today';
+  font-size:9px;
+  opacity:.5;
+}
+.aod-day-name{
+  font-size:12px;
+  font-weight:600;
+  color:white;
+  letter-spacing:.5px;
+}
+.aod-day-date{
+  font-size:10px;
+  color:rgba(255,255,255,.35);
+  font-weight:300;
+}
+.aod-nav-note{
+  margin-top:auto;
+  padding:24px;
+  font-size:10px;
+  line-height:1.7;
+  color:rgba(255,255,255,.2);
+}
+
+/* Main feature area */
+.aod-main{
+  overflow-y:auto;
+  background:var(--cream);
+}
+.aod-feature{
+  max-width:760px;
+  padding:60px 60px 80px;
+}
+
+/* Palette strip */
+.aod-palette{
+  display:flex;
+  height:6px;
+  border-radius:3px;
+  overflow:hidden;
+  margin-bottom:32px;
+  max-width:300px;
+}
+.aod-swatch{ flex:1; }
+
+/* Badge */
+.aod-badge-row{ margin-bottom:20px; }
+.aod-badge{
+  display:inline-block;
+  padding:5px 12px;
+  font-size:9px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:white;
+  font-weight:700;
+}
+
+/* Name */
+.aod-name{
+  font-family:'Cormorant',Georgia,serif;
+  font-size:clamp(44px,5vw,72px);
+  font-weight:300;
+  line-height:1.0;
+  color:var(--black);
+  margin-bottom:14px;
+}
+.aod-handle{
+  font-size:13px;
+  color:var(--grey);
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.aod-handle a{
+  color:var(--black);
+  text-decoration:none;
+  font-weight:600;
+  border-bottom:1.5px solid var(--black);
+}
+.aod-sep{ color:var(--rule); }
+.aod-medium{
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--grey);
+  margin-bottom:48px;
+}
+
+/* Why section */
+.aod-why{
+  border-top:1px solid var(--rule);
+  padding-top:36px;
+  margin-bottom:40px;
+}
+.aod-why-label{
+  font-size:9px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--grey);
+  margin-bottom:16px;
+}
+.aod-why-text{
+  font-size:16px;
+  font-weight:300;
+  line-height:1.85;
+  color:var(--ink);
+  max-width:600px;
+}
+
+/* Unique list */
+.aod-unique{
+  margin-bottom:48px;
+}
+.aod-unique-label{
+  font-size:9px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--grey);
+  margin-bottom:16px;
+}
+.aod-unique-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.aod-unique-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  font-size:13px;
+  font-weight:300;
+  color:var(--ink);
+  line-height:1.5;
+}
+.aod-bullet{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  flex-shrink:0;
+  margin-top:5px;
+}
+
+/* Footer: price + actions */
+.aod-footer{
+  border-top:1px solid var(--rule);
+  padding-top:32px;
+}
+.aod-price{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin-bottom:20px;
+}
+.aod-price-label{
+  font-size:9px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--grey);
+  flex-shrink:0;
+}
+.aod-price-val{
+  font-size:14px;
+  color:var(--ink);
+  font-weight:400;
+}
+.aod-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.aod-btn-ig{
+  display:inline-block;
+  padding:14px 24px;
+  border:1.5px solid var(--black);
+  color:var(--black);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-decoration:none;
+  transition:all .2s;
+}
+.aod-btn-ig:hover{
+  background:var(--black);
+  color:white;
+}
+.aod-btn-buy{
+  display:inline-block;
+  padding:14px 24px;
+  color:white;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-decoration:none;
+  transition:opacity .2s;
+}
+.aod-btn-buy:hover{ opacity:.85; }
+
+/* Mobile */
+@media(max-width:700px){
+  .aod-wrap{ grid-template-columns:1fr; }
+  .aod-nav{
+    position:static;
+    height:auto;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    padding:16px 0;
+  }
+  .aod-nav-label,.aod-nav-note{ display:none; }
+  .aod-day-btn{
+    flex-direction:row;
+    align-items:center;
+    gap:6px;
+    padding:10px 16px;
+    flex-shrink:0;
+    border-left:none;
+    border-bottom:2px solid transparent;
+  }
+  .aod-day-btn.active{
+    border-left:none;
+    border-bottom-color:white;
+  }
+  .aod-feature{ padding:32px 24px 60px; }
+}
+
+/* AOD Image grid */
+.aod-imgs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:48px;
+}
+.aod-img-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.aod-img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  display:block;
+  background:var(--rule);
+}
+.aod-img-cap{
+  font-size:10px;
+  color:var(--grey);
+  letter-spacing:.5px;
+  line-height:1.4;
+}
+@media(max-width:700px){
+  .aod-imgs{ grid-template-columns:repeat(2,1fr); }
+}
 </style>
 </head>
 <body>
@@ -1278,151 +1884,401 @@ input[type=range]::-webkit-slider-thumb{
 <!-- ════ HOME ════ -->
 <div id="pg-home" class="pg on">
 
-  <!-- Full-bleed hero — AIC: Seurat's Grande Jatte -->
-  <div class="hero">
-    <div class="hero-img">
-      <img id="heroImg"
-        src="https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FLake-Drifter-in-White-24x36-cropped.jpg%3Fv%3D1768518734&w=900&output=jpg"
-        alt="A Sunday on La Grande Jatte — Georges Seurat, 1886. Art Institute of Chicago."
-        onload="this.classList.add('loaded')"
-        onerror="this.style.display='none'">
-    </div>
-    <div class="hero-content">
-      <h1 class="hero-h">Original art,<br><em>found for you.</em></h1>
-      <p class="hero-sub">Tell us about your space. We search the best platforms and build a considered proposal — with the story behind every piece.</p>
-      <button class="hero-cta" onclick="nav('consult')">Start your consultation</button>
-    </div>
-    <div class="hero-scroll">Scroll</div>
-  </div>
-
-  <!-- Marquee -->
-  <div class="marquee-strip">
-    <div class="marquee-track">
-      <span class="marquee-item hi">Tappan Collective</span><span class="marquee-item">·</span>
-      <span class="marquee-item">Uprise Art</span><span class="marquee-item">·</span>
-      <span class="marquee-item hi">Hake House</span><span class="marquee-item">·</span>
-      <span class="marquee-item">Artsper</span><span class="marquee-item">·</span>
-      <span class="marquee-item">Singular Art</span><span class="marquee-item">·</span>
-      <span class="marquee-item hi">Artist Studios</span><span class="marquee-item">·</span>
-      <span class="marquee-item">Artfully Walls</span><span class="marquee-item">·</span>
-      <span class="marquee-item">$500–$5,000</span><span class="marquee-item">·</span>
-      <span class="marquee-item hi">Originals Only</span><span class="marquee-item">·</span>
-      <!-- repeat for infinite -->
-      <span class="marquee-item hi">Tappan Collective</span><span class="marquee-item">·</span>
-      <span class="marquee-item">Uprise Art</span><span class="marquee-item">·</span>
-      <span class="marquee-item hi">Hake House</span><span class="marquee-item">·</span>
-      <span class="marquee-item">Artsper</span><span class="marquee-item">·</span>
-      <span class="marquee-item">Singular Art</span><span class="marquee-item">·</span>
-      <span class="marquee-item hi">Artist Studios</span><span class="marquee-item">·</span>
-      <span class="marquee-item">Artfully Walls</span><span class="marquee-item">·</span>
-      <span class="marquee-item">$500–$5,000</span><span class="marquee-item">·</span>
-      <span class="marquee-item hi">Originals Only</span><span class="marquee-item">·</span>
+<!-- ══════════════════════════════════════
+  HERO — full-bleed, editorial
+══════════════════════════════════════ -->
+<section class="edu-hero">
+  <div class="edu-hero-inner">
+    <p class="edu-eyebrow">A different kind of art guide</p>
+    <h1 class="edu-hero-h">You don't need a gallery.<br>You don't need a fortune.<br>You just need to <em>start.</em></h1>
+    <p class="edu-hero-sub">Art collecting has always been sold as something exclusive — white rooms, velvet ropes, prices whispered on request. That's not collecting. That's theater.<br><br>The real art world is messier, more democratic, and far more interesting. This is your introduction.</p>
+    <div class="edu-hero-actions">
+      <button class="edu-btn-primary" onclick="scrollToSection('edu-sections')">Start Learning →</button>
+      <button class="edu-btn-ghost" onclick="nav('consult')">Skip to Proposal →</button>
     </div>
   </div>
+  <div class="edu-hero-scroll-hint">↓</div>
+</section>
 
-  <!-- Split — Nighthawks image + how it works -->
-  <div class="split">
-    <div class="split-img">
-      <img src="https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Fproducts%2FSparkle_12x16-Print-No-Frame.jpg%3Fv%3D1739578792&w=900&output=jpg"
-        alt="Nighthawks — Edward Hopper, 1942"
-        onerror="this.style.display='none'">
-    </div>
-    <div class="split-body">
-      <p class="t-eye split-eye">How it works</p>
-      <h2 class="split-h">Tell us about<br><em>your space.</em></h2>
-      <p class="split-p">Room, aesthetic, palette, budget. The more specific you are, the more precise the match. We search Tappan, Uprise Art, Hake House, Artsper, and direct artist sources — then build you a proposal.</p>
-      <button class="link-arrow" onclick="nav('consult')">Start your consultation</button>
-    </div>
-  </div>
-
-  <!-- 3-image grid -->
-  <div class="img-grid">
-    <div class="ig-main">
-      <img src="https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FBeach-Scene-24x36-Black_c4cc149b-2bd3-4a58-a905-7711eb893db0.jpg%3Fv%3D1755316153&w=900&output=jpg"
-        alt="Paris Street; Rainy Day — Gustave Caillebotte, 1877"
-        onerror="this.style.display='none'">
-      <div class="ig-caption">
-        <p class="t-eye">Featured</p>
-        <p class="ig-caption-h">The art that lives with you</p>
+<!-- ══════════════════════════════════════
+  MYTH BUSTERS — interactive flip cards
+══════════════════════════════════════ -->
+<section class="edu-section" id="edu-sections" style="background:var(--black);color:white;padding:80px 40px;">
+  <div class="edu-section-inner">
+    <p class="edu-eyebrow" style="color:rgba(255,255,255,.4);">Before we begin</p>
+    <h2 class="edu-section-h" style="color:white;">Five myths about<br><em>buying art.</em></h2>
+    <p class="edu-section-sub" style="color:rgba(255,255,255,.55);">Click any card to flip it.</p>
+    <div class="myth-grid">
+      <div class="myth-card" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front">
+          <div class="myth-n">01</div>
+          <p class="myth-claim">"You need to go<br>through a gallery."</p>
+          <span class="myth-flip-hint">Tap to reveal →</span>
+        </div>
+        <div class="myth-back">
+          <p class="myth-truth">Most artists now sell directly — through their own websites, Instagram DMs, or online platforms. Galleries take 40–50%. Buying direct means the artist gets more and you pay less.</p>
+        </div>
       </div>
-    </div>
-    <div class="ig-side">
-      <img src="https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FUtah-30x45-Natural-Full-bleed.jpg%3Fv%3D1756190550&w=900&output=jpg"
-        alt="The Old Guitarist — Pablo Picasso, 1903"
-        onerror="this.style.display='none'">
-    </div>
-    <div class="ig-side" style="border-top:1px solid rgba(255,255,255,.05);">
-      <img src="https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FPink_Salt-18x24-Primary.jpg%3Fv%3D1750462079&w=900&output=jpg"
-        alt="Time Transfixed — René Magritte, 1938"
-        onerror="this.style.display='none'">
-    </div>
-  </div>
-
-  <!-- How it works -->
-  <div class="how-section">
-    <div class="how-header">
-      <h2 class="how-header-h serif">Three steps to your proposal</h2>
-      <button class="link-arrow" onclick="nav('consult')">Begin</button>
-    </div>
-    <div class="how-grid">
-      <div class="how-step">
-        <p class="how-n">01 — Tell us</p>
-        <h3 class="how-h">Your space, your taste</h3>
-        <p class="how-p">Room dimensions, aesthetic direction, colour palette, budget. The brief that makes a great match possible.</p>
+      <div class="myth-card" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front">
+          <div class="myth-n">02</div>
+          <p class="myth-claim">"Good art costs<br>thousands of dollars."</p>
+          <span class="myth-flip-hint">Tap to reveal →</span>
+        </div>
+        <div class="myth-back">
+          <p class="myth-truth">Original paintings start at $50–$200. Prints by real artists run $30–$150. Emerging artists at fairs regularly sell work under $500. The price is about market position, not quality.</p>
+        </div>
       </div>
-      <div class="how-step">
-        <p class="how-n">02 — We search</p>
-        <h3 class="how-h">Everywhere that matters</h3>
-        <p class="how-p">Tappan Collective, Uprise Art, Hake House, Artsper, Artfully Walls, artist sites. Real originals from real discovery.</p>
+      <div class="myth-card" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front">
+          <div class="myth-n">03</div>
+          <p class="myth-claim">"I don't know enough<br>about art to buy it."</p>
+          <span class="myth-flip-hint">Tap to reveal →</span>
+        </div>
+        <div class="myth-back">
+          <p class="myth-truth">Every collector starts without knowing anything. The only qualification is a reaction — does this work make you feel something? That's enough. Knowledge comes with looking, not before it.</p>
+        </div>
       </div>
-      <div class="how-step">
-        <p class="how-n">03 — You receive</p>
-        <h3 class="how-h">A curator's proposal</h3>
-        <p class="how-p">Not a grid of thumbnails. A considered proposal with each artist's story and the specific work that fits your space.</p>
+      <div class="myth-card" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front">
+          <div class="myth-n">04</div>
+          <p class="myth-claim">"Art is only worth<br>buying as investment."</p>
+          <span class="myth-flip-hint">Tap to reveal →</span>
+        </div>
+        <div class="myth-back">
+          <p class="myth-truth">Investment is a side effect, not a goal. The best collectors buy what they want to live with. If you're buying for returns, you'll make bad decisions and end up with work you don't love.</p>
+        </div>
+      </div>
+      <div class="myth-card" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front">
+          <div class="myth-n">05</div>
+          <p class="myth-claim">"Prints aren't<br>real collecting."</p>
+          <span class="myth-flip-hint">Tap to reveal →</span>
+        </div>
+        <div class="myth-back">
+          <p class="myth-truth">Signed, limited-edition prints are considered original works of art — not reproductions. Many serious collectors focus on works on paper. It's how most great collections start.</p>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Quote -->
-  <div class="quote-band">
-    <p class="quote-text">&ldquo;Collecting art isn&rsquo;t for galleries and billionaires. It never was.&rdquo;</p>
-    <p class="quote-attr">found.art</p>
-  </div>
+<!-- ══════════════════════════════════════
+  STEP-BY-STEP GUIDE — expandable accordion
+══════════════════════════════════════ -->
+<section class="edu-section" style="background:var(--cream);padding:80px 40px;">
+  <div class="edu-section-inner">
+    <p class="edu-eyebrow">The path in</p>
+    <h2 class="edu-section-h">How to actually<br><em>start collecting.</em></h2>
+    <p class="edu-section-sub">No gatekeepers required. Follow these steps in order or skip to what you need.</p>
+    <div class="steps-list">
 
-  <!-- CTA band -->
-  <div class="cta-band">
-    <div class="cta-band-img">
-      <img src="https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FBalancing-Act-15x11-Cropped.jpg%3Fv%3D1769110911&w=900&output=jpg"
-        alt="American Gothic — Grant Wood, 1930"
-        onerror="this.style.display='none'">
-    </div>
-    <div class="cta-band-body">
-      <h2 class="cta-band-h">Ready to find<br><em>your piece?</em></h2>
-      <p class="cta-band-p">Free. Takes 3 minutes. Real artists, real originals, selected for your home.</p>
-      <button class="btn-white" onclick="nav('consult')">Start consultation →</button>
-    </div>
-  </div>
+      <div class="step-item" onclick="toggleStep(this)">
+        <div class="step-header">
+          <div class="step-num">01</div>
+          <div class="step-title">Look at a lot of art — without trying to buy anything</div>
+          <div class="step-arrow">↓</div>
+        </div>
+        <div class="step-body">
+          <p>Before you spend money, spend time. Follow artists on Instagram. Browse Artsy, Saatchi Art, Artfinder. Visit galleries without the pressure of buying. Go to a local fair. Look at what other collectors hang.</p>
+          <p>The goal is to start noticing what you're drawn to — what stops you mid-scroll. That instinct is the foundation of your taste, and it gets sharper the more you look.</p>
+          <div class="step-links">
+            <a href="https://www.artsy.net" target="_blank" rel="noopener">Artsy →</a>
+            <a href="https://www.saatchiart.com" target="_blank" rel="noopener">Saatchi Art →</a>
+            <a href="https://www.artfinder.com" target="_blank" rel="noopener">Artfinder →</a>
+          </div>
+        </div>
+      </div>
 
-  <!-- Platforms -->
-  <div class="plat-section">
-    <div class="plat-header">
-      <p class="t-eye">Where we look</p>
-    </div>
-    <div class="plat-grid">
-      <div class="plat-item"><div class="plat-item-inner"><div class="plat-name">Tappan Collective</div><p class="plat-desc">Curated emerging artists, editorial curation.</p><p class="plat-tag">Featured partner</p></div></div>
-      <div class="plat-item"><div class="plat-item-inner"><div class="plat-name">Uprise Art</div><p class="plat-desc">Direct from emerging artists, fair pricing.</p><p class="plat-tag">Direct</p></div></div>
-      <div class="plat-item"><div class="plat-item-inner"><div class="plat-name">Hake House</div><p class="plat-desc">Boutique originals and limited editions.</p><p class="plat-tag">Originals</p></div></div>
-      <div class="plat-item"><div class="plat-item-inner"><div class="plat-name">Artsper</div><p class="plat-desc">International emerging artists.</p><p class="plat-tag">International</p></div></div>
-      <div class="plat-item"><div class="plat-item-inner"><div class="plat-name">Singular Art</div><p class="plat-desc">One-of-a-kind only, every piece unique.</p><p class="plat-tag">1-of-1</p></div></div>
-      <div class="plat-item"><div class="plat-item-inner"><div class="plat-name">Artfully Walls</div><p class="plat-desc">Home-friendly originals and limited editions.</p><p class="plat-tag">Home-friendly</p></div></div>
-      <div class="plat-item"><div class="plat-item-inner"><div class="plat-name">Artist Sites</div><p class="plat-desc">Direct. More money reaches the artist.</p><p class="plat-tag">Highest artist cut</p></div></div>
-      <div class="plat-item"><div class="plat-item-inner"><div class="plat-name">Instagram</div><p class="plat-desc">Discover emerging artists before the market does.</p><p class="plat-tag">Discovery</p></div></div>
+      <div class="step-item" onclick="toggleStep(this)">
+        <div class="step-header">
+          <div class="step-num">02</div>
+          <div class="step-title">Figure out your style — not your room's style</div>
+          <div class="step-arrow">↓</div>
+        </div>
+        <div class="step-body">
+          <p>The most common mistake first-time buyers make is shopping for their walls, not themselves. Art that matches your sofa is decoration. Art you love is a collection.</p>
+          <p>Ask yourself: what subjects or moods do you keep coming back to? Abstract energy or quiet representation? Dense color or spare composition? Figures or landscape? Big and loud or intimate and small? Start there.</p>
+          <button class="step-cta" onclick="event.stopPropagation();nav('quiz')">Take Our Style Quiz →</button>
+        </div>
+      </div>
+
+      <div class="step-item" onclick="toggleStep(this)">
+        <div class="step-header">
+          <div class="step-num">03</div>
+          <div class="step-title">Set a real budget — and understand what it gets you</div>
+          <div class="step-arrow">↓</div>
+        </div>
+        <div class="step-body">
+          <p>Here's what different price points realistically buy you in 2025:</p>
+          <div class="budget-table">
+            <div class="bt-row"><div class="bt-price">$50–$200</div><div class="bt-what">Original works on paper, small studies, prints from emerging artists. Real originals, real people. A great starting point.</div></div>
+            <div class="bt-row"><div class="bt-price">$200–$800</div><div class="bt-what">Signed limited editions, original paintings by artists building their careers. This is the sweet spot for most new collectors.</div></div>
+            <div class="bt-row"><div class="bt-price">$800–$3,000</div><div class="bt-what">Original paintings, mid-size works, artists with gallery shows and real momentum. The beginning of a real collection.</div></div>
+            <div class="bt-row"><div class="bt-price">$3,000+</div><div class="bt-what">Established emerging and mid-career artists. Works that hold and grow value. Where collecting starts to feel like a long-term practice.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item" onclick="toggleStep(this)">
+        <div class="step-header">
+          <div class="step-num">04</div>
+          <div class="step-title">Go looking — everywhere, not just the obvious places</div>
+          <div class="step-arrow">↓</div>
+        </div>
+        <div class="step-body">
+          <p>The art world isn't hiding in galleries anymore. Here's where the real discoveries happen:</p>
+          <div class="source-grid">
+            <div class="source-card">
+              <div class="source-icon">📱</div>
+              <h4>Instagram</h4>
+              <p>Follow artists directly. DM them. 78% of collectors now discover artists this way. Many artists sell directly through DMs at lower prices than their platforms.</p>
+            </div>
+            <div class="source-card">
+              <div class="source-icon">🏛️</div>
+              <h4>Art Fairs</h4>
+              <p>Affordable Art Fair, art on paper, local and regional fairs. You can talk to the artist face-to-face and often negotiate. Works start at $100.</p>
+            </div>
+            <div class="source-card">
+              <div class="source-icon">🌐</div>
+              <h4>Artist Websites</h4>
+              <p>Many artists have their own shops with no platform fee. Search the artist\'s name + "shop" or "buy." Direct sales mean better prices and a direct relationship.</p>
+            </div>
+            <div class="source-card">
+              <div class="source-icon">🏠</div>
+              <h4>Open Studios</h4>
+              <p>Cities do open studio events seasonally. You walk through working artists' spaces, see work in progress, and often buy at studio prices — no gallery markup.</p>
+            </div>
+            <div class="source-card">
+              <div class="source-icon">🖥️</div>
+              <h4>Online Platforms</h4>
+              <p>Artsy, Saatchi, Artfinder, Uprise Art, Tappan, 1stDibs, Foundmyself. Each has a different feel and price range — worth knowing all of them.</p>
+            </div>
+            <div class="source-card">
+              <div class="source-icon">🔨</div>
+              <h4>Online Auctions</h4>
+              <p>LiveAuctioneers, Invaluable, Christie's First Open, Phillips online sales. Works sometimes sell below estimate — especially regional and specialty sales.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item" onclick="toggleStep(this)">
+        <div class="step-header">
+          <div class="step-num">05</div>
+          <div class="step-title">Buy the thing you can't stop thinking about</div>
+          <div class="step-arrow">↓</div>
+        </div>
+        <div class="step-body">
+          <p>The rule every experienced collector gives: if you're still thinking about a piece a week later, buy it. Regret in art collecting almost always runs in one direction — the things you didn't get.</p>
+          <p>Don't overthink the investment angle. Don't wait until you know more. Don't wait until you have a bigger budget. Buy the thing that got you. That's how a collection starts.</p>
+          <button class="step-cta" onclick="event.stopPropagation();nav('consult')">Get a Personalized Proposal →</button>
+        </div>
+      </div>
+
     </div>
   </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  ART CATEGORIES — interactive scroll tabs
+══════════════════════════════════════ -->
+<section class="edu-section" style="background:white;padding:80px 0 0;">
+  <div class="edu-section-inner" style="padding:0 40px;">
+    <p class="edu-eyebrow">What's out there</p>
+    <h2 class="edu-section-h">The categories<br><em>worth knowing.</em></h2>
+    <p class="edu-section-sub">Click a category to learn what it is, what it costs, and where to find it.</p>
+  </div>
+  <div class="cat-tabs">
+    <button class="cat-tab on" onclick="showCat('painting')">Painting</button>
+    <button class="cat-tab" onclick="showCat('photo')">Photography</button>
+    <button class="cat-tab" onclick="showCat('print')">Prints & Editions</button>
+    <button class="cat-tab" onclick="showCat('drawing')">Drawing & Works on Paper</button>
+    <button class="cat-tab" onclick="showCat('sculpture')">Sculpture</button>
+    <button class="cat-tab" onclick="showCat('mixed')">Mixed Media</button>
+    <button class="cat-tab" onclick="showCat('street')">Street Art</button>
+  </div>
+  <div class="cat-panels">
+
+    <div class="cat-panel on" id="cat-painting">
+      <div class="cat-swatch" style="background:linear-gradient(135deg,#8B1A1A,#C04020,#E86830,#D4A860,#A87840);"></div>
+      <div class="cat-body">
+        <h3>Painting</h3>
+        <p class="cat-desc">The oldest and most broadly defined category — oil, acrylic, watercolor, gouache, encaustic. Painting ranges from $50 studies to millions. For new collectors, emerging painters offer some of the strongest value: original work, unique object, direct from the person who made it.</p>
+        <div class="cat-facts">
+          <div class="cat-fact"><span class="cf-label">Entry point</span><span class="cf-val">$50 – $500</span></div>
+          <div class="cat-fact"><span class="cf-label">What to look for</span><span class="cf-val">Strength of mark, coherence of vision, consistency of practice</span></div>
+          <div class="cat-fact"><span class="cf-label">Where to find it</span><span class="cf-val">Instagram, artist websites, Saatchi Art, art fairs, open studios</span></div>
+          <div class="cat-fact"><span class="cf-label">Best for</span><span class="cf-val">Collectors who want something truly one-of-a-kind</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-panel" id="cat-photo">
+      <div class="cat-swatch" style="background:linear-gradient(135deg,#1a1a18,#2a2a28,#4a4a46,#787870,#b0b0a8);"></div>
+      <div class="cat-body">
+        <h3>Photography</h3>
+        <p class="cat-desc">Fine art photography is sold as limited editions — signed, numbered prints from a finite run. When the edition sells out, it's gone. Photography often represents the best price-to-quality ratio in the market, with museum-quality work available in the $200–$800 range from emerging photographers.</p>
+        <div class="cat-facts">
+          <div class="cat-fact"><span class="cf-label">Entry point</span><span class="cf-val">$150 – $800</span></div>
+          <div class="cat-fact"><span class="cf-label">What to look for</span><span class="cf-val">Edition size (smaller = more valuable), paper quality, framing</span></div>
+          <div class="cat-fact"><span class="cf-label">Where to find it</span><span class="cf-val">Artsy, 20×200, Tappan, artist websites, Instagram</span></div>
+          <div class="cat-fact"><span class="cf-label">Best for</span><span class="cf-val">Collectors who want scale and visual impact at an accessible price</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-panel" id="cat-print">
+      <div class="cat-swatch" style="background:linear-gradient(135deg,#E8D9C8,#D4845A,#8B3A20,#2D4A6B,#1a1a18);"></div>
+      <div class="cat-body">
+        <h3>Prints & Editions</h3>
+        <p class="cat-desc">Screenprint, etching, lithograph, woodcut, giclée — prints are original works of art, not reproductions. Artists create them intentionally as editions: limited, signed, numbered runs. A signed screenprint by an emerging artist is a real original. This is where most great collections start.</p>
+        <div class="cat-facts">
+          <div class="cat-fact"><span class="cf-label">Entry point</span><span class="cf-val">$30 – $300</span></div>
+          <div class="cat-fact"><span class="cf-label">What to look for</span><span class="cf-val">Hand-signed (not printed signature), edition number, quality of paper</span></div>
+          <div class="cat-fact"><span class="cf-label">Where to find it</span><span class="cf-val">20×200, Tiny Showcase, Tappan, Artsy, gallery shops, art fairs</span></div>
+          <div class="cat-fact"><span class="cf-label">Best for</span><span class="cf-val">Budget-conscious collectors who want quality without compromise</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-panel" id="cat-drawing">
+      <div class="cat-swatch" style="background:linear-gradient(135deg,#f5f0e8,#e0d4c0,#c0a880,#806040,#403020);"></div>
+      <div class="cat-body">
+        <h3>Drawing & Works on Paper</h3>
+        <p class="cat-desc">Drawings, sketches, pastels, ink works, gouache on paper — often the most intimate and direct expression of an artist\'s vision. Works on paper are typically more affordable than canvas, and can be just as powerful. Many major artists are best known through their drawings.</p>
+        <div class="cat-facts">
+          <div class="cat-fact"><span class="cf-label">Entry point</span><span class="cf-val">$50 – $400</span></div>
+          <div class="cat-fact"><span class="cf-label">What to look for</span><span class="cf-val">Quality of line, spontaneity, archival paper, artist\'s hand clearly present</span></div>
+          <div class="cat-fact"><span class="cf-label">Where to find it</span><span class="cf-val">Art on Paper fair, Artsy, artist studios, open studio events</span></div>
+          <div class="cat-fact"><span class="cf-label">Best for</span><span class="cf-val">Collectors who want intimacy and access to serious artists at lower price points</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-panel" id="cat-sculpture">
+      <div class="cat-swatch" style="background:linear-gradient(135deg,#8a7060,#b09080,#d4c0a8,#e8dcc8,#c0a880);"></div>
+      <div class="cat-body">
+        <h3>Sculpture</h3>
+        <p class="cat-desc">Three-dimensional work in ceramic, bronze, glass, resin, wood, steel, found objects, and beyond. Sculpture brings a different energy to a space — it exists in real light, from every angle. Small-scale ceramic and resin works by emerging artists are increasingly collectible and surprisingly affordable.</p>
+        <div class="cat-facts">
+          <div class="cat-fact"><span class="cf-label">Entry point</span><span class="cf-val">$150 – $1,000</span></div>
+          <div class="cat-fact"><span class="cf-label">What to look for</span><span class="cf-val">Material quality, edition vs unique, relationship of form to space</span></div>
+          <div class="cat-fact"><span class="cf-label">Where to find it</span><span class="cf-val">Artsy, 1stDibs, Artfinder, gallery shows, ceramic fairs</span></div>
+          <div class="cat-fact"><span class="cf-label">Best for</span><span class="cf-val">Collectors who want to change how a room feels, not just what it looks like</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-panel" id="cat-mixed">
+      <div class="cat-swatch" style="background:linear-gradient(135deg,#2D4A6B,#7A3B6E,#C04020,#D4A860,#4E6840);"></div>
+      <div class="cat-body">
+        <h3>Mixed Media & Collage</h3>
+        <p class="cat-desc">Work that combines materials — photograph and paint, textile and paper, found objects and drawing. Mixed media often carries the most conceptual energy and material surprise. Collage in particular has a rich history and a strong contemporary moment, with collectors paying serious attention.</p>
+        <div class="cat-facts">
+          <div class="cat-fact"><span class="cf-label">Entry point</span><span class="cf-val">$100 – $600</span></div>
+          <div class="cat-fact"><span class="cf-label">What to look for</span><span class="cf-val">Material integrity, how the combination creates meaning, archival quality</span></div>
+          <div class="cat-fact"><span class="cf-label">Where to find it</span><span class="cf-val">Artfinder, Saatchi, Instagram, art fairs, artist websites</span></div>
+          <div class="cat-fact"><span class="cf-label">Best for</span><span class="cf-val">Collectors who want conceptual depth and visual complexity</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-panel" id="cat-street">
+      <div class="cat-swatch" style="background:linear-gradient(135deg,#1a1a18,#E86830,#F5D020,#2D4A6B,#1a1a18);"></div>
+      <div class="cat-body">
+        <h3>Street Art & Urban Art</h3>
+        <p class="cat-desc">Work rooted in public space — Banksy, Shepard Fairey, KAWS, and thousands of artists below them who sell prints and studio works. Urban art has a strong secondary market and serious collector base. Signed screenprints from street artists are often the best-performing prints in a budget collection.</p>
+        <div class="cat-facts">
+          <div class="cat-fact"><span class="cf-label">Entry point</span><span class="cf-val">$50 – $500</span></div>
+          <div class="cat-fact"><span class="cf-label">What to look for</span><span class="cf-val">Authenticity (signed + COA), edition number, condition</span></div>
+          <div class="cat-fact"><span class="cf-label">Where to find it</span><span class="cf-val">1xRun, Jealous Gallery, Artsy, artist drops, eBay carefully</span></div>
+          <div class="cat-fact"><span class="cf-label">Best for</span><span class="cf-val">Collectors who want energy, culture, and works with strong resale markets</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  WHERE TO FIND ARTISTS — key platforms
+══════════════════════════════════════ -->
+<section class="edu-section" style="background:var(--cream2);padding:80px 40px;">
+  <div class="edu-section-inner">
+    <p class="edu-eyebrow">The landscape</p>
+    <h2 class="edu-section-h">Where to find<br><em>the work.</em></h2>
+    <p class="edu-section-sub">Every platform has a different character. Know what each is for.</p>
+    <div class="platform-grid">
+      <div class="pf-card">
+        <div class="pf-logo">📷</div>
+        <h4>Instagram</h4>
+        <p>The most important discovery tool. Follow artists, search hashtags, engage. Many artists sell exclusively through DMs. The algorithm will find more artists like the ones you love.</p>
+        <div class="pf-tag">Free to browse · DM to buy</div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-logo">🎨</div>
+        <h4>Artsy</h4>
+        <p>The most comprehensive database of galleries, artists, and works. Great for research, price history, and understanding an artist\'s market position. Not just buying — learning.</p>
+        <div class="pf-tag">Gallery-linked · Research + buy</div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-logo">🖼️</div>
+        <h4>Saatchi Art</h4>
+        <p>Huge selection of originals and prints from artists worldwide, curated but broad. Strong in painting. Good filtering by price. Works from under $200.</p>
+        <div class="pf-tag">$100–$10,000+ · Originals focus</div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-logo">🌍</div>
+        <h4>Artfinder</h4>
+        <p>Buy directly from artists worldwide with no gallery markup. Strong for painting, photography, and mixed media. Artists keep more, you pay less.</p>
+        <div class="pf-tag">Direct from artists · Under $500</div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-logo">⬆️</div>
+        <h4>Uprise Art</h4>
+        <p>Curated emerging art with strong editorial voice. Gallery quality, online prices. Good "Under $800" filter. Works from $80 up.</p>
+        <div class="pf-tag">Curated · $80–$5,000</div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-logo">🧵</div>
+        <h4>Artist Websites</h4>
+        <p>The best price. Zero commission. A direct relationship. When you find an artist you love, always check their own site before buying elsewhere. Search: artist name + "shop".</p>
+        <div class="pf-tag">Best prices · Direct connection</div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-logo">🏪</div>
+        <h4>Art Fairs</h4>
+        <p>Affordable Art Fair (NY, London), regional fairs, art on paper. Face-to-face with artists and galleries. Prices are often negotiable. This is where real relationships start.</p>
+        <div class="pf-tag">In person · Negotiable prices</div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-logo">🔨</div>
+        <h4>Online Auctions</h4>
+        <p>LiveAuctioneers, Invaluable, Christie's First Open, Phillips. Works can sell below estimate. Add buyer's premium (15–25%) to any hammer price you're planning around.</p>
+        <div class="pf-tag">Variable · Budget for premium</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  CTA — GET A PROPOSAL
+══════════════════════════════════════ -->
+<section class="edu-cta">
+  <div class="edu-cta-inner">
+    <p class="edu-eyebrow" style="color:rgba(255,255,255,.4);">Ready to go further</p>
+    <h2 class="edu-cta-h">Let us do the<br><em>searching for you.</em></h2>
+    <p class="edu-cta-sub">Tell us about your space, your taste, your budget. We'll search across every platform — Artsy, Saatchi, Instagram, artist websites — and come back with specific works that fit.</p>
+    <div class="edu-cta-actions">
+      <button class="edu-btn-primary" style="background:white;color:var(--black);" onclick="nav('consult')">Build My Proposal →</button>
+      <button class="edu-btn-ghost" style="border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7);" onclick="nav('trending')">See Artist of the Day →</button>
+    </div>
+  </div>
+</section>
 
 </div>
 
-<!-- ════ WHY COLLECT ════ -->
 <div id="pg-why" class="pg">
 
   <div class="why-hero">
@@ -1461,7 +2317,7 @@ input[type=range]::-webkit-slider-thumb{
         <span class="why-num">04</span>
         <div>
           <h3 class="why-h">You support a person</h3>
-          <p class="why-p">When you buy an original, you're not paying a corporation's margin. You're paying an artist's rent, studio costs, and the time they spend making something only they could make.</p>
+          <p class="why-p">When you buy an original, you're not paying a corporation's margin. You're paying an artist\'s rent, studio costs, and the time they spend making something only they could make.</p>
         </div>
       </div>
       <div class="why-item">
@@ -1504,37 +2360,23 @@ input[type=range]::-webkit-slider-thumb{
 <!-- ════ TRENDING ════ -->
 <div id="pg-trending" class="pg">
 
-  <div style="padding:80px 0 40px;max-width:860px;margin:0 auto;padding-left:40px;padding-right:40px;">
-    <p class="t-eye" style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--grey);margin-bottom:20px;">Artists to Watch · 2026</p>
-    <h1 style="font-family:'Cormorant',Georgia,serif;font-size:clamp(42px,6vw,72px);font-weight:300;font-style:italic;line-height:1.05;margin-bottom:20px;">The artists<br>gaining ground.</h1>
-    <p style="font-size:15px;font-weight:300;color:var(--ink3);line-height:1.75;max-width:520px;">Emerging and mid-career artists who are moving — in galleries, at auction, and with collectors. Each one hand-selected.</p>
-  </div>
+<div class="aod-wrap">
 
-  <div class="tfilters">
-    <button class="tf on" onclick="filterTrend(this,'all')">All</button>
-    <button class="tf" onclick="filterTrend(this,'painting')">Painting</button>
-    <button class="tf" onclick="filterTrend(this,'photo')">Photography</button>
-    <button class="tf" onclick="filterTrend(this,'print')">Prints</button>
-    <button class="tf" onclick="filterTrend(this,'mixed')">Mixed Media</button>
-  </div>
+  <!-- Left: date nav strip -->
+  <aside class="aod-nav">
+    <div class="aod-nav-label">This Week</div>
+    <div id="aod-days"></div>
+    <div class="aod-nav-note">A new artist every day.<br>Come back tomorrow.</div>
+  </aside>
 
-  <div id="ag" style="max-width:1100px;margin:0 auto;padding:0 40px 80px;"></div>
-
-  <div class="cta-band">
-    <div class="cta-band-img">
-      <img src="https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FLake-Drifter-in-White-24x36-cropped.jpg%3Fv%3D1768518734&w=900&output=jpg"
-        alt="Lake Drifter in White — Cortney Herron"
-        onerror="this.remove()">
-    </div>
-    <div class="cta-band-body">
-      <h2 class="cta-band-h">Want us to find<br><em>your artist?</em></h2>
-      <p class="cta-band-p">Tell us about your space. We'll match you with the right artist from our full network.</p>
-      <button class="btn-white" onclick="nav('consult')">Get a proposal →</button>
-    </div>
-  </div>
+  <!-- Right: artist feature -->
+  <main class="aod-main" id="aod-main">
+    <!-- Rendered by JS -->
+  </main>
 
 </div>
-<!-- CONSULT -->
+
+</div>
 <div id="pg-consult" class="pg">
   <div class="cx">
     <aside class="sb">
@@ -1768,160 +2610,264 @@ function nav(id){
   else{pg.style.display='block';}
   const nt=document.getElementById('nt-'+id);if(nt)nt.classList.add('on');
   window.scrollTo(0,0);
-  if(id==='trending')buildTrending();
+  if(id==='trending')initAOD();
   if(id==='consult')showQ(1);
   if(id==='quiz')initQuiz();
 }
 
-const artists=[
-  {rank:1, cat:'painting', src:'Tappan Collective',
-   name:'Viktor Kobylianski',
-   bio:'Bold, gestural canvases that balance raw energy with restraint. Featured in major collections across Europe and the US — one of the most physically confident painters working today.',
-   price:'$2,450 – $4,800', studio:'Berlin / New York',
-   works:[
-     {title:'Pink Salt', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FPink_Salt-18x24-Primary.jpg%3Fv%3D1750462079&w=600&output=jpg', url:'https://www.tappancollective.com/products/pink-salt'},
-     {title:'Cacti III', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FCacti-III-18x24-Primary.jpg%3Fv%3D1750462079&w=600&output=jpg', url:'https://www.tappancollective.com/products/cacti-iii'}
-   ],
-   url:'https://www.tappancollective.com/collections/viktor-kobylianski'},
-  {rank:2, cat:'painting', src:'Tappan Collective',
-   name:'Cortney Herron',
-   bio:'Dreamlike figurative paintings where domestic interiors become surreal, liminal spaces. Featured in HELLO!, C Magazine, and Document Journal. Her figures hover between presence and disappearance.',
-   price:'$2,800 – $5,800', studio:'Los Angeles',
-   works:[
-     {title:'Lake Drifter in White', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FLake-Drifter-in-White-24x36-cropped.jpg%3Fv%3D1768518734&w=600&output=jpg', url:'https://www.tappancollective.com/products/lake-drifter-in-white'},
-     {title:'Moving Through The Shadows', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FMoving-Through-The-Shadows60x48-Cropped-v1.jpg%3Fv%3D1768519182&w=600&output=jpg', url:'https://www.tappancollective.com/products/moving-through-the-shadows'}
-   ],
-   url:'https://www.tappancollective.com/collections/cortney-herron'},
-  {rank:3, cat:'painting', src:'Tappan Collective',
-   name:'Marina Ross',
-   bio:'Layered reinterpretations of The Wizard of Oz filtered through Soviet-American memory and personal grief. Ethereal teals and cinematic haze — her palette is unlike anyone else working right now.',
-   price:'$1,800 – $3,200', studio:'Chicago',
-   works:[
-     {title:'Subterfuge', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FSubterfuge-9x12_noframe.jpg%3Fv%3D1761170959&w=600&output=jpg', url:'https://www.tappancollective.com/products/subterfuge'}
-   ],
-   url:'https://www.tappancollective.com/collections/marina-ross'},
-  {rank:4, cat:'painting', src:'Tappan Collective',
-   name:'Alexandria Coe',
-   bio:'Abstracted female figures in a fluid, painterly language — faces intentionally obscured, bodies full of quiet freedom. Recently expanded from drawing into paint with stunning results.',
-   price:'$1,800 – $4,200', studio:'London',
-   works:[
-     {title:'Between Things', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FBetween-Things-39_25x39_25-no-frame.jpg%3Fv%3D1753223680&w=600&output=jpg', url:'https://www.tappancollective.com/products/between-things'},
-     {title:'Midsummer', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FMidsummer-47_25x31_5-no-frame.jpg%3Fv%3D1753223548&w=600&output=jpg', url:'https://www.tappancollective.com/products/midsummer-1'}
-   ],
-   url:'https://www.tappancollective.com/collections/alexandria-coe'},
-  {rank:5, cat:'painting', src:'Tappan Collective',
-   name:'Laura Burke',
-   bio:'Translucent washes layered until something fragile and precise emerges. Burke works slowly and the patience shows — each piece has an internal logic that rewards close looking.',
-   price:'$1,200 – $2,400', studio:'Brooklyn',
-   works:[
-     {title:'Balancing Act', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FBalancing-Act-15x11-Cropped.jpg%3Fv%3D1769110911&w=600&output=jpg', url:'https://www.tappancollective.com/products/balancing-act'}
-   ],
-   url:'https://www.tappancollective.com/collections/laura-burke'},
-  {rank:6, cat:'mixed', src:'Tappan Collective',
-   name:'Cheryl Humphreys',
-   bio:'Collage built from sun prints, avocado dye, photogravure, and decades of experiments across geographies. Each work is a serendipitous composition of layered time and material memory.',
-   price:'$900 – $2,200', studio:'New York',
-   works:[
-     {title:'Caught in Time', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FCaught-in-Time-12x16_5-Primary.jpg%3Fv%3D1742679442&w=600&output=jpg', url:'https://www.tappancollective.com/products/caught-in-time'}
-   ],
-   url:'https://www.tappancollective.com/collections/cheryl-humphreys'},
-  {rank:7, cat:'print', src:'Tappan Collective',
-   name:'Marleigh Culver',
-   bio:'Bold graphic florals with sharply defined edges — hand-drawn then digitally refined. Her prints have an immediate visual confidence and translate beautifully into any interior.',
-   price:'from $275', studio:'Portland',
-   works:[
-     {title:'La Colline', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FLa_Colline-28x35_Natural.jpg%3Fv%3D1765483464&w=600&output=jpg', url:'https://www.tappancollective.com/products/la-colline'},
-     {title:'Elde', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FElde-28x35_Natural.jpg%3Fv%3D1765414066&w=600&output=jpg', url:'https://www.tappancollective.com/products/elde'}
-   ],
-   url:'https://www.tappancollective.com/collections/marleigh-culver'},
-  {rank:8, cat:'photo', src:'Tappan Collective',
-   name:'Brian Merriam',
-   bio:'Vast Western landscapes rendered with quiet authority. Merriam finds stillness in open terrain — his photography makes large-scale work accessible without sacrificing presence.',
-   price:'from $350', studio:'Colorado',
-   works:[
-     {title:'Utah', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FUtah-30x45-Natural-Full-bleed.jpg%3Fv%3D1756190550&w=600&output=jpg', url:'https://www.tappancollective.com/products/utah-1'}
-   ],
-   url:'https://www.tappancollective.com/collections/brian-merriam'},
-  {rank:9, cat:'photo', src:'Tappan Collective',
-   name:'Danny Scott Lane',
-   bio:'Sun-drenched scenes of leisure and the beach — but Lane never lets it tip into nostalgia. There is something slightly off, slightly electric about his light.',
-   price:'from $350', studio:'Los Angeles',
-   works:[
-     {title:'Beach Scene', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Ffiles%2FBeach-Scene-24x36-Black_c4cc149b-2bd3-4a58-a905-7711eb893db0.jpg%3Fv%3D1755316153&w=600&output=jpg', url:'https://www.tappancollective.com/products/beach-scene'}
-   ],
-   url:'https://www.tappancollective.com/collections/danny-scott-lane'},
-  {rank:10, cat:'print', src:'Tappan Collective',
-   name:'Satsuki Shibuya',
-   bio:'Energetic abstract compositions bursting with color and movement. Shibuya works in a register that is simultaneously joyful and precise — and her prints are among the most affordable originals on the market.',
-   price:'from $275', studio:'Los Angeles',
-   works:[
-     {title:'Sparkle', img:'https://images.weserv.nl/?url=https%3A%2F%2Fwww.tappancollective.com%2Fcdn%2Fshop%2Fproducts%2FSparkle_12x16-Print-No-Frame.jpg%3Fv%3D1739578792&w=600&output=jpg', url:'https://www.tappancollective.com/products/sparkle'}
-   ],
-   url:'https://www.tappancollective.com/collections/satsuki-shibuya'},
-  {rank:11, cat:'painting', src:'Tappan Collective',
-   name:'Arran Rahimian',
-   bio:'Mark-making shaped by bodies moving across canvas. Surfaces carry traces of time — reclaimed book covers, shifting light, the physical imprint of process. Featured in Artforum and Wallpaper.',
-   price:'$1,800 – $3,400', studio:'London',
-   works:[],
-   url:'https://www.tappancollective.com/collections/arran-rahimian'}
+
+// ═══════════════════════════════════════════
+//  ARTIST OF THE DAY DATA
+// ═══════════════════════════════════════════
+const aodArtists = [
+  {
+    dayLabel: 'Sunday',   dayNum: 'Mar 01',
+    name: 'Margo Mc Daid', handle: '@margoinmargate',
+    location: 'Margate, UK', medium: 'Acrylic & ink on canvas, paper, wood',
+    priceRange: 'Originals £150–£900 · Prints from £25',
+    instagram: 'https://www.instagram.com/margoinmargate/',
+    website: 'https://margoinmargate.com',
+    buyLink: 'https://margoinmargate.com', buyLabel: 'Shop direct at margoinmargate.com',
+    images: [
+      { url: 'https://agora-gallery.com/wp-content/uploads/2025/04/9cd7546f-63d3-4d2c-a95c-c58f82573be1-l-300x450.jpg', caption: 'Girl In Red' },
+      { url: 'https://agora-gallery.com/wp-content/uploads/2025/04/4299c233-d620-44c1-aa70-b70ce14c655a-l-300x402.jpg', caption: 'Girl In Green' },
+      { url: 'https://agora-gallery.com/wp-content/uploads/2025/04/56f0f65e-8249-4d65-8eec-64487623c8fa-l.jpg', caption: 'Recent Work' }
+    ],
+    why: `She has painted every single day since 2014. Not as a challenge — as a life. The result is an unmistakable visual language: graphic female portraits in acid color, rooted in Margate's coastal energy and the NY pop art scene she soaked up waiting tables near Warhol's factory. Works sell out the moment they hit Instagram. Shows at Brighton's Helm sell out in 24 hours. But her website always has something. That's where to look first.`,
+    unique: [
+      `Paints in batches of 10 — making originals genuinely affordable`,
+      `Work held in Turner Contemporary's shop collection`,
+      `Over 20,000 sales direct to collectors worldwide`,
+      `You know a Margo the second you see one`
+    ],
+    palette: ['#E84060','#F5C030','#2060C0','#20B060','#F0F0E8'],
+    accentColor: '#E84060'
+  },
+  {
+    dayLabel: 'Monday',   dayNum: 'Mar 02',
+    name: 'Yuma Radne', handle: '@yumaradne',
+    location: 'London, UK (b. Buryatia, Russia)', medium: 'Oil & acrylic on canvas',
+    priceRange: 'Works from $1,500 · Inquire via website',
+    instagram: 'https://www.instagram.com/yumaradne/',
+    website: 'https://www.yumaradne.com',
+    buyLink: 'https://www.yumaradne.com', buyLabel: 'Inquire at yumaradne.com',
+    images: [
+      { url: 'https://www.munchiesart.club/content/images/2024/05/yuma-radne-painting-now-tomorrow-promising-artist-painting.webp', caption: 'Evolution' },
+      { url: 'https://www.munchiesart.club/content/images/2024/05/new-promising-emerging-artist-contemporary-painting-2024.webp', caption: 'Mythological composition' },
+      { url: 'https://www.munchiesart.club/content/images/2024/05/yuma-radne-2024-artwork-painting-contemporary-art-steve-truner-los-angeles.webp', caption: 'The Weight of Water (Steve Turner LA)' }
+    ],
+    why: `Born 2001 in Ulaan Ude, Buryatia — a city wedged between Russia, China, and Mongolia — Yuma Radne held her first solo exhibition at the National Museum of Buryatia at age 17. By 22 she had shown in Saint Petersburg, Vienna, Paris (Bloom Galerie), and Los Angeles (Steve Turner). Her paintings blend Mongolian mythology with thick, expressive figuration that feels at once ancient and completely now. Artsy called her one of their top emerging painters of the 2000s generation. She's the real thing.`,
+    unique: [
+      `One of the only Buryat-heritage artists showing internationally`,
+      `Self-taught from age 5, dropped out of academia to paint full-time`,
+      `Steve Turner Gallery, LA + Bloom Galerie, Saint Tropez`,
+      `Dreamlike mythology in thick, confident paint`
+    ],
+    palette: ['#C04870','#E89040','#7040A0','#204880','#F8F0E0'],
+    accentColor: '#C04870'
+  },
+  {
+    dayLabel: 'Tuesday',  dayNum: 'Mar 03',
+    name: 'Llanor Alleyne', handle: '@llapen',
+    location: 'Barbados-born · New York & Tulsa', medium: 'Mixed media collage (paint + mylar + paper)',
+    priceRange: 'Works $400–$4,900 · Via Tourné Gallery & Artsy',
+    instagram: 'https://www.instagram.com/llapen/',
+    website: 'https://www.llanoralleyne.com',
+    buyLink: 'https://tournegallery.com/collections/llanor-alleyne', buyLabel: 'Browse at Tourné Gallery',
+    images: [
+      { url: 'https://cdn.shopify.com/s/files/1/0429/4741/2129/files/Llanor_Alleyne_Midnights_2048x2048.png?v=1723674822', caption: 'Moonlights series' },
+      { url: 'https://www.munchiesart.club/content/images/2024/05/yuma-radne-best-of-female-artist-painting-2024-1.webp', caption: 'Recent collage work' },
+      { url: 'https://cdn.shopify.com/s/files/1/0429/4741/2129/files/Llanor_Alleyne_Midnights_2048x2048.png?v=1723674822', caption: 'Layered composition' }
+    ],
+    why: `Llanor Alleyne doesn't use anyone else's imagery. Every collage begins as an original abstract painting, which she then tears, cuts, and layers — finding female figures in the fragments. The process is deeply personal: she grew up between Barbados, New York, and the UK, and her work sits at the intersection of all three. She was commissioned for a large-scale collage at the Leslie-Lohman Museum in NYC in 2024. Caribbean diaspora experience, told through layers of paint that still breathe.`,
+    unique: [
+      `Every collage starts as a hand-painted original — no found imagery`,
+      `Leslie-Lohman Museum NYC commission, 2024`,
+      `"World building through collage" — her own description`,
+      `Works on mylar and paper, luminous and fragile`
+    ],
+    palette: ['#1A3A5C','#3E7D52','#C4803A','#8B4060','#F5EDE0'],
+    accentColor: '#3E7D52'
+  },
+  {
+    dayLabel: 'Wednesday', dayNum: 'Mar 04',
+    name: 'Scott Teplin', handle: '@steplin',
+    location: 'Brooklyn, NY', medium: 'Watercolor & pen on paper',
+    priceRange: 'Works $400–$4,000 · Inquire at scott@teplin.com',
+    instagram: 'https://www.instagram.com/steplin/',
+    website: 'https://www.teplin.com',
+    buyLink: 'https://www.instagram.com/steplin/', buyLabel: 'Follow on Instagram — DM for inquiries',
+    images: [
+      { url: 'https://images.squarespace-cdn.com/content/v1/5694604fe4b0871b6e578af0/1552428978278-IZJNUXJ9J4ASVB6SRSQC/Scott+Teplin+Rooms+Apartments+Floors.jpg', caption: 'Architectural cross-section' },
+      { url: 'https://images.squarespace-cdn.com/content/v1/5694604fe4b0871b6e578af0/1552429039183-UZZC8HP7ME6E7TY32L5P/Scott+Teplin+drawing.jpg', caption: 'Interior study' },
+      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Scott_Teplin_-_Untitled_%28Parking_Lot%29.jpg/640px-Scott_Teplin_-_Untitled_%28Parking_Lot%29.jpg', caption: 'Untitled (Parking Lot)' }
+    ],
+    why: `Scott Teplin draws buildings from the inside out. His watercolors are impossibly detailed cross-sections of impossible spaces — staircases that don't connect, rooms stacked at wrong angles, interiors that suggest an entire life lived somewhere impossible. His work is in the permanent collections of MoMA (both NY and SF), the New Museum, The Walker Art Center, Brooklyn Museum, Stanford, Yale, and Harvard. And he still sells via DM. Every year for 15 years he opens a 4-day window: give him 2 words, he draws something. That's the kind of artist this is.`,
+    unique: [
+      `MoMA, The Walker, Brooklyn Museum, Stanford permanent collections`,
+      `Annual 2-word commission window — direct from artist`,
+      `Cross-section architectural watercolors unlike anyone else`,
+      `Represented by Thomas VanDyke Gallery, Brooklyn`
+    ],
+    palette: ['#4A6C8A','#8AA860','#C4904A','#3A3A3A','#F8F5EE'],
+    accentColor: '#4A6C8A'
+  },
+  {
+    dayLabel: 'Thursday', dayNum: 'Mar 05',
+    name: 'Guim Tió Zarraluki', handle: '@guimtio',
+    location: 'Barcelona, Spain', medium: 'Oil on canvas · Thick impasto',
+    priceRange: 'Works via Alzueta Gallery, Madrid — inquire',
+    instagram: 'https://www.instagram.com/guimtio/',
+    website: 'https://www.alzuetagallery.com/artists/guim-tio-zarraluki/',
+    buyLink: 'https://www.alzuetagallery.com/artists/guim-tio-zarraluki/', buyLabel: 'Inquire at Alzueta Gallery',
+    images: [
+      { url: 'https://www.munchiesart.club/content/images/size/w1920/2024/05/3-Up-and-Coming-Artists-on-Instagram-You-Can-t-Miss--instagram--painting-2.webp', caption: 'Dreamlike figurative composition' },
+      { url: 'https://www.munchiesart.club/content/images/2024/05/yuma-radne-contemporary-artist-painting-1.webp', caption: 'Back-turned figure' },
+      { url: 'https://www.munchiesart.club/content/images/2024/05/best-of-contemporary-painting-danmark-martin-paaskesen-1.webp', caption: 'Landscape with figures' }
+    ],
+    why: `Guim Tió Zarraluki's figures are present and absent at the same time. He paints people from the back, mid-turn, with features softened into suggestion — present enough to project onto, absent enough to let you in. The paint is heavy and assured, the scenes strangely serene. In 2025 he was one of the most searched artists on Artsy and showed at the Armory Show. His Instagram following of 229K grew almost entirely by word of mouth. This is what it looks like when a painter's visual language lands.`,
+    unique: [
+      `229,000 Instagram followers — grown organically, no gallery push`,
+      `Armory Show 2025 · Artsy most in-demand list 2025`,
+      `Faceless, back-turned figures that somehow feel deeply personal`,
+      `Thick impasto that rewards looking at in person`
+    ],
+    palette: ['#C8A87A','#8A7060','#5C6870','#A8804A','#F5EFE5'],
+    accentColor: '#8A7060'
+  },
+  {
+    dayLabel: 'Friday',   dayNum: 'Mar 06',
+    name: 'Leo Shallat', handle: '@leo.shallat',
+    location: 'Seattle, WA', medium: 'Acrylic on canvas · Large-scale murals',
+    priceRange: 'Prints from $120 · Originals $400–$3,500',
+    instagram: 'https://www.instagram.com/leo.shallat/',
+    website: 'https://www.leoshallat.com',
+    buyLink: 'https://www.leoshallat.com', buyLabel: 'Originals + prints at leoshallat.com',
+    images: [
+      { url: 'https://images.squarespace-cdn.com/content/v1/60089aad95751d00768d7596/1765924349511-3KLCMJKLUIWGDAKE6SX4/9738446.jpg', caption: 'Unfolding' },
+      { url: 'https://images.squarespace-cdn.com/content/v1/60089aad95751d00768d7596/75673a8b-09b5-4158-8f98-68893025e376/magenta+orange+16x20-web.jpg', caption: 'Magenta Orange' },
+      { url: 'https://images.squarespace-cdn.com/content/v1/60089aad95751d00768d7596/1765842468723-084W9PA2VBCZ6YBOSSIJ/7477056.jpg', caption: 'Inhale' }
+    ],
+    why: `Leo Shallat paints waveforms and abstract calligraphy in sweeping gestural marks that feel simultaneously meditative and urgent. He's a muralist who works at city scale, but his studio canvases translate that energy into something you can actually own. 129K followers and growing fast — largely because his videos of process are as compelling as the finished work. Seattle-based, self-built, and genuinely accessible. Prints start at $120. Originals are still in the hundreds for smaller works.`,
+    unique: [
+      `Large-scale public murals across Seattle and beyond`,
+      `129K Instagram followers built on process videos alone`,
+      `Waveform abstraction that reads from across a room`,
+      `Prints starting at $120 — one of the most accessible on this list`
+    ],
+    palette: ['#1A4A7A','#2E8A9A','#7AC0D0','#A8D8E8','#F0F8FF'],
+    accentColor: '#1A4A7A'
+  },
+  {
+    dayLabel: 'Saturday', dayNum: 'Mar 07',
+    name: 'Martin Paaskesen', handle: '@martinpaaskesen',
+    location: 'Copenhagen, Denmark', medium: 'Oil & mixed media on canvas',
+    priceRange: 'Works via Valerius Gallery — inquire',
+    instagram: 'https://www.instagram.com/martinpaaskesen/',
+    website: 'https://www.valeriusgallery.com/martin-paaskesen-1',
+    buyLink: 'https://www.valeriusgallery.com/martin-paaskesen-1', buyLabel: 'Inquire at Valerius Gallery, Copenhagen',
+    images: [
+      { url: 'https://www.munchiesart.club/content/images/2024/05/martin-paaskesen-emerging-painter-danmark-2024.webp', caption: 'Studio portrait with recent work' },
+      { url: 'https://www.munchiesart.club/content/images/2024/05/best-of-contemporary-painting-danmark-martin-paaskesen-1.webp', caption: 'Recent painting' },
+      { url: 'https://www.munchiesart.club/content/images/2024/05/martin-paaskesen-artist-contemporary-painting.webp', caption: 'New work 2024' }
+    ],
+    why: `Martin Paaskesen came to painting through theater — and it shows. His canvases have a staged quality, a sense of tension about to be released, figures caught mid-gesture in settings that feel dramatic and unresolved. He's considered one of Denmark's most promising contemporary painters, with shows at Luxembourg Art Week and Dijon Art Fair. The work is raw and narrative, expressionistic in the best sense — paint doing emotional work that illustration can't.`,
+    unique: [
+      `Former theater background shapes every composition`,
+      `Luxembourg Art Week · Dijon Art Fair · Valerius Gallery Copenhagen`,
+      `Patch painting technique — layered, accumulative surface`,
+      `Narrative tension: figures always mid-action, never resolved`
+    ],
+    palette: ['#8A4030','#C07840','#5A6840','#3A4860','#F0EAE0'],
+    accentColor: '#8A4030'
+  }
 ];
 
-function buildTrending(filter){
-  filter=filter||'all';
-  const grid=document.getElementById('ag');
-  const list=filter==='all'?artists:artists.filter(a=>a.cat===filter||a.cat===filter);
-  grid.innerHTML=list.map((a,i)=>{
-    const hasWorks = a.works && a.works.length > 0;
-    const worksHtml = hasWorks ? a.works.map(w=>`
-      <a href="${w.url}" target="_blank" rel="noopener" style="display:block;flex:1;min-width:0;text-decoration:none;">
-        <div style="aspect-ratio:1;overflow:hidden;background:#1a1a18;position:relative;">
-          <img src="${w.img}" alt="${w.title}" loading="lazy"
-            style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;"
-            onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:#1a1a18;flex-direction:column;gap:8px;">
-            <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);">View work</span>
-          </div>
-          <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 14px;background:linear-gradient(transparent,rgba(0,0,0,.6));opacity:0;transition:opacity .3s;" class="work-caption">
-            <p style="font-size:11px;color:rgba(255,255,255,.85);letter-spacing:.5px;">${w.title}</p>
-          </div>
-        </div>
-      </a>`).join('') :
-      `<div style="flex:1;aspect-ratio:1;background:#1a1a18;display:flex;align-items:center;justify-content:center;">
-        <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);">View artist</span>
-      </div>`;
+// ═══════════════════════════════════════════
+//  ARTIST OF THE DAY RENDERER
+// ═══════════════════════════════════════════
+function initAOD(){
+  const today = new Date();
+  const dayOfWeek = today.getDay(); // 0=Sun, 6=Sat
 
-    return `
-    <div style="border-top:1px solid var(--rule);padding:48px 0 56px;display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap;">
-      <!-- Left: artist info -->
-      <div style="flex:0 0 280px;min-width:220px;">
-        <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--grey);margin-bottom:10px;">${String(i+1).padStart(2,'0')} · ${a.cat}</div>
-        <h2 style="font-family:'Cormorant',Georgia,serif;font-size:clamp(26px,3vw,36px);font-weight:300;font-style:italic;line-height:1.1;margin-bottom:14px;">${a.name}</h2>
-        <p style="font-size:13px;font-weight:300;color:var(--ink3);line-height:1.75;margin-bottom:16px;">${a.bio}</p>
-        <p style="font-size:11px;letter-spacing:1px;color:var(--grey);margin-bottom:4px;text-transform:uppercase;">Price range</p>
-        <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:20px;">${a.price}</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <a href="${a.url}" target="_blank" rel="noopener"
-             style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--black);text-decoration:none;border-bottom:1.5px solid var(--black);padding-bottom:2px;">
-            View all works →
-          </a>
-          <button onclick="nav('consult')"
-             style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey);background:none;border:none;cursor:pointer;padding:0;border-bottom:1.5px solid var(--rule);padding-bottom:2px;">
-            Get proposal
-          </button>
-        </div>
-      </div>
-      <!-- Right: works grid -->
-      <div style="flex:1;min-width:240px;display:flex;gap:10px;align-items:stretch;">
-        ${worksHtml}
-      </div>
-    </div>`;
-  }).join('');
+  const navEl = document.getElementById('aod-days');
+  if(!navEl) return;
+  navEl.innerHTML = '';
+  aodArtists.forEach((a, i) => {
+    const isToday = i === dayOfWeek;
+    const div = document.createElement('div');
+    // All days are always clickable — show the full week
+    div.className = 'aod-day-btn' + (isToday ? ' today' : '');
+    div.innerHTML = '<span class="aod-day-name">' + a.dayLabel + '</span><span class="aod-day-date">' + a.dayNum + '</span>';
+    div.onclick = () => renderAOD(i);
+    navEl.appendChild(div);
+  });
+
+  renderAOD(dayOfWeek);
 }
 
-function filterTrend(el,cat){
-  document.querySelectorAll('.tf').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');buildTrending(cat);
+function renderAOD(idx){
+  const a = aodArtists[idx];
+  if(!a) return;
+
+  document.querySelectorAll('.aod-day-btn').forEach((b,i) => {
+    b.classList.toggle('active', i === idx);
+  });
+
+  const main = document.getElementById('aod-main');
+  const isToday = idx === new Date().getDay();
+
+  const imgsHtml = (a.images||[]).map(img => `
+    <div class="aod-img-wrap">
+      <img src="${img.url}" alt="${img.caption}" class="aod-img">
+      <p class="aod-img-cap">${img.caption}</p>
+    </div>`).join('');
+
+  main.innerHTML = `
+    <div class="aod-feature">
+      <div class="aod-palette">
+        ${a.palette.map(col=>`<div class="aod-swatch" style="background:${col}"></div>`).join('')}
+      </div>
+      <div class="aod-badge-row">
+        <span class="aod-badge" style="background:${a.accentColor}">
+          ${isToday ? 'Artist of the Day' : a.dayLabel+' &middot; '+a.dayNum}
+        </span>
+      </div>
+      <div class="aod-header">
+        <h1 class="aod-name">${a.name}</h1>
+        <div class="aod-handle">
+          <a href="${a.instagram}" target="_blank" rel="noopener">${a.handle}</a>
+          <span class="aod-sep">&middot;</span>
+          <span>${a.location}</span>
+        </div>
+        <div class="aod-medium">${a.medium}</div>
+      </div>
+      ${imgsHtml ? `<div class="aod-imgs">${imgsHtml}</div>` : ''}
+      <div class="aod-why">
+        <p class="aod-why-label">Why we are featuring them</p>
+        <p class="aod-why-text">${a.why}</p>
+      </div>
+      <div class="aod-unique">
+        <p class="aod-unique-label">What sets them apart</p>
+        <div class="aod-unique-list">
+          ${a.unique.map(u=>`
+            <div class="aod-unique-item">
+              <span class="aod-bullet" style="background:${a.accentColor}"></span>
+              <span>${u}</span>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="aod-footer">
+        <div class="aod-price">
+          <span class="aod-price-label">Price range</span>
+          <span class="aod-price-val">${a.priceRange}</span>
+        </div>
+        <div class="aod-actions">
+          <a href="${a.instagram}" target="_blank" rel="noopener" class="aod-btn-ig">Follow on Instagram &rarr;</a>
+          <a href="${a.buyLink}" target="_blank" rel="noopener" class="aod-btn-buy" style="background:${a.accentColor}">${a.buyLabel} &rarr;</a>
+        </div>
+      </div>
+    </div>`;
 }
 
 function showQ(n){
@@ -2019,6 +2965,66 @@ async function submit(){
   await callAI();
 }
 
+const sys=`You are FOUND.ART — an expert independent art curator. Your job is to find the RIGHT art for each client from ANYWHERE on the internet.
+
+YOUR NORTH STAR: The best possible match for the client's room, taste, and budget. Platform, gallery, or source doesn't matter at all.
+
+WHERE TO SEARCH — in this order of preference:
+1. Artist Instagram accounts (@handle) — many sell directly via DM or link in bio
+2. Artist personal websites — often best prices, direct relationship, no platform fee
+3. Artsy (artsy.net) — search by style, medium, price; excellent for research + buying
+4. Saatchi Art (saatchiart.com) — huge selection, strong in painting and photography
+5. Artfinder (artfinder.com) — direct from artists worldwide, competitive prices
+6. Uprise Art (upriseart.com) — curated emerging art, strong editorial eye
+7. Tappan Collective (tappancollective.com) — curated, reliable CDN images
+8. 1stDibs, Artplode, UGallery, Foundmyself — worth checking
+9. Online auctions — LiveAuctioneers, Invaluable, Christie's First Open
+
+HOW TO SEARCH:
+- Use web_search to find artists matching the client's criteria
+- Search terms like: "abstract painter Instagram affordable originals", "emerging [style] artist website shop", site:saatchiart.com [style] [color] painting under [price]
+- For each candidate: verify the work is actually available and the URL is real
+- For imageUrl: search for the actual product/artwork page and extract the real image URL. If you cannot confirm it, set imageUrl to "" — never guess
+- For Instagram artists: handleUrl should be their Instagram profile, sourceUrl their link.bio or website shop
+
+OUTPUT — return ONLY valid JSON, no markdown:
+{
+  "proposalTitle": "A punchy, specific title based on their answers",
+  "curatorNote": "2-3 sentences explaining your search approach and why these works fit",
+  "works": [
+    {
+      "artist": "Full Name",
+      "title": "Work Title",
+      "year": "2024",
+      "medium": "Oil on linen, 24x30 in",
+      "price": "$1,200",
+      "platform": "Artist website / Instagram / Saatchi Art / etc",
+      "sourceUrl": "https://exactproductpage.com/work",
+      "imageUrl": "https://confirmed-cdn-image-url.jpg",
+      "why": "2 sentences on why this specific work fits this specific client"
+    }
+  ],
+  "artists": [
+    {
+      "name": "Full Name",
+      "handle": "@instagramhandle or website.com",
+      "handleUrl": "https://instagram.com/handle",
+      "why": "Why their practice fits this client",
+      "style": "e.g. Gestural abstraction, muted earth palette",
+      "priceRange": "e.g. $400-$1,800 via studio / DM"
+    }
+  ]
+}
+
+IMPORTANT RULES:
+- 3-5 works minimum across at least 2 different sources/platforms
+- Prioritize Instagram and artist websites over platforms when possible
+- Never fabricate a URL or image URL. If unsure, omit imageUrl (set to "")
+- sourceUrl must be a specific work page, not a homepage
+- Include 2-3 artists in the artists[] array for discovery
+- Write the "why" field as if speaking directly to this specific client about their specific room
+`;
+
 async function callAI(){
   const hexStr = S.colorHexes.length ? S.colorHexes.join(', ') : 'not specified';
 
@@ -2085,7 +3091,7 @@ RESPONSE — return ONLY valid JSON, no markdown, no preamble:
       "name": "Full Name",
       "handle": "@instagramhandle or website.com",
       "handleUrl": "https://instagram.com/handle or https://artistwebsite.com",
-      "why": "2–3 sentences: why this artist's practice is right for this client",
+      "why": "2–3 sentences: why this artist\'s practice is right for this client",
       "style": "e.g. Gestural abstraction, muted palette",
       "priceRange": "e.g. $800–$3,000 via studio"
     }
@@ -2219,7 +3225,7 @@ function render(p){
             <div class="wi-desc">
               <div class="wi-di">
                 <p class="wi-dl">About This Work</p>
-                <p class="wi-dt">${w.artDescription||'An original work in the artist\'s signature style.'}</p>
+                <p class="wi-dt">${w.artDescription||"An original work in the artist's signature style."}</p>
               </div>
             </div>
             <div class="wi-ov">
@@ -2492,6 +3498,26 @@ function renderLikedList(){
 updB(1500);
 loadSaved();
 
+
+
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+}
+
+function toggleStep(el){
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.step-item').forEach(s => s.classList.remove('open'));
+  if(!isOpen) el.classList.add('open');
+}
+
+function showCat(id){
+  document.querySelectorAll('.cat-panel').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('on'));
+  const panel = document.getElementById('cat-'+id);
+  if(panel) panel.classList.add('on');
+  event.currentTarget.classList.add('on');
+}
 </script>
 
 
@@ -2820,6 +3846,7 @@ loadSaved();
     <button class="liked-view-all" onclick="closeLiked();nav('consult')">Start a New Consultation &rarr;</button>
   </div>
 </div>
+
 
 
 </body>
